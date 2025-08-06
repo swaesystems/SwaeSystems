@@ -1,218 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swae Systems | AI Automation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Swae Systems - 24/7 AI Clinic Booking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-      font-family: 'Outfit', sans-serif;
-    }
-
-    body {
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background-color: #f8f9fc; color: #111; }
     header {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(255,255,255,0.8);
       backdrop-filter: blur(8px);
+      z-index: 1000;
+      padding: 16px 32px;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px 0;
-      z-index: 1000;
-    }
-
-    header h1 {
-      color: gold;
       font-weight: 700;
-      font-size: 24px;
-      letter-spacing: 1px;
+      font-size: 20px;
+      color: #001f4d;
+      border-bottom: 1px solid #ddd;
     }
 
     .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      background: linear-gradient(135deg, #001f4d, #003366);
+      color: white;
       text-align: center;
-      position: relative;
-      z-index: 1;
+      padding: 160px 20px 80px;
     }
-
-    .hero h2 {
-      font-size: 48px;
+    .hero h1 {
+      font-size: 38px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
-
     .hero p {
-      font-size: 20px;
+      font-size: 18px;
       max-width: 600px;
-      margin-bottom: 30px;
-      line-height: 1.6;
-      color: #ccc;
+      margin: 0 auto 30px;
+      line-height: 1.5;
     }
-
-    .hero .cta-btn {
-      background: gold;
-      color: #000;
-      border: none;
-      padding: 15px 30px;
-      font-size: 16px;
+    .hero .btn {
+      padding: 12px 24px;
+      background: white;
+      color: #001f4d;
       font-weight: 600;
-      border-radius: 8px;
+      border-radius: 6px;
+      border: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      font-size: 16px;
     }
 
-    .hero .cta-btn:hover {
-      background: #fff;
-      color: #000;
+    .chat-box {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 40px auto 0;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      text-align: left;
     }
 
-    canvas#bgCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
+    .chat-box p {
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .chat-box .chat-btn {
+      background-color: #e6f0ff;
+      color: #001f4d;
+      padding: 10px 16px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      display: block;
+      text-align: left;
+      border: none;
+      width: 100%;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: default;
     }
   </style>
 </head>
 <body>
-  <canvas id="bgCanvas"></canvas>
-
   <header>
-    <h1>Swae Systems</h1>
+    Swae Systems
   </header>
 
   <section class="hero">
-    <h2>AI That Closes Leads While You Sleep</h2>
-    <p>Turn missed calls, messages, and DMs into booked appointments — 24/7. No receptionist needed.</p>
-    <a href="#form"><button class="cta-btn">See It In Action</button></a>
-  </section>
-  <section style="padding: 80px 20px; background-color: #0b0b0b; text-align: center;">
-    <h2 style="font-size: 36px; color: gold; margin-bottom: 20px;">Why Businesses Use Swae</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1100px; margin: auto;">
-      <div style="flex: 1 1 300px; background: #111; padding: 30px; border-radius: 12px;">
-        <h3 style="color: gold; margin-bottom: 10px;">✅ 24/7 Lead Response</h3>
-        <p>Replies to DMs, missed calls, and inquiries instantly — day or night.</p>
-      </div>
-      <div style="flex: 1 1 300px; background: #111; padding: 30px; border-radius: 12px;">
-        <h3 style="color: gold; margin-bottom: 10px;">✅ Books Appointments</h3>
-        <p>Integrates with your calendar or CRM to lock in bookings automatically.</p>
-      </div>
-      <div style="flex: 1 1 300px; background: #111; padding: 30px; border-radius: 12px;">
-        <h3 style="color: gold; margin-bottom: 10px;">✅ Handles FAQs</h3>
-        <p>Trained to respond in your tone, style, and language — no scripting needed.</p>
-      </div>
-      <div style="flex: 1 1 300px; background: #111; padding: 30px; border-radius: 12px;">
-        <h3 style="color: gold; margin-bottom: 10px;">✅ Follows Up Automatically</h3>
-        <p>Sends reminders, review requests, and nurture messages so you don’t have to.</p>
-      </div>
-    </div>
-  </section>
+    <h1>Book More Patients 24/7 with AI</h1>
+    <p>Our 24/7 AI application converts lead inquiries into booked appointments through automated responses and seamless scheduling.</p>
+    <button class="btn">View Demo</button>
 
-  <section style="padding: 80px 20px; background-color: #000; text-align: center;">
-    <h2 style="font-size: 36px; color: gold; margin-bottom: 20px;">How It Works</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1000px; margin: auto;">
-      <div style="flex: 1 1 280px;">
-        <h3 style="font-size: 24px; margin-bottom: 10px;">📞 Step 1</h3>
-        <p>A lead calls, messages, or fills out a form — anytime, day or night.</p>
-      </div>
-      <div style="flex: 1 1 280px;">
-        <h3 style="font-size: 24px; margin-bottom: 10px;">🤖 Step 2</h3>
-        <p>Your AI replies instantly, answers questions, and books them in.</p>
-      </div>
-      <div style="flex: 1 1 280px;">
-        <h3 style="font-size: 24px; margin-bottom: 10px;">📅 Step 3</h3>
-        <p>You wake up to booked appointments or qualified leads — no extra staff needed.</p>
-      </div>
+    <div class="chat-box">
+      <p><strong>AI Chat:</strong><br>Thanks for reaching out to [Clinic Name]! How can I help you today?</p>
+      <button class="chat-btn">What services do you offer?</button>
+      <button class="chat-btn">How much does it cost?</button>
+      <button class="chat-btn">Do you accept insurance?</button>
+      <button class="chat-btn">Book an appointment</button>
     </div>
   </section>
-  <section id="form" style="padding: 80px 20px; background-color: #0b0b0b; text-align: center;">
-    <h2 style="font-size: 36px; color: gold; margin-bottom: 20px;">Get a Free Demo</h2>
-    <p style="color: #ccc; margin-bottom: 30px;">See how Swae Systems can automate your lead replies and bookings 24/7.</p>
-    <form style="max-width: 500px; margin: auto;">
-      <input type="text" placeholder="Your Name" style="width: 100%; padding: 15px; margin-bottom: 20px; border: none; border-radius: 8px; font-size: 16px;">
-      <input type="email" placeholder="Your Email" style="width: 100%; padding: 15px; margin-bottom: 20px; border: none; border-radius: 8px; font-size: 16px;">
-      <button type="submit" style="background: gold; color: #000; padding: 15px 30px; border: none; border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer;">Request Demo</button>
+    <style>
+    .form-section {
+      padding: 80px 20px;
+      background: #fff;
+      text-align: center;
+    }
+    .form-section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #001f4d;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    input, select, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    button[type="submit"] {
+      background: #001f4d;
+      color: white;
+      font-size: 16px;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .trusted {
+      background: #f0f4ff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .trusted h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #001f4d;
+      margin-bottom: 12px;
+    }
+
+    .cta-section {
+      background: #001f4d;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .cta-section a {
+      background: white;
+      color: #001f4d;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer {
+      background: #f8f9fc;
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+      .form-section h2, .cta-section h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+
+  <section class="form-section" id="form">
+    <h2>Try It Now</h2>
+    <form>
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email Address" required />
+      <input type="tel" placeholder="Phone Number" required />
+      <select required>
+        <option value="">Select a Treatment</option>
+        <option value="iv">IV Therapy</option>
+        <option value="trt">Testosterone Therapy</option>
+        <option value="weightloss">Weight Loss</option>
+      </select>
+      <input type="date" required />
+      <input type="time" required />
+      <button type="submit">Book Now</button>
     </form>
   </section>
 
-  <footer style="padding: 40px 20px; background-color: #000; color: #888; text-align: center; font-size: 14px;">
-    © 2025 Swae Systems. All rights reserved.
+  <section class="trusted">
+    <h3>Trusted by growing clinics looking to automate intake & boost revenue.</h3>
+    <p style="color:#333;">Built by Swae Systems — powering lead capture & booking around the clock.</p>
+  </section>
+
+  <section class="cta-section">
+    <h2>Want a System Like This?</h2>
+    <p>DM “Clinic AI” to see how we can build a custom version for your business.</p>
+    <a href="#">Message Us</a>
+  </section>
+    <footer>
+    &copy; 2025 Swae Systems. All rights reserved.
   </footer>
 
-  <script>
-    const canvas = document.getElementById("bgCanvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particlesArray = [];
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        // bounce off edges
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-      }
-
-      draw() {
-        ctx.fillStyle = "gold";
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function initParticles() {
-      particlesArray = [];
-      for (let i = 0; i < 80; i++) {
-        particlesArray.push(new Particle());
-      }
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particlesArray.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-
-    window.addEventListener("resize", () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initParticles();
-    });
-
-    initParticles();
-    animateParticles();
-  </script>
 </body>
 </html>
