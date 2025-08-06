@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swae Systems | AI Automation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      color: gold;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 600px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .hero .cta-btn {
+      background: gold;
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .hero .cta-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    canvas#bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+
+  <header>
+    <h1>Swae Systems</h1>
+  </header>
+
+  <section class="hero">
+    <h2>AI That Closes Leads While You Sleep</h2>
+    <p>Turn missed calls, messages, and DMs into booked appointments — 24/7. No receptionist needed.</p>
+    <a href="#form"><button class="cta-btn">See It In Action</button></a>
+  </section>
+  <section style="padding: 80px 20px; background-color: #0b0b0b; text-align: center;">
+    <h2 style="font-size: 36px; color: gold; margin-bottom: 20px;">Why Businesses Use Swae</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1100px; margin: auto;">
+      <div style="flex: 1 1 300px; background: #111; padding: 30px; border-radius: 12px;">
+        <h3 style="color: gold; margin-bottom: 10px;">✅ 24/7 Lead Response</h3>
+        <p>Replies to DMs, missed calls, and inquiries instantly — day or night.</p>
+      </div>
+      <div style="flex: 1 1 300px; background: #111; padding: 30px; border-radius: 12px;">
+        <h3 style="color: gold; margin-bottom: 10px;">✅ Books Appointments</h3>
+        <p>Integrates with your calendar or CRM to lock in bookings automatically.</p>
+      </div>
+      <div style="flex: 1 1 300px; background: #111; padding: 30px; border-radius: 12px;">
+        <h3 style="color: gold; margin-bottom: 10px;">✅ Handles FAQs</h3>
+        <p>Trained to respond in your tone, style, and language — no scripting needed.</p>
+      </div>
+      <div style="flex: 1 1 300px; background: #111; padding: 30px; border-radius: 12px;">
+        <h3 style="color: gold; margin-bottom: 10px;">✅ Follows Up Automatically</h3>
+        <p>Sends reminders, review requests, and nurture messages so you don’t have to.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 80px 20px; background-color: #000; text-align: center;">
+    <h2 style="font-size: 36px; color: gold; margin-bottom: 20px;">How It Works</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1000px; margin: auto;">
+      <div style="flex: 1 1 280px;">
+        <h3 style="font-size: 24px; margin-bottom: 10px;">📞 Step 1</h3>
+        <p>A lead calls, messages, or fills out a form — anytime, day or night.</p>
+      </div>
+      <div style="flex: 1 1 280px;">
+        <h3 style="font-size: 24px; margin-bottom: 10px;">🤖 Step 2</h3>
+        <p>Your AI replies instantly, answers questions, and books them in.</p>
+      </div>
+      <div style="flex: 1 1 280px;">
+        <h3 style="font-size: 24px; margin-bottom: 10px;">📅 Step 3</h3>
+        <p>You wake up to booked appointments or qualified leads — no extra staff needed.</p>
+      </div>
+    </div>
+  </section>
+  <section id="form" style="padding: 80px 20px; background-color: #0b0b0b; text-align: center;">
+    <h2 style="font-size: 36px; color: gold; margin-bottom: 20px;">Get a Free Demo</h2>
+    <p style="color: #ccc; margin-bottom: 30px;">See how Swae Systems can automate your lead replies and bookings 24/7.</p>
+    <form style="max-width: 500px; margin: auto;">
+      <input type="text" placeholder="Your Name" style="width: 100%; padding: 15px; margin-bottom: 20px; border: none; border-radius: 8px; font-size: 16px;">
+      <input type="email" placeholder="Your Email" style="width: 100%; padding: 15px; margin-bottom: 20px; border: none; border-radius: 8px; font-size: 16px;">
+      <button type="submit" style="background: gold; color: #000; padding: 15px 30px; border: none; border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer;">Request Demo</button>
+    </form>
+  </section>
+
+  <footer style="padding: 40px 20px; background-color: #000; color: #888; text-align: center; font-size: 14px;">
+    © 2025 Swae Systems. All rights reserved.
+  </footer>
+
+  <script>
+    const canvas = document.getElementById("bgCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // bounce off edges
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.fillStyle = "gold";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      for (let i = 0; i < 80; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+
+    initParticles();
+    animateParticles();
+  </script>
+</body>
+</html>
