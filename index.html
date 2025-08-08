@@ -18,9 +18,9 @@
 
   <!-- Icons -->
   <link rel="icon" href="favicon.ico"/>
-  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.PNG"/>
 
-  <!-- Optional: help hero appear faster -->
+  <!-- Help hero appear faster -->
   <link rel="preload" as="image" href="hero-cinematic.PNG"/>
 
   <style>
@@ -47,6 +47,7 @@
     /* Soft page fade for luxe feel */
     body{opacity:0; transition:opacity .35s ease}
     body.is-ready{opacity:1}
+    body.no-scroll{overflow:hidden}
 
     a{color:var(--ink);text-decoration:none}
     a:focus-visible,button:focus-visible,input:focus-visible{outline:none;box-shadow:var(--focus);border-radius:10px}
@@ -91,7 +92,11 @@
     }
     .drawer.open{transform:translateX(0)}
     .drawer a{padding:16px 18px;border-bottom:1px solid var(--line)}
-    .drawer .close{margin:14px 18px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center}
+    .drawer .close{
+      margin:14px 18px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center;
+      background:#0D0D10;color:var(--ink);cursor:pointer
+    }
+    .drawer .close:hover{border-color:var(--gold);background:rgba(214,198,150,.08);color:var(--ink)}
 
     /* ===== Hero ===== */
     .hero{padding:42px 0 22px}
@@ -120,13 +125,11 @@
       margin-top:18px;background:radial-gradient(900px 360px at 70% -20%,rgba(214,198,150,.08),transparent),var(--panel);
       border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow-soft)
     }
-    /* Subtle shimmering glow background */
     .hero-card::before{
       content:"";position:absolute;inset:-1px;border-radius:14px;
       background: radial-gradient(600px 240px at 70% -20%, rgba(214,198,150,.08), transparent);
       pointer-events:none;
     }
-    /* Image container keeps height so no CLS */
     .hero-img{position:relative; width:100%; height:340px; border-radius:12px; border:1px solid var(--line); overflow:hidden; background:#0C0C0E}
     .hero-img img{
       position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
@@ -189,10 +192,11 @@
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="/">
+    <!-- Use ./ so GitHub Pages doesn't jump to root -->
+    <a class="brand" href="./">
       <div class="mark">SS</div><div>Swae Systems</div>
     </a>
-    <nav class="links">
+    <nav class="links" aria-label="Primary">
       <a href="solutions.html">Solutions</a>
       <a href="proof.html">Proof</a>
       <a href="contact.html">Contact</a>
@@ -203,6 +207,8 @@
       Menu
     </button>
   </div>
+
+  <!-- Drawer -->
   <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Mobile Menu">
     <a href="solutions.html">Solutions</a>
     <a href="proof.html">Proof</a>
@@ -224,10 +230,8 @@
 
     <div class="hero-card reveal reveal-delay2" aria-hidden="true">
       <div class="hero-img">
-        <picture>
-          <source srcset="hero-cinematic.webp" type="image/webp">
-          <img src="hero-cinematic.PNG" alt="" width="1600" height="900" decoding="async" loading="eager" id="heroImg">
-        </picture>
+        <!-- PNG-only per your request -->
+        <img src="hero-cinematic.PNG" alt="" width="1600" height="900" decoding="async" loading="eager" id="heroImg">
       </div>
     </div>
   </section>
@@ -331,7 +335,6 @@
           </table>
         </div>
 
-        <!-- skinny divider + repeated CTA for visibility -->
         <div style="height:1px;background:var(--line);margin:14px 0;"></div>
         <div class="cta" style="margin-top:0">
           <a class="primary" href="proof.html">See live results</a>
@@ -377,19 +380,21 @@
     else { hi.addEventListener('load', ()=> hi.classList.add('loaded')); }
   })();
 
-  // Drawer logic (open/close + ESC + basic focus handling)
+  // Drawer logic (open/close + ESC + focus + body scroll lock)
   const drawer = document.getElementById('drawer');
   const openBtn = document.getElementById('menuBtn');
   const closeBtn = document.getElementById('closeDrawer');
 
   function openDrawer(){
     drawer.classList.add('open');
+    document.body.classList.add('no-scroll');
     openBtn.setAttribute('aria-expanded','true');
     closeBtn?.focus();
     document.addEventListener('keydown',handleEsc);
   }
   function closeDrawer(){
     drawer.classList.remove('open');
+    document.body.classList.remove('no-scroll');
     openBtn.setAttribute('aria-expanded','false');
     openBtn?.focus();
     document.removeEventListener('keydown',handleEsc);
