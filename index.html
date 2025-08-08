@@ -5,12 +5,12 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Swae Systems — AI Intake & Booking, Built for Scale</title>
-  <meta name="description" content="Black & gold luxury-grade AI that captures leads, replies instantly, books to your calendar, and syncs your CRM — without adding staff."/>
+  <meta name="description" content="Luxury-grade AI that captures every lead, replies in seconds, books to your calendar, and syncs your CRM — without adding staff."/>
   <meta name="theme-color" content="#0A0A0B"/>
 
   <!-- Open Graph -->
   <meta property="og:title" content="Swae Systems — AI Intake & Booking"/>
-  <meta property="og:description" content="Never miss another lead. Luxury-grade AI that replies instantly, books on your calendar, and syncs your CRM."/>
+  <meta property="og:description" content="Never miss another lead. Concierge-level AI that books and follows up automatically."/>
   <meta property="og:type" content="website"/>
 
   <!-- Fonts -->
@@ -57,8 +57,7 @@
 
     /* Nav */
     .nav{
-      position:fixed;top:16px;left:0;right:0;z-index:50;
-      display:flex;justify-content:center;
+      position:fixed;top:16px;left:0;right:0;z-index:50;display:flex;justify-content:center;
     }
     .nav__wrap{
       backdrop-filter: blur(14px);
@@ -136,7 +135,7 @@
     .btn--ghost:hover{background:rgba(255,255,255,.05)}
     .subnote{margin-top:14px;color:#9ea2aa;font-size:13px}
 
-    /* Section shells (used later) */
+    /* Sections */
     section{padding:84px 0;border-top:1px solid var(--line)}
     .section__title{
       font-family:"Playfair Display",serif;font-size:clamp(26px,4vw,40px);line-height:1.2;margin:0 0 12px;
@@ -201,7 +200,8 @@
       </div>
     </div>
   </header>
-    <!-- Capabilities -->
+
+  <!-- Capabilities -->
   <section id="capabilities">
     <div class="container fade-up">
       <h2 class="section__title">Capabilities That Actually Matter</h2>
@@ -286,6 +286,7 @@
       </div>
     </div>
   </section>
+
   <!-- Integrations -->
   <section id="integrations">
     <div class="container fade-up">
@@ -343,3 +344,129 @@
         <textarea placeholder="What problems are you trying to solve?" rows="5" style="padding:14px;border-radius:12px;border:1px solid var(--line);background:#0c0d10;color:var(--text)"></textarea>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <button class="btn btn--gold" type="button">Request Live Demo</button>
+          <a class="btn btn--ghost" href="#faq">Read FAQ</a>
+        </div>
+        <div class="subnote">Prefer email? hello@swaesystems.com (placeholder)</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top:1px solid var(--line);padding:42px 0;background:var(--bg-soft);">
+    <div class="container" style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;">
+      <div style="font-family:'Playfair Display',serif;font-weight:700;">Swae <span style="color:var(--gold)">Systems</span></div>
+      <div style="color:var(--muted);font-size:14px;">© <span id="year"></span> Swae Systems. All rights reserved.</div>
+      <div style="display:flex;gap:16px;color:var(--muted);font-size:14px;">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#how">How It Works</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chatbot widget placeholder (drop your script below when ready) -->
+  <!-- <script src="YOUR_CHATBOT_WIDGET.js"></script> -->
+
+  <!-- Scripts -->
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Preloader hide
+    window.addEventListener('load', () => {
+      const p = document.getElementById('preloader');
+      setTimeout(()=> p.classList.add('hide'), 300);
+      revealOnScroll(); // first pass
+    });
+
+    // Mobile menu
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger?.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    });
+    mobileMenu?.addEventListener('click', (e) => { if(e.target.closest('a')) mobileMenu.classList.remove('open'); });
+
+    // Fade-up on scroll
+    const items = [...document.querySelectorAll('.fade-up')];
+    function revealOnScroll(){
+      const vh = window.innerHeight;
+      items.forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if(r.top < vh - 80) el.classList.add('show');
+      });
+    }
+    document.addEventListener('scroll', revealOnScroll, {passive:true});
+
+    // Testimonials slider (manual)
+    (function(){
+      const track = document.querySelector('#testimonials .slider-track');
+      if(!track) return;
+      let index = 0;
+      const cards = track.children.length;
+      const step = 320; // card width + gap (approx)
+      const wrapper = document.querySelector('#testimonials .testimonial-slider');
+      const ctrls = document.createElement('div');
+      ctrls.style.display='flex'; ctrls.style.gap='8px'; ctrls.style.marginTop='14px';
+      const prev = document.createElement('button');
+      const next = document.createElement('button');
+      [prev,next].forEach(b=>{b.className='btn btn--ghost'; b.type='button';});
+      prev.textContent='‹ Prev'; next.textContent='Next ›';
+      ctrls.append(prev,next); wrapper.appendChild(ctrls);
+      function update(){ track.style.transform = 'translateX(' + (-index*step) + 'px)'; }
+      prev.addEventListener('click',()=>{ index = Math.max(0, index-1); update(); });
+      next.addEventListener('click',()=>{ index = Math.min(cards-1, index+1); update(); });
+    })();
+
+    // Particles (subtle)
+    (function(){
+      const c = document.getElementById('particles');
+      if(!c) return;
+      const ctx = c.getContext('2d');
+      let w,h,particles=[];
+      function resize(){ w = c.width = window.innerWidth; h = c.height = document.querySelector('.hero').offsetHeight; }
+      window.addEventListener('resize', resize); resize();
+
+      const COUNT = Math.min(120, Math.floor(w*h/18000));
+      for(let i=0;i<COUNT;i++){
+        particles.push({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          vx:(Math.random()-.5)*.3,
+          vy:(Math.random()-.5)*.3,
+          r: Math.random()*1.6+0.3
+        });
+      }
+
+      function tick(){
+        ctx.clearRect(0,0,w,h);
+        ctx.globalAlpha = .8;
+        particles.forEach(p=>{
+          p.x += p.vx; p.y += p.vy;
+          if(p.x<0||p.x>w) p.vx*=-1;
+          if(p.y<0||p.y>h) p.vy*=-1;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle = (Math.random()>.98) ? 'rgba(230,198,91,.9)' : 'rgba(255,255,255,.25)';
+          ctx.fill();
+        });
+        // light linking
+        ctx.globalAlpha = .08;
+        for(let i=0;i<particles.length;i++){
+          for(let j=i+1;j<particles.length;j++){
+            const a = particles[i], b = particles[j];
+            const dx=a.x-b.x, dy=a.y-b.y; const d=dx*dx+dy*dy;
+            if(d<9000){
+              ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+              ctx.strokeStyle = '#C9A227'; ctx.lineWidth = .6; ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+  </script>
+
+</body>
+</html>
