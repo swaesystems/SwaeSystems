@@ -79,10 +79,14 @@
     .nav__burger{
       margin-left:8px;border:1px solid var(--line);border-radius:999px;padding:10px 12px;cursor:pointer;
       background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+      transition:transform .15s ease;
     }
-    .burger-lines{width:20px;height:2px;background:var(--text);position:relative;display:block}
-    .burger-lines::before,.burger-lines::after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--text)}
+    .burger-lines{width:20px;height:2px;background:var(--text);position:relative;display:block;transition:background .2s ease}
+    .burger-lines::before,.burger-lines::after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--text);transition:transform .2s ease, top .2s ease}
     .burger-lines::before{top:-6px}.burger-lines::after{top:6px}
+    .nav__burger.open .burger-lines{background:transparent}
+    .nav__burger.open .burger-lines::before{top:0;transform:rotate(45deg)}
+    .nav__burger.open .burger-lines::after{top:0;transform:rotate(-45deg)}
 
     /* Mobile menu */
     .mobile-menu{
@@ -105,12 +109,21 @@
 
     /* Hero */
     .hero{
-      position:relative;min-height:86vh;display:flex;align-items:center;justify-content:center;padding:120px 0 80px;
-      overflow:hidden;isolation:isolate;
+      position:relative;min-height:78vh;
+      display:flex;align-items:center;justify-content:center;
+      padding:120px 0 72px;overflow:hidden;isolation:isolate;
     }
-    canvas#particles{position:absolute;inset:0;z-index:0;opacity:.6}
+    .hero::before{
+      content:"";position:absolute;inset:0;z-index:0;
+      background:
+        radial-gradient(1200px 500px at 50% 0%, rgba(201,162,39,.14), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.9)),
+        url('hero-bg.jpg') center/cover no-repeat;
+      filter:saturate(1.05);
+    }
+    canvas#particles{position:absolute;inset:0;z-index:1;opacity:.5}
     .hero__glass{
-      position:relative;z-index:1;border-radius:24px;border:1px solid var(--line);
+      position:relative;z-index:2;border-radius:24px;border:1px solid var(--line);
       background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
       box-shadow:var(--shadow);padding:42px 32px;max-width:980px;margin:0 auto;
     }
@@ -136,7 +149,8 @@
     .subnote{margin-top:14px;color:#9ea2aa;font-size:13px}
 
     /* Sections */
-    section{padding:84px 0;border-top:1px solid var(--line)}
+    section{padding:72px 0;border-top:1px solid var(--line)}
+    @media(max-width:600px){ section{padding:54px 0} }
     .section__title{
       font-family:"Playfair Display",serif;font-size:clamp(26px,4vw,40px);line-height:1.2;margin:0 0 12px;
     }
@@ -145,6 +159,24 @@
     /* Simple fade-up */
     .fade-up{opacity:0;transform:translateY(12px);transition:opacity .5s ease, transform .5s ease}
     .fade-up.show{opacity:1;transform:translateY(0)}
+
+    /* Testimonials (scroll-snap) */
+    .ts-wrap{position:relative;margin-top:32px;display:flex;align-items:center;gap:8px}
+    .ts-btn{
+      border:1px solid var(--line);background:rgba(255,255,255,.03);
+      border-radius:10px;padding:10px 14px;cursor:pointer;color:var(--text)
+    }
+    .ts-track{
+      flex:1;display:flex;gap:16px;overflow-x:auto;padding:6px;
+      scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    }
+    .ts-card{
+      scroll-snap-align:center;flex:0 0 78%;
+      background:var(--card);border:1px solid var(--line);
+      border-radius:var(--radius);padding:22px;min-height:140px;
+    }
+    .ts-stars{color:var(--gold);margin-bottom:8px}
+    @media(min-width:900px){ .ts-card{flex:0 0 31%} }
   </style>
 </head>
 <body>
@@ -263,26 +295,29 @@
     </div>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Testimonials (scroll-snap) -->
   <section id="testimonials">
     <div class="container fade-up">
       <h2 class="section__title">Testimonials</h2>
       <p class="section__lead">What clients say after replacing missed calls and DMs with instant bookings.</p>
-      <div class="testimonial-slider" style="margin-top:42px;overflow:hidden;position:relative;">
-        <div class="slider-track" style="display:flex;gap:20px;transition:transform .6s ease;">
-          <div style="min-width:300px;flex:0 0 auto;background:var(--card);padding:24px;border-radius:var(--radius);border:1px solid var(--line);">
-            <div style="color:var(--gold);margin-bottom:8px;">★★★★★</div>
-            <p style="color:var(--muted);">"We went from missing half our leads to booking them automatically. Revenue’s up and stress is way down."</p>
-          </div>
-          <div style="min-width:300px;flex:0 0 auto;background:var(--card);padding:24px;border-radius:var(--radius);border:1px solid var(--line);">
-            <div style="color:var(--gold);margin-bottom:8px;">★★★★★</div>
-            <p style="color:var(--muted);">"Clients think we hired a full-time receptionist. It’s actually just Swae running in the background 24/7."</p>
-          </div>
-          <div style="min-width:300px;flex:0 0 auto;background:var(--card);padding:24px;border-radius:var(--radius);border:1px solid var(--line);">
-            <div style="color:var(--gold);margin-bottom:8px;">★★★★★</div>
-            <p style="color:var(--muted);">"The integration with our CRM was seamless. Our follow-ups are automatic now — no more dropped balls."</p>
-          </div>
+
+      <div class="ts-wrap">
+        <button class="ts-btn ts-prev" aria-label="Previous">‹</button>
+        <div class="ts-track" id="tsTrack">
+          <article class="ts-card">
+            <div class="ts-stars">★★★★★</div>
+            <p>"We went from missing half our leads to booking them automatically. Revenue’s up and stress is way down."</p>
+          </article>
+          <article class="ts-card">
+            <div class="ts-stars">★★★★★</div>
+            <p>"Clients think we hired a full-time receptionist. It’s actually just Swae running 24/7."</p>
+          </article>
+          <article class="ts-card">
+            <div class="ts-stars">★★★★★</div>
+            <p>"CRM integration was seamless. Follow-ups are automatic now — no more dropped balls."</p>
+          </article>
         </div>
+        <button class="ts-btn ts-next" aria-label="Next">›</button>
       </div>
     </div>
   </section>
@@ -364,7 +399,7 @@
     </div>
   </footer>
 
-  <!-- Chatbot widget placeholder (drop your script below when ready) -->
+  <!-- Chatbot widget placeholder -->
   <!-- <script src="YOUR_CHATBOT_WIDGET.js"></script> -->
 
   <!-- Scripts -->
@@ -379,14 +414,22 @@
       revealOnScroll(); // first pass
     });
 
-    // Mobile menu
+    // Mobile menu + close/X state
     const burger = document.getElementById('burger');
     const mobileMenu = document.getElementById('mobileMenu');
     burger?.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
       mobileMenu.setAttribute('aria-hidden', String(!isOpen));
     });
-    mobileMenu?.addEventListener('click', (e) => { if(e.target.closest('a')) mobileMenu.classList.remove('open'); });
+    mobileMenu?.addEventListener('click', (e) => {
+      if(e.target.closest('a')){
+        mobileMenu.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-label','Open menu');
+      }
+    });
 
     // Fade-up on scroll
     const items = [...document.querySelectorAll('.fade-up')];
@@ -399,24 +442,15 @@
     }
     document.addEventListener('scroll', revealOnScroll, {passive:true});
 
-    // Testimonials slider (manual)
+    // Testimonials slider (scroll-snap + buttons)
     (function(){
-      const track = document.querySelector('#testimonials .slider-track');
+      const track = document.getElementById('tsTrack');
       if(!track) return;
-      let index = 0;
-      const cards = track.children.length;
-      const step = 320; // card width + gap (approx)
-      const wrapper = document.querySelector('#testimonials .testimonial-slider');
-      const ctrls = document.createElement('div');
-      ctrls.style.display='flex'; ctrls.style.gap='8px'; ctrls.style.marginTop='14px';
-      const prev = document.createElement('button');
-      const next = document.createElement('button');
-      [prev,next].forEach(b=>{b.className='btn btn--ghost'; b.type='button';});
-      prev.textContent='‹ Prev'; next.textContent='Next ›';
-      ctrls.append(prev,next); wrapper.appendChild(ctrls);
-      function update(){ track.style.transform = 'translateX(' + (-index*step) + 'px)'; }
-      prev.addEventListener('click',()=>{ index = Math.max(0, index-1); update(); });
-      next.addEventListener('click',()=>{ index = Math.min(cards-1, index+1); update(); });
+      const next = document.querySelector('.ts-next');
+      const prev = document.querySelector('.ts-prev');
+      const step = () => track.clientWidth * 0.9;
+      next.addEventListener('click', ()=> track.scrollBy({left: step(), behavior:'smooth'}));
+      prev.addEventListener('click', ()=> track.scrollBy({left: -step(), behavior:'smooth'}));
     })();
 
     // Particles (subtle)
@@ -425,7 +459,11 @@
       if(!c) return;
       const ctx = c.getContext('2d');
       let w,h,particles=[];
-      function resize(){ w = c.width = window.innerWidth; h = c.height = document.querySelector('.hero').offsetHeight; }
+      function resize(){ 
+        w = c.width = window.innerWidth; 
+        const hero = document.querySelector('.hero');
+        h = c.height = hero ? hero.offsetHeight : window.innerHeight*0.8; 
+      }
       window.addEventListener('resize', resize); resize();
 
       const COUNT = Math.min(120, Math.floor(w*h/18000));
