@@ -9,24 +9,30 @@
 <meta name="description" content="Capture every lead, reply in seconds, and book straight to your calendar — without adding headcount. Concierge-grade AI for real businesses."/>
 <meta name="theme-color" content="#0A0A0B"/>
 <meta property="og:title" content="Swae Systems — Luxury AI Intake & Booking"/>
-<meta property="og:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Black & Gold. Precision only."/>
+<meta property="og:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Precision only."/>
 <meta property="og:type" content="website"/>
 <link rel="icon" href="favicon.ico"/>
 
 <style>
 :root{
   --bg:#0a0a0b; --panel:#121214; --muted:#151517;
-  --text:#e8e8ea; --sub:#a9a9af; --gold:#d4af37; --border:rgba(255,255,255,.08);
-  --shadow:0 12px 40px rgba(0,0,0,.45); --r:18px; --gap:16px; --glow:0 0 80px rgba(212,175,55,.15);
+  --text:#e8e8ea; --sub:#a9a9af;
+  --gold:#D7B86A; --gold-deep:#A0782A; --gold-hi:#F4E2A6;
+  --border:rgba(255,255,255,.08);
+  --shadow:0 12px 40px rgba(0,0,0,.45);
+  --r:18px; --gap:16px; --glow:0 0 80px rgba(215,184,106,.15);
 }
 
 /* Base */
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif}
 a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%;height:auto}
+img{display:block;max-width:100%}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-:focus-visible{outline:2px solid rgba(212,175,55,.6);outline-offset:3px;border-radius:10px}
+:focus-visible{outline:2px solid rgba(215,184,106,.6);outline-offset:3px;border-radius:10px}
+
+/* Progress bar */
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold-hi),var(--gold-deep));width:0;z-index:90}
 
 /* Soft loader */
 .loader{position:fixed;inset:0;background:#0a0a0b;display:grid;place-items:center;z-index:100;transition:opacity .4s ease}
@@ -46,27 +52,43 @@ img{display:block;max-width:100%;height:auto}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--text)}
 .burger span::before{top:-6px}.burger span::after{top:6px}
 
-/* Fullscreen menu (lux overlay) */
+/* Fullscreen menu */
 .menu{position:fixed;inset:0;background:rgba(10,10,11,.78);backdrop-filter:blur(16px) saturate(140%);z-index:80;display:none}
 .menu.active{display:block;animation:fadeIn .25s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .menu-inner{max-width:1120px;margin:0 auto;padding:22px 20px}
 .menu-head{height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .menu-list{padding:22px 0;display:grid;gap:12px}
-.menu a{display:flex;justify-content:space-between;align-items:center;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.03);opacity:0;transform:translateY(12px)}
+.menu a{display:flex;justify-content:space-between;align-items:center;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.03);opacity:0;transform:translateY(12px);font-weight:600}
 .menu a small{color:var(--sub)}
 .menu a.show{opacity:1;transform:translateY(0);transition:.35s ease}
 .menu a:hover{background:rgba(255,255,255,.06);transform:translateY(-1px)}
 .menu-close{height:38px;padding:0 14px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text)}
 
 /* Background layers */
-#bgfx{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.22}
-.intro-parallax{position:relative;z-index:-1;height:120px;background:
- radial-gradient(80% 60% at 60% -10%, rgba(212,175,55,.10), transparent 60%);transform:translateY(0);}
+#bgfx{position:fixed;inset:0;z-index:-3;pointer-events:none;opacity:.20}
+#fog{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.09;filter:blur(12px);
+  background:
+    radial-gradient(1200px 500px at 20% 10%, rgba(255,255,255,.15), transparent 60%),
+    radial-gradient(900px 400px at 80% 0%, rgba(255,255,255,.12), transparent 60%),
+    radial-gradient(700px 400px at 50% 20%, rgba(255,255,255,.08), transparent 60%);
+  animation:fog 18s ease-in-out infinite alternate;
+}
+@keyframes fog{0%{transform:translateY(0)}100%{transform:translateY(10px)}}
 
-/* Intro (no giant hero) */
+.intro-parallax{position:relative;z-index:-1;height:120px;background:
+ radial-gradient(80% 60% at 60% -10%, rgba(215,184,106,.10), transparent 60%);transform:translateY(0);}
+@media (max-width:820px){ .intro-parallax{display:none;} }
+
+/* Intro (no hero) + shimmer headline */
 .intro{padding:28px 0 10px;border-bottom:1px solid var(--border)}
-.headline{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:.2px}
+.headline{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:.2px;position:relative;display:inline-block}
+.headline::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25) 50%,transparent 70%);
+  transform:translateX(-120%);animation:shine 6s linear infinite;
+}
+@keyframes shine{to{transform:translateX(120%)}}
 .sub{color:var(--sub);margin-top:8px;max-width:860px}
 
 /* Sections */
@@ -80,19 +102,32 @@ section{padding:56px 0}
 .card h3{margin:0 0 8px;font-size:18px}
 .card p{margin:0;color:var(--sub);line-height:1.6}
 
+/* Luxe accents */
+.card.luxe,.panel.luxe{border:1px solid rgba(215,184,106,.40);box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 60px rgba(215,184,106,.08)}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(215,184,106,.35),transparent);margin:32px 0}
+
+/* Micro-interactions (desktop) */
+@media (hover:hover){
+  .card:hover{transform:translateY(2px)}
+}
+
 /* Chips */
 .chip-row{display:flex;flex-wrap:wrap;gap:10px}
 .chip{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:14px;transform:translateY(8px);opacity:0;transition:transform .6s ease,opacity .6s ease}
 
-/* Compare table */
-.compare{overflow:hidden}
-.table{border:1px solid var(--border);border-radius:var(--r);overflow:auto;background:linear-gradient(180deg,#111113,#0b0b0d)}
-.tgrid{display:grid;min-width:760px;grid-template-columns:260px repeat(2,1fr)}
-.th,.td{padding:14px 16px;border-bottom:1px solid var(--border)}
-.th{font-weight:800;background:rgba(255,255,255,.04);position:sticky;top:0}
-.row:nth-child(even) .td{background:rgba(255,255,255,.02)}
-.good{color:var(--gold);font-weight:700}.bad{color:#8a8a93}
-.tag{display:inline-block;padding:6px 10px;border:1px solid rgba(212,175,55,.35);border-radius:999px;background:rgba(212,175,55,.12);font-size:12px;margin-left:8px}
+/* Compare (mobile cards → desktop two-column) */
+.compare .kicker{margin-bottom:14px}
+.cmp{display:grid;gap:14px}
+.cmp-item{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:16px}
+.cmp-feature{margin:0 0 10px;font-size:16.5px}
+.cmp-cols{display:grid;gap:10px}
+.cmp-cell{border:1px dashed rgba(255,255,255,.12);border-radius:14px;padding:12px 14px}
+.cmp-badge{display:inline-block;padding:6px 10px;border-radius:999px;
+  background:linear-gradient(180deg,rgba(215,184,106,.18),rgba(160,120,42,.10));
+  border:1px solid rgba(215,184,106,.45);font-weight:700;color:var(--text);margin-bottom:6px}
+.other-badge{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
+.win p{color:#ece7d6} .other p{color:#a7a7ad}
+@media (min-width:900px){ .cmp-cols{grid-template-columns:1fr 1fr} }
 
 /* Testimonials */
 .carousel{position:relative}
@@ -102,34 +137,70 @@ section{padding:56px 0}
 .stars{letter-spacing:2px;margin-bottom:10px;color:var(--gold)}
 .quote{font-size:15.5px;line-height:1.55}
 .client{margin-top:12px;color:var(--sub);font-size:14px}
-.nav-btn{position:absolute;top:50%;transform:translateY(-50%);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.08);width:40px;height:40px;border-radius:12px;cursor:pointer;backdrop-filter:blur(8px)}
-.nav-btn:hover{background:rgba(255,255,255,.14)}
-.nav-btn[disabled],.nav-btn[aria-disabled="true"]{opacity:.35;cursor:not-allowed;pointer-events:none}
-.prev{left:-6px}.next{right:-6px}
+
+/* Arrows — NO BLUE */
+.nav-btn{
+  -webkit-appearance:none; appearance:none;
+  color:#e8e8ea; font-weight:700; line-height:1;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.07);
+  width:44px;height:44px;border-radius:12px;cursor:pointer;backdrop-filter:blur(10px)
+}
+.nav-btn:hover{background:rgba(255,255,255,.12)}
+.nav-btn:focus-visible{outline:2px solid rgba(215,184,106,.6); outline-offset:3px}
+.nav-btn[disabled]{opacity:.35;pointer-events:none;cursor:not-allowed}
+.prev{position:absolute;top:50%;left:-6px;transform:translateY(-50%)}
+.next{position:absolute;top:50%;right:-6px;transform:translateY(-50%)}
 @media(min-width:900px){.prev{left:-14px}.next{right:-14px}}
 
-/* CTA / stack / footer */
-.cta{padding:34px;border:1px solid var(--border);border-radius:var(--r);background:linear-gradient(180deg,rgba(212,175,55,.06),rgba(255,255,255,0));display:flex;flex-direction:column;gap:10px}
+/* CTA / buttons */
+.cta{padding:34px;border:1px solid var(--border);border-radius:var(--r);background:linear-gradient(180deg,rgba(215,184,106,.06),rgba(255,255,255,0));display:flex;flex-direction:column;gap:10px}
 .cta h3{margin:0;font-size:20px}
 .cta p{margin:0;color:var(--sub)}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 16px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.04);cursor:pointer;transition:transform .15s ease}
-.btn.gold{background:rgba(212,175,55,.14);border-color:rgba(212,175,55,.4)}
+.btn.gold{
+  position:relative; overflow:hidden;
+  background:linear-gradient(180deg, rgba(215,184,106,.22), rgba(160,120,42,.14));
+  border-color:rgba(215,184,106,.50);
+}
+.btn.gold::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(75deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+  transform:translateX(-120%); transition:transform .8s ease;
+}
+.btn.gold:hover::after{ transform:translateX(120%) }
 .btn:hover{transform:translateY(-1px)}
+
+/* Floating Book button */
+.fab{
+  position:fixed; right:18px; bottom:18px; z-index:70;
+  height:52px; padding:0 18px; border-radius:999px;
+  display:flex; align-items:center; gap:10px;
+  color:var(--text); border:1px solid rgba(215,184,106,.45);
+  background:linear-gradient(180deg, rgba(215,184,106,.20), rgba(160,120,42,.12));
+  box-shadow:0 12px 40px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.10);
+}
+
+/* Stack / footer */
 .stack{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:18px}
 footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-size:14px}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
-  .card,.chip,.btn,.menu a{transition:none}
+  .card,.chip,.btn,.menu a,.btn.gold::after{transition:none}
+  .headline::after{animation:none}
   .track{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
+
 <!-- Background layers -->
 <canvas id="bgfx" aria-hidden="true"></canvas>
+<div id="fog" aria-hidden="true"></div>
 <div class="intro-parallax" id="parallax" aria-hidden="true"></div>
 
 <!-- Soft loader -->
@@ -160,7 +231,7 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
   </div>
 </div>
 
-<!-- Intro (no hero, high-impact) -->
+<!-- Intro -->
 <div class="intro">
   <div class="wrap">
     <h1 class="headline">Capture every lead. Reply in seconds. Book directly to your calendar.</h1>
@@ -174,7 +245,7 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
     <h2 class="title">What you get on day one</h2>
     <p class="kicker">Fast wins without rebuilding your workflow.</p>
     <div class="grid-3">
-      <div class="card reveal"><h3>More Bookings</h3><p>Turn missed calls and DMs into confirmed appointments automatically — even after hours.</p></div>
+      <div class="card reveal luxe"><h3>More Bookings</h3><p>Turn missed calls and DMs into confirmed appointments automatically — even after hours.</p></div>
       <div class="card reveal"><h3>Faster Response</h3><p>Sub-60s replies keep prospects engaged and prevent drop-off.</p></div>
       <div class="card reveal"><h3>Fewer No-Shows</h3><p>Smart confirmations & reminders reduce flakes and protect your calendar.</p></div>
     </div>
@@ -199,66 +270,61 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
   </div>
 </section>
 
-<!-- How it works -->
-<section>
-  <div class="wrap">
-    <h2 class="title">How it works</h2>
-    <p class="kicker">Set up in an afternoon — then it runs.</p>
-    <div class="steps">
-      <div class="card step reveal"><div class="num">1</div><h4>Connect</h4><p>We link your calendar, messaging, and CRM. No migration. No downtime.</p></div>
-      <div class="card step reveal"><div class="num">2</div><h4>Tailor</h4><p>We load FAQs, pricing, and policies so replies sound like your brand.</p></div>
-      <div class="card step reveal"><div class="num">3</div><h4>Go Live</h4><p>Swae starts capturing, qualifying, and booking — while logging everything.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- Compare Us -->
+<!-- Compare (rebuild) -->
 <section id="compare" class="compare">
   <div class="wrap">
-    <h2 class="title">Why teams choose Swae over generic “AI chatbots”</h2>
-    <p class="kicker">Side-by-side clarity. No hype — just capability.</p>
-    <div class="table reveal" role="table" aria-label="Swae Systems versus competitors">
-      <div class="tgrid">
-        <div class="th" role="columnheader">Feature</div>
-        <div class="th" role="columnheader">Swae Systems <span class="tag">Purpose-built</span></div>
-        <div class="th" role="columnheader">Competitors <span class="tag" style="opacity:.65">Generic tools</span></div>
-
-        <div class="row">
-          <div class="td">Missed-call textback → booking</div>
-          <div class="td good">✓ End-to-end</div>
-          <div class="td bad">✕ Partial / manual</div>
+    <h2 class="title">Swae vs. Others — at a glance</h2>
+    <p class="kicker">Clear wins, no fluff.</p>
+    <div class="cmp">
+      <article class="cmp-item">
+        <h3 class="cmp-feature">Missed-call textback → booking</h3>
+        <div class="cmp-cols">
+          <div class="cmp-cell win"><div class="cmp-badge">Swae</div><p>✓ End-to-end flow to confirmed slot.</p></div>
+          <div class="cmp-cell other"><div class="cmp-badge other-badge">Others</div><p>✕ Partial / manual hand-offs.</p></div>
         </div>
-        <div class="row">
-          <div class="td">DMs & emails into one intake</div>
-          <div class="td good">✓ Unified thread & CRM log</div>
-          <div class="td bad">✕ Channel silos</div>
+      </article>
+      <article class="cmp-item">
+        <h3 class="cmp-feature">DMs & email unified intake</h3>
+        <div class="cmp-cols">
+          <div class="cmp-cell win"><div class="cmp-badge">Swae</div><p>✓ One thread + CRM log.</p></div>
+          <div class="cmp-cell other"><div class="cmp-badge other-badge">Others</div><p>✕ Channel silos.</p></div>
         </div>
-        <div class="row">
-          <div class="td">Calendar holds + deposits</div>
-          <div class="td good">✓ Built-in flow</div>
-          <div class="td bad">✕ Add-on or missing</div>
+      </article>
+      <article class="cmp-item">
+        <h3 class="cmp-feature">Calendar holds + deposits</h3>
+        <div class="cmp-cols">
+          <div class="cmp-cell win"><div class="cmp-badge">Swae</div><p>✓ Built-in & frictionless.</p></div>
+          <div class="cmp-cell other"><div class="cmp-badge other-badge">Others</div><p>✕ Add-ons or missing.</p></div>
         </div>
-        <div class="row">
-          <div class="td">No-show prevention</div>
-          <div class="td good">✓ Smart reminders & reschedule</div>
-          <div class="td bad">✕ Basic notifications</div>
+      </article>
+      <article class="cmp-item">
+        <h3 class="cmp-feature">No-show prevention</h3>
+        <div class="cmp-cols">
+          <div class="cmp-cell win"><div class="cmp-badge">Swae</div><p>✓ Smart reminders & reschedule.</p></div>
+          <div class="cmp-cell other"><div class="cmp-badge other-badge">Others</div><p>✕ Basic notifications.</p></div>
         </div>
-        <div class="row">
-          <div class="td">Brand-quality responses</div>
-          <div class="td good">✓ Scripted + tailored tone</div>
-          <div class="td bad">✕ Generic answers</div>
+      </article>
+      <article class="cmp-item">
+        <h3 class="cmp-feature">Brand-quality responses</h3>
+        <div class="cmp-cols">
+          <div class="cmp-cell win"><div class="cmp-badge">Swae</div><p>✓ Scripted, on-brand tone.</p></div>
+          <div class="cmp-cell other"><div class="cmp-badge other-badge">Others</div><p>✕ Generic answers.</p></div>
         </div>
-        <div class="row">
-          <div class="td">Set-up time</div>
-          <div class="td good">✓ One afternoon</div>
-          <div class="td bad">✕ Weeks & dev help</div>
+      </article>
+      <article class="cmp-item">
+        <h3 class="cmp-feature">Set-up time</h3>
+        <div class="cmp-cols">
+          <div class="cmp-cell win"><div class="cmp-badge">Swae</div><p>✓ One afternoon.</p></div>
+          <div class="cmp-cell other"><div class="cmp-badge other-badge">Others</div><p>✕ Weeks & dev help.</p></div>
         </div>
-        <div class="row">
-          <div class="td">Cost to replace receptionist</div>
-          <div class="td good">✓ Fraction of headcount</div>
-          <div class="td bad">✕ Tools + staff still needed</div>
+      </article>
+      <article class="cmp-item">
+        <h3 class="cmp-feature">Cost to replace receptionist</h3>
+        <div class="cmp-cols">
+          <div class="cmp-cell win"><div class="cmp-badge">Swae</div><p>✓ Fraction of headcount.</p></div>
+          <div class="cmp-cell other"><div class="cmp-badge other-badge">Others</div><p>✕ Tools + staff still needed.</p></div>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
@@ -272,26 +338,10 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
     <div class="carousel">
       <button class="nav-btn prev" aria-label="Previous">‹</button>
       <div class="track" id="track">
-        <article class="tcard">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“Clients thought we hired a full-time receptionist. It was Swae running 24/7 — missed calls became bookings.”</div>
-          <div class="client">— Clinic Owner</div>
-        </article>
-        <article class="tcard">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“We reply in under a minute and auto-book consults. Zero extra staff, fewer no-shows.”</div>
-          <div class="client">— Med Spa Manager</div>
-        </article>
-        <article class="tcard">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“DMs, forms, and calls funnel into one flow. Calendar stays full.”</div>
-          <div class="client">— Wellness Studio</div>
-        </article>
-        <article class="tcard">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“Implementation took an afternoon. It just works.”</div>
-          <div class="client">— Owner, IV Therapy</div>
-        </article>
+        <article class="tcard"><div class="stars">★★★★★</div><div class="quote">“Clients thought we hired a full-time receptionist. It was Swae running 24/7 — missed calls became bookings.”</div><div class="client">— Clinic Owner</div></article>
+        <article class="tcard"><div class="stars">★★★★★</div><div class="quote">“We reply in under a minute and auto-book consults. Zero extra staff, fewer no-shows.”</div><div class="client">— Med Spa Manager</div></article>
+        <article class="tcard"><div class="stars">★★★★★</div><div class="quote">“DMs, forms, and calls funnel into one flow. Calendar stays full.”</div><div class="client">— Wellness Studio</div></article>
+        <article class="tcard"><div class="stars">★★★★★</div><div class="quote">“Implementation took an afternoon. It just works.”</div><div class="client">— Owner, IV Therapy</div></article>
       </div>
       <button class="nav-btn next" aria-label="Next">›</button>
     </div>
@@ -301,7 +351,7 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
 <!-- CTA -->
 <section>
   <div class="wrap">
-    <div class="cta reveal">
+    <div class="cta reveal luxe">
       <h3>See the flow in 3 minutes.</h3>
       <p>Watch a live demo or send us your process — we’ll map the upgrade.</p>
       <div class="btn-row">
@@ -326,123 +376,79 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
   </div>
 </section>
 
+<!-- Floating Book Demo -->
+<a class="fab" href="contact.html" aria-label="Book a demo">✨ Book Demo</a>
+
 <!-- Footer -->
 <footer role="contentinfo">
-  <div class="wrap">© <span id="y"></span> Swae Systems — Black & Gold. Precision only.</div>
+  <div class="wrap">© <span id="y"></span> Swae Systems.</div>
 </footer>
 
 <script>
-/* Year + loader */
-window.addEventListener('load',()=>{
-  document.getElementById('y').textContent=new Date().getFullYear();
-  setTimeout(()=>document.getElementById('loader').classList.add('hide'),250);
-});
+/* 0) No half-way start + year */
+try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; }catch(e){}
+window.scrollTo(0,0);
+document.getElementById('y').textContent=new Date().getFullYear();
 
-/* Fullscreen Menu (stagger reveal + Esc/backdrop close) */
-const menu=document.getElementById('menu');
-const openMenu=document.getElementById('openMenu');
-const closeMenu=document.getElementById('closeMenu');
-openMenu.addEventListener('click',()=>{
-  menu.classList.add('active');
-  [...menu.querySelectorAll('.menu-list a')].forEach((a,i)=>setTimeout(()=>a.classList.add('show'),80*i));
-  menu.querySelector('.menu-list a')?.focus();
-});
-function hideMenu(){
-  menu.classList.remove('active');
-  [...menu.querySelectorAll('.menu-list a')].forEach(a=>a.classList.remove('show'));
-}
+/* Loader */
+window.addEventListener('load',()=>{ setTimeout(()=>document.getElementById('loader').classList.add('hide'),250); });
+
+/* Progress bar */
+(function(){
+  const bar=document.getElementById('progress');
+  const update=()=>{ const h=document.documentElement; const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight); bar.style.width=(p*100)+'%'; };
+  update(); addEventListener('scroll',update,{passive:true}); addEventListener('resize',update,{passive:true});
+})();
+
+/* Fullscreen Menu (stagger + esc/backdrop) */
+const menu=document.getElementById('menu'), openMenu=document.getElementById('openMenu'), closeMenu=document.getElementById('closeMenu');
+openMenu.addEventListener('click',()=>{ menu.classList.add('active'); [...menu.querySelectorAll('.menu-list a')].forEach((a,i)=>setTimeout(()=>a.classList.add('show'),80*i)); menu.querySelector('.menu-list a')?.focus(); });
+function hideMenu(){ menu.classList.remove('active'); [...menu.querySelectorAll('.menu-list a')].forEach(a=>a.classList.remove('show')); }
 closeMenu.addEventListener('click',hideMenu);
 menu.addEventListener('click',e=>{ if(e.target===menu) hideMenu(); });
-window.addEventListener('keydown',e=>{ if(e.key==='Escape') hideMenu(); });
+addEventListener('keydown',e=>{ if(e.key==='Escape') hideMenu(); });
 
-/* Parallax band */
+/* Parallax band (desktop only) */
 const band=document.getElementById('parallax');
-window.addEventListener('scroll',()=>{ band.style.transform=`translateY(${window.scrollY*0.15}px)`; },{passive:true});
+if(band) addEventListener('scroll',()=>{ band.style.transform=`translateY(${scrollY*0.15}px)`; },{passive:true});
 
 /* Reveal on scroll */
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.style.opacity=1;
-      e.target.style.transform='translateY(0)';
-      io.unobserve(e.target);
-    }
-  });
-},{threshold:.18});
+const io=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='translateY(0)'; io.unobserve(e.target); } }); },{threshold:.18});
 document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
 
-/* Subtle particles */
+/* Subtle gold particles */
 (function(){
   const c=document.getElementById('bgfx'),x=c.getContext('2d'); let w,h,p=[];
   function R(){ w=c.width=innerWidth; h=c.height=innerHeight;
     p=Array.from({length:Math.min(90,Math.floor(w*h/25000))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.3+.4}));
   }
   addEventListener('resize',R,{passive:true}); R();
-  (function t(){
-    x.clearRect(0,0,w,h);
-    for(const a of p){
-      a.x+=a.vx; a.y+=a.vy;
-      if(a.x<0||a.x>w) a.vx*=-1;
-      if(a.y<0||a.y>h) a.vy*=-1;
-      x.beginPath(); x.arc(a.x,a.y,a.r,0,Math.PI*2);
-      x.fillStyle='rgba(212,175,55,.11)'; x.fill();
-    }
-    requestAnimationFrame(t);
+  (function t(){ x.clearRect(0,0,w,h);
+    for(const a of p){ a.x+=a.vx; a.y+=a.vy; if(a.x<0||a.x>w)a.vx*=-1; if(a.y<0||a.y>h)a.vy*=-1;
+      x.beginPath(); x.arc(a.x,a.y,a.r,0,Math.PI*2); x.fillStyle='rgba(215,184,106,.11)'; x.fill();
+    } requestAnimationFrame(t);
   })();
 })();
 
-/* Testimonials — end-stop disabling + snap, buttons are true <button> styles */
+/* Testimonials — end-stop disabling + snap */
 (function(){
-  const track=document.getElementById('track');
-  const prev=document.querySelector('.nav-btn.prev');
-  const next=document.querySelector('.nav-btn.next');
-  if(!track||!prev||!next) return;
-
-  let step=0, idx=0, max=0;
-
+  const track=document.getElementById('track'), prev=document.querySelector('.nav-btn.prev'), next=document.querySelector('.nav-btn.next');
+  if(!track||!prev||!next) return; let step=0, idx=0, max=0;
   function measure(){
-    const card=track.querySelector('.tcard');
-    if(!card) return;
+    const card=track.querySelector('.tcard'); if(!card) return;
     const gap=parseInt(getComputedStyle(track).columnGap||getComputedStyle(track).gap)||16;
     step=card.offsetWidth + gap;
-    const count=[...track.querySelectorAll('.tcard')].length;
+    const count=track.querySelectorAll('.tcard').length;
     const visible=Math.max(1,Math.round(track.clientWidth/step));
-    max=Math.max(0,count - visible);
-    idx=Math.min(idx,max);
-    go(idx,false);
-    update();
+    max=Math.max(0,count-visible); idx=Math.min(idx,max);
+    go(idx,false); update();
   }
-
-  function update(){
-    const atStart = idx<=0;
-    const atEnd   = idx>=max;
-    prev.disabled=atStart; prev.setAttribute('aria-disabled',atStart);
-    next.disabled=atEnd;   next.setAttribute('aria-disabled',atEnd);
-  }
-
-  function go(i,smooth=true){
-    idx=Math.max(0,Math.min(i,max));
-    track.scrollTo({left: idx*step, behavior: smooth?'smooth':'auto'});
-    update();
-  }
-
-  prev.addEventListener('click',()=>go(idx-1));
-  next.addEventListener('click',()=>go(idx+1));
-
-  let to;
-  track.addEventListener('scroll',()=>{
-    clearTimeout(to);
-    to=setTimeout(()=>{
-      const i=Math.round(track.scrollLeft/step);
-      if(i!==idx) go(i);
-      else update();
-    },80);
-  });
-
-  addEventListener('resize',measure,{passive:true});
-  measure();
+  function update(){ prev.disabled=idx<=0; prev.setAttribute('aria-disabled',idx<=0); next.disabled=idx>=max; next.setAttribute('aria-disabled',idx>=max); }
+  function go(i,smooth=true){ idx=Math.max(0,Math.min(i,max)); track.scrollTo({left:idx*step,behavior:smooth?'smooth':'auto'}); update(); }
+  prev.addEventListener('click',()=>go(idx-1)); next.addEventListener('click',()=>go(idx+1));
+  let to; track.addEventListener('scroll',()=>{ clearTimeout(to); to=setTimeout(()=>{ const i=Math.round(track.scrollLeft/step); if(i!==idx) go(i); else update(); },80); });
+  addEventListener('resize',measure,{passive:true}); measure();
 })();
 </script>
-<!-- Chatbot snippet can go here when you're ready -->
 </body>
 </html>
