@@ -1,556 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Swae Systems — 24/7 AI Intake & Booking</title>
-  <meta name="description" content="Turn missed calls & DMs into booked appointments automatically. Concierge AI that replies in seconds, qualifies leads, and books to your calendar."/>
-  <meta name="theme-color" content="#0A0A0B"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Swae Systems — Luxury AI Intake & Booking</title>
 
-  <style>
-    :root{
-      --bg:#0a0a0b; --panel:#0f0f11; --card:#111114; --text:#f3f3f4; --muted:#bababe;
-      --line:rgba(255,255,255,.08); --gold:#d4af37; --gold-2:#f1d57a;
-      --radius:16px; --radius-lg:22px; --shadow:0 12px 40px rgba(0,0,0,.45);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    img{max-width:100%;display:block}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+<!-- Meta -->
+<meta name="description" content="Capture every lead, reply in seconds, and book straight to your calendar — without adding headcount. Concierge-grade AI for real businesses."/>
+<meta name="theme-color" content="#0A0A0B"/>
+<meta property="og:title" content="Swae Systems — Luxury AI Intake & Booking"/>
+<meta property="og:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Precision only."/>
+<meta property="og:type" content="website"/>
+<link rel="icon" href="favicon.ico"/>
 
-    /* Scroll progress bar */
-    .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:2000}
+<style>
+:root{
+  --bg:#0a0a0b; --panel:#121214; --muted:#151517;
+  --text:#e8e8ea; --sub:#a9a9af;
+  --gold:#D7B86A; --gold-deep:#A0782A; --gold-hi:#F4E2A6;
+  --border:rgba(255,255,255,.08);
+  --shadow:0 12px 40px rgba(0,0,0,.45);
+  --r:18px; --gap:16px; --glow:0 0 80px rgba(215,184,106,.15);
+}
 
-    /* Transparent sticky nav + hamburger */
-    .nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,11,.35);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
-    .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
-    .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 8px 22px rgba(212,175,55,.35)}
-    .links{display:flex;gap:20px;align-items:center}
-    .links a{color:#e7e7ea;font-size:14px;opacity:.8}
-    .links a:hover{opacity:1}
-    .hamburger{display:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06)}
-    .hamburger:before{content:"≡";display:block;text-align:center;line-height:36px;font-size:20px;color:#fff}
+/* Base */
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:2px solid rgba(215,184,106,.6);outline-offset:3px;border-radius:10px}
 
-    /* Drawer menu (mobile) */
-    .drawer{position:fixed;inset:0 0 0 auto;width:min(86%,360px);background:#0c0c0e;border-left:1px solid var(--line);
-      transform:translateX(100%);transition:transform .25s ease;z-index:1200;display:flex;flex-direction:column}
-    .drawer.open{transform:translateX(0)}
-    .d-head{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--line)}
-    .d-links{display:flex;flex-direction:column;padding:12px}
-    .d-links a{padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:rgba(255,255,255,.04)}
+/* Progress bar */
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold-hi),var(--gold-deep));width:0;z-index:90}
 
-    /* Hero */
-    header.hero{position:relative;isolation:isolate;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;z-index:-1;opacity:.35;
-      background:
-        radial-gradient(60% 45% at 75% 10%, rgba(241,213,122,.23), transparent 65%),
-        radial-gradient(50% 40% at 10% 60%, rgba(212,175,55,.12), transparent 65%),
-        url('hero-landing.PNG') center/cover no-repeat;
-      filter:saturate(110%) contrast(104%);
-    }
-    .hero-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:center;padding:92px 0 54px}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.05);color:#e9e9eb;font-size:12px}
-    h1{font-size: clamp(34px, 5vw, 58px);line-height:1.04;margin:12px 0 12px;letter-spacing:-.5px}
-    .lead{font-size: clamp(16px, 2.1vw, 20px);color:#d7d7db;max-width:680px;margin:10px 0 22px}
-    .row{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid var(--line);transition:transform .18s ease, background .2s ease}
-    .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.11)}
-    .btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#171717;border:none;font-weight:900;box-shadow:0 12px 30px rgba(212,175,55,.35)}
-    .hero-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:16px}
-    .hero-card small{color:#bdbdc2}
+/* Soft loader */
+.loader{position:fixed;inset:0;background:#0a0a0b;display:grid;place-items:center;z-index:100;transition:opacity .4s ease}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:var(--glow);animation:bounce 1s infinite ease-in-out;position:relative}
+.dot::before,.dot::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.dot::before{transform:translateX(-14px)} .dot::after{transform:translateX(14px)}
+@keyframes bounce{0%,80%,100%{transform:scale(.8)}40%{transform:scale(1)}}
+.loader.hide{opacity:0;pointer-events:none}
 
-    /* Minimal home sections to keep it uncluttered */
-    .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;margin:28px 0}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-    .muted{color:#cfcfd3}
+/* Header */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(10,10,11,.72);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar-inner{height:68px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;letter-spacing:.3px}
+.brand .accent{color:var(--gold)}
+.burger{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 14px;border-radius:12px;background:var(--muted);border:1px solid var(--border);box-shadow:var(--shadow);cursor:pointer}
+.burger span{width:18px;height:2px;background:var(--text);display:block;position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--text)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
 
-    /* Floating Book Now */
-    .sticky-cta{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:1000;background:linear-gradient(135deg,var(--gold),var(--gold-2));
-      color:#171717;border:none;border-radius:999px;padding:12px 20px;font-weight:900;box-shadow:0 16px 40px rgba(212,175,55,.35);display:flex;align-items:center;gap:10px}
+/* Fullscreen menu */
+.menu{position:fixed;inset:0;background:rgba(10,10,11,.78);backdrop-filter:blur(16px) saturate(140%);z-index:80;display:none}
+.menu.active{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.menu-inner{max-width:1120px;margin:0 auto;padding:22px 20px}
+.menu-head{height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.menu-list{padding:22px 0;display:grid;gap:12px}
+.menu a{display:flex;justify-content:space-between;align-items:center;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.03);opacity:0;transform:translateY(12px);font-weight:600}
+.menu a small{color:var(--sub)}
+.menu a.show{opacity:1;transform:translateY(0);transition:.35s ease}
+.menu a:hover{background:rgba(255,255,255,.06);transform:translateY(-1px)}
+.menu-close{height:38px;padding:0 14px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text)}
 
-    /* Footer */
-    footer{margin:60px 0 90px;color:#bababe}
-    footer .row{margin-top:12px}
+/* Background layers */
+#bgfx{position:fixed;inset:0;z-index:-3;pointer-events:none;opacity:.20}
+#fog{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.09;filter:blur(12px);
+  background:
+    radial-gradient(1200px 500px at 20% 10%, rgba(255,255,255,.15), transparent 60%),
+    radial-gradient(900px 400px at 80% 0%, rgba(255,255,255,.12), transparent 60%),
+    radial-gradient(700px 400px at 50% 20%, rgba(255,255,255,.08), transparent 60%);
+  animation:fog 18s ease-in-out infinite alternate;
+}
+@keyframes fog{0%{transform:translateY(0)}100%{transform:translateY(10px)}}
 
-    /* Responsive */
-    @media (max-width: 1024px){
-      .links{display:none}
-      .hamburger{display:block}
-      .hero-wrap{grid-template-columns:1fr}
-      .grid-3{grid-template-columns:1fr}
-    }
-  </style>
+.intro-parallax{position:relative;z-index:-1;height:120px;background:
+ radial-gradient(80% 60% at 60% -10%, rgba(215,184,106,.10), transparent 60%);transform:translateY(0);}
+@media (max-width:820px){ .intro-parallax{display:none;} }
+
+/* Intro (no hero) + shimmer headline */
+.intro{padding:28px 0 10px;border-bottom:1px solid var(--border)}
+.headline{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:.2px;position:relative;display:inline-block}
+.headline::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25) 50%,transparent 70%);
+  transform:translateX(-120%);animation:shine 6s linear infinite;
+}
+@keyframes shine{to{transform:translateX(120%)}}
+.sub{color:var(--sub);margin-top:8px;max-width:860px}
+
+/* Sections */
+section{padding:56px 0}
+.title{font-size:26px;font-weight:800;margin:0 0 16px}
+.kicker{color:var(--sub);margin:0 0 22px}
+
+/* Cards & grids */
+.grid-3{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);transform:translateY(8px);opacity:0;transition:transform .6s ease,opacity .6s ease}
+.card h3{margin:0 0 8px;font-size:18px}
+.card p{margin:0;color:var(--sub);line-height:1.6}
+
+/* Luxe accents */
+.card.luxe,.panel.luxe{border:1px solid rgba(215,184,106,.40);box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 60px rgba(215,184,106,.08)}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(215,184,106,.35),transparent);margin:32px 0}
+
+/* Chips */
+.chip-row{display:flex;flex-wrap:wrap;gap:10px}
+.chip{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:14px;transform:translateY(8px);opacity:0;transition:transform .6s ease,opacity .6s ease}
+
+/* Demo Spotlight */
+.demo{position:relative;border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,rgba(215,184,106,.08),rgba(255,255,255,0));overflow:hidden}
+.demo-inner{position:relative;aspect-ratio:16/9;background:radial-gradient(100% 80% at 50% 0%,rgba(255,255,255,.06),transparent 70%)}
+.demo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.demo .overlay{position:absolute;inset:auto 16px 16px 16px;display:flex;gap:10px;flex-wrap:wrap}
+.demo .overlay .btn{backdrop-filter:blur(6px)}
+.demo-note{color:var(--sub);font-size:13px;margin-top:8px}
+
+/* Testimonials */
+.carousel{position:relative}
+.track{display:flex;gap:var(--gap);overflow:auto scroll;padding:6px;scroll-behavior:smooth;scroll-snap-type:x mandatory}
+.track::-webkit-scrollbar{height:6px}.track::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px}
+.tcard{min-width:300px;max-width:360px;flex:0 0 auto;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:18px;scroll-snap-align:start;box-shadow:var(--shadow)}
+.stars{letter-spacing:2px;margin-bottom:10px;color:var(--gold)}
+.quote{font-size:15.5px;line-height:1.55}
+.client{margin-top:12px;color:var(--sub);font-size:14px}
+
+/* Arrows — NO BLUE */
+.nav-btn{
+  -webkit-appearance:none; appearance:none;
+  color:#e8e8ea; font-weight:700; line-height:1;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.07);
+  width:44px;height:44px;border-radius:12px;cursor:pointer;backdrop-filter:blur(10px)
+}
+.nav-btn:hover{background:rgba(255,255,255,.12)}
+.nav-btn:focus-visible{outline:2px solid rgba(215,184,106,.6); outline-offset:3px}
+.nav-btn[disabled]{opacity:.35;pointer-events:none;cursor:not-allowed}
+.prev{position:absolute;top:50%;left:-6px;transform:translateY(-50%)}
+.next{position:absolute;top:50%;right:-6px;transform:translateY(-50%)}
+@media(min-width:900px){.prev{left:-14px}.next{right:-14px}}
+
+/* CTA / buttons */
+.cta{padding:34px;border:1px solid var(--border);border-radius:var(--r);background:linear-gradient(180deg,rgba(215,184,106,.06),rgba(255,255,255,0));display:flex;flex-direction:column;gap:10px}
+.cta h3{margin:0;font-size:20px}
+.cta p{margin:0;color:var(--sub)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 16px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.04);cursor:pointer;transition:transform .15s ease}
+.btn.gold{
+  position:relative; overflow:hidden;
+  background:linear-gradient(180deg, rgba(215,184,106,.22), rgba(160,120,42,.14));
+  border-color:rgba(215,184,106,.50);
+}
+.btn.gold::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(75deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+  transform:translateX(-120%); transition:transform .8s ease;
+}
+.btn.gold:hover::after{ transform:translateX(120%) }
+.btn:hover{transform:translateY(-1px)}
+
+/* Floating Book button */
+.fab{
+  position:fixed; right:18px; bottom:18px; z-index:70;
+  height:52px; padding:0 18px; border-radius:999px;
+  display:flex; align-items:center; gap:10px;
+  color:var(--text); border:1px solid rgba(215,184,106,.45);
+  background:linear-gradient(180deg, rgba(215,184,106,.20), rgba(160,120,42,.12));
+  box-shadow:0 12px 40px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.10);
+}
+
+/* Stack / footer */
+.stack{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:18px}
+footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-size:14px}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .card,.chip,.btn,.menu a,.btn.gold::after{transition:none}
+  .headline::after{animation:none}
+  .track{scroll-behavior:auto}
+}
+</style>
 </head>
 <body>
-  <div class="progress" id="progress"></div>
+<div class="progress" id="progress"></div>
 
-  <!-- NAV -->
-  <nav class="nav" aria-label="Primary">
-    <div class="container nav-in">
-      <a class="brand" href="index.html"><div class="mark" aria-hidden="true"></div><span>Swae Systems</span></a>
-      <div class="links">
-        <a href="how.html">How It Works</a>
-        <a href="features.html">Features</a>
-        <a href="demo.html">Demo</a>
-        <a href="book.html" class="btn" style="padding:8px 14px">Book</a>
-      </div>
-      <button class="hamburger" id="hamburger" aria-label="Open menu"></button>
+<!-- Background layers -->
+<canvas id="bgfx" aria-hidden="true"></canvas>
+<div id="fog" aria-hidden="true"></div>
+<div class="intro-parallax" id="parallax" aria-hidden="true"></div>
+
+<!-- Soft loader -->
+<div class="loader" id="loader"><div class="dot" aria-hidden="true"></div></div>
+
+<!-- Header -->
+<header class="topbar" role="banner">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/" aria-label="Swae Systems Home">Swae <span class="accent">Systems</span></a>
+    <button class="burger" id="openMenu" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+
+<!-- Fullscreen Menu -->
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+  <div class="menu-inner">
+    <div class="menu-head">
+      <strong id="menuTitle">Swae <span class="accent" style="color:var(--gold)">Systems</span></strong>
+      <button class="menu-close" id="closeMenu" aria-label="Close menu">Close ✕</button>
     </div>
-  </nav>
-
-  <!-- Mobile Drawer -->
-  <aside class="drawer" id="drawer" aria-hidden="true">
-    <div class="d-head">
-      <div class="brand"><div class="mark"></div><strong>Swae Systems</strong></div>
-      <button class="hamburger" id="closeDrawer" aria-label="Close menu" style="transform:rotate(90deg)">✕</button>
+    <div class="menu-list">
+      <!-- Live Demo removed as requested -->
+      <a href="#compare"><span>Compare Us</span><small>Swae vs Competitors</small></a>
+      <a href="industries.html"><span>Industries</span><small>Where we win</small></a>
+      <a href="cases.html"><span>Case Studies</span><small>Proven results</small></a>
+      <a href="contact.html"><span>Contact</span><small>Book a walkthrough</small></a>
     </div>
-    <nav class="d-links">
-      <a href="index.html">Home</a>
-      <a href="how.html">How It Works</a>
-      <a href="features.html">Features</a>
-      <a href="demo.html">Demo</a>
-      <a href="book.html">Book a Demo</a>
-    </nav>
-  </aside>
+  </div>
+</div>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="container">
-      <div class="hero-wrap">
-        <div>
-          <span class="eyebrow">Concierge AI • Clinics & Service Businesses</span>
-          <h1>Turn missed calls & DMs into <em>booked appointments</em> — automatically.</h1>
-          <p class="lead">Reply in seconds, qualify leads, offer real-time availability, and sync to your calendar & CRM. No extra staff. No new tools to learn.</p>
-          <div class="row">
-            <a class="btn primary" href="book.html">✨ Book a 15-min Demo</a>
-            <a class="btn" href="demo.html">▶ Watch 90-second Preview</a>
-          </div>
+<!-- Intro -->
+<div class="intro">
+  <div class="wrap">
+    <h1 class="headline">Capture every lead. Reply in seconds. Book directly to your calendar.</h1>
+    <p class="sub">Concierge-level AI across SMS, email, and DMs — intake, qualification, scheduling, and follow-ups handled with precision and synced to your tools.</p>
+  </div>
+</div>
+
+<!-- Outcomes -->
+<section>
+  <div class="wrap">
+    <h2 class="title">What you get on day one</h2>
+    <p class="kicker">Fast wins without rebuilding your workflow.</p>
+    <div class="grid-3">
+      <div class="card reveal luxe"><h3>More Bookings</h3><p>Turn missed calls and DMs into confirmed appointments automatically — even after hours.</p></div>
+      <div class="card reveal"><h3>Faster Response</h3><p>Sub-60s replies keep prospects engaged and prevent drop-off.</p></div>
+      <div class="card reveal"><h3>Fewer No-Shows</h3><p>Smart confirmations & reminders reduce flakes and protect your calendar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities -->
+<section>
+  <div class="wrap">
+    <h2 class="title">Capabilities at a glance</h2>
+    <p class="kicker">A focused toolkit — no bloat, just results.</p>
+    <div class="chip-row">
+      <span class="chip reveal">24/7 Intake & Qualification</span>
+      <span class="chip reveal">Calendar Booking</span>
+      <span class="chip reveal">Auto Follow-ups</span>
+      <span class="chip reveal">Missed-Call Textbacks</span>
+      <span class="chip reveal">CRM Sync</span>
+      <span class="chip reveal">Lead Scoring</span>
+      <span class="chip reveal">Multi-channel (SMS/Email/DMs)</span>
+      <span class="chip reveal">Payments & Deposits</span>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO SPOTLIGHT (replaces the old compare section) -->
+<section id="compare">
+  <div class="wrap">
+    <h2 class="title">Live Demo Spotlight</h2>
+    <p class="kicker">Missed call → instant textback → qualification → booked on your calendar.</p>
+
+    <div class="demo reveal">
+      <div class="demo-inner">
+        <!-- Replace demo.mp4 and poster with your actual assets when ready -->
+        <video autoplay muted playsinline loop poster="demo-poster.jpg">
+          <source src="demo.mp4" type="video/mp4"/>
+        </video>
+        <div class="overlay">
+          <a class="btn gold" href="contact.html">Book a Walkthrough</a>
+          <a class="btn" href="cases.html">See Real Results</a>
         </div>
-        <aside class="hero-card" aria-label="UI preview">
-          <img src="hero-ui.PNG" alt="Chat + calendar booking UI preview"/>
-          <small>Works with Google, Outlook, & iCloud calendars. Qualified leads get times, confirmations, and reminders — automatically.</small>
-        </aside>
+      </div>
+      <div class="demo-note">No sound, 15s loop. Full walk-through available on request.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="wrap">
+    <h2 class="title">Testimonials</h2>
+    <p class="kicker">What clients say once Swae replaces missed calls and slow DMs.</p>
+
+    <div class="carousel">
+      <button class="nav-btn prev" aria-label="Previous">‹</button>
+      <div class="track" id="track">
+        <article class="tcard"><div class="stars">★★★★★</div><div class="quote">“Clients thought we hired a full-time receptionist. It was Swae running 24/7 — missed calls became bookings.”</div><div class="client">— Clinic Owner</div></article>
+        <article class="tcard"><div class="stars">★★★★★</div><div class="quote">“We reply in under a minute and auto-book consults. Zero extra staff, fewer no-shows.”</div><div class="client">— Med Spa Manager</div></article>
+        <article class="tcard"><div class="stars">★★★★★</div><div class="quote">“DMs, forms, and calls funnel into one flow. Calendar stays full.”</div><div class="client">— Wellness Studio</div></article>
+        <article class="tcard"><div class="stars">★★★★★</div><div class="quote">“Implementation took an afternoon. It just works.”</div><div class="client">— Owner, IV Therapy</div></article>
+      </div>
+      <button class="nav-btn next" aria-label="Next">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="wrap">
+    <div class="cta reveal luxe">
+      <h3>See the flow in 3 minutes.</h3>
+      <p>Watch a live demo or send us your process — we’ll map the upgrade.</p>
+      <div class="btn-row">
+        <a class="btn gold" href="contact.html">Book a Demo</a>
+        <a class="btn" href="contact.html">Talk to Swae</a>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- Minimal Proof (clean, not cluttered) -->
-  <main class="container">
-    <section class="panel">
-      <h2 style="margin:0 0 10px">What you get on day one</h2>
-      <p class="muted" style="margin:0 0 16px">Quick wins without rebuilding your workflow.</p>
-      <div class="grid-3">
-        <div class="item"><h3>More bookings</h3><p class="muted">Missed calls/DMs turn into confirmed appointments — even after hours.</p></div>
-        <div class="item"><h3>Faster replies</h3><p class="muted">Sub-60s responses keep prospects engaged and prevent drop-off.</p></div>
-        <div class="item"><h3>Fewer no-shows</h3><p class="muted">Smart confirmations & reminders protect your calendar.</p></div>
-      </div>
-      <div class="row" style="margin-top:14px">
-        <a class="btn primary" href="how.html">See How It Works</a>
-        <a class="btn" href="features.html">Explore Features</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="container">
-    <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:26px"></div>
-    <p>© Swae Systems.</p>
-    <small>We respect privacy. Data is encrypted in transit. Integrations use provider-approved methods. Ask about HIPAA/CCPA workflows.</small>
-    <div class="row">
-      <a class="btn" href="how.html">How It Works</a>
-      <a class="btn" href="features.html">Features</a>
-      <a class="btn" href="demo.html">Demo</a>
-      <a class="btn" href="book.html">Book</a>
+<!-- Stack -->
+<section>
+  <div class="wrap">
+    <h2 class="title">Works with your stack</h2>
+    <p class="kicker">Drop-in connections. Keep what already works.</p>
+    <div class="stack">
+      <div class="panel reveal">Calendars: Google, Outlook, iCloud</div>
+      <div class="panel reveal">Messaging: SMS, Email, IG DMs, FB Messenger</div>
+      <div class="panel reveal">CRMs: HubSpot, Pipedrive, HighLevel, Airtable</div>
+      <div class="panel reveal">Forms & Payments: Typeform, Jotform, Stripe</div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <!-- Floating CTA -->
-  <a class="sticky-cta" href="book.html" aria-label="Book a demo now">✨ Book Now</a>
+<!-- Floating Book Demo -->
+<a class="fab" href="contact.html" aria-label="Book a demo">✨ Book Demo</a>
 
-  <!-- Chatbot widget (paste your real ID to go live) -->
-  <!-- Tidio example: replace YOUR_PUBLIC_KEY and uncomment -->
-  <!-- <script src="//code.tidio.co/YOUR_PUBLIC_KEY.js" async></script> -->
-  <!-- Crisp example: replace YOUR_WEBSITE_ID and uncomment
-  <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="YOUR_WEBSITE_ID";
-  (function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script> -->
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="wrap">© <span id="y"></span> Swae Systems.</div>
+</footer>
 
-  <script>
-    // Scroll progress
-    const progress = document.getElementById('progress');
-    const onScroll = () => {
-      const h = document.documentElement;
-      const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
-      progress.style.width = (scrolled*100) + '%';
-    };
-    document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+<script>
+/* 0) No half-way start + year */
+try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; }catch(e){}
+window.scrollTo(0,0);
+document.getElementById('y').textContent=new Date().getFullYear();
 
-    // Drawer toggle
-    const drawer = document.getElementById('drawer');
-    document.getElementById('hamburger').onclick = ()=> drawer.classList.add('open');
-    document.getElementById('closeDrawer').onclick = ()=> drawer.classList.remove('open');
-    drawer.addEventListener('click', (e)=>{ if(e.target===drawer) drawer.classList.remove('open'); });
-  </script>
+/* Loader */
+window.addEventListener('load',()=>{ setTimeout(()=>document.getElementById('loader').classList.add('hide'),250); });
+
+/* Progress bar */
+(function(){
+  const bar=document.getElementById('progress');
+  const update=()=>{ const h=document.documentElement; const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight); bar.style.width=(p*100)+'%'; };
+  update(); addEventListener('scroll',update,{passive:true}); addEventListener('resize',update,{passive:true});
+})();
+
+/* Fullscreen Menu (stagger + esc/backdrop) */
+const menu=document.getElementById('menu'), openMenu=document.getElementById('openMenu'), closeMenu=document.getElementById('closeMenu');
+openMenu.addEventListener('click',()=>{ menu.classList.add('active'); [...menu.querySelectorAll('.menu-list a')].forEach((a,i)=>setTimeout(()=>a.classList.add('show'),80*i)); menu.querySelector('.menu-list a')?.focus(); });
+function hideMenu(){ menu.classList.remove('active'); [...menu.querySelectorAll('.menu-list a')].forEach(a=>a.classList.remove('show')); }
+closeMenu.addEventListener('click',hideMenu);
+menu.addEventListener('click',e=>{ if(e.target===menu) hideMenu(); });
+addEventListener('keydown',e=>{ if(e.key==='Escape') hideMenu(); });
+
+/* Parallax band (desktop only) */
+const band=document.getElementById('parallax');
+if(band) addEventListener('scroll',()=>{ band.style.transform=`translateY(${scrollY*0.15}px)`; },{passive:true});
+
+/* Reveal on scroll */
+const io=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='translateY(0)'; io.unobserve(e.target); } }); },{threshold:.18});
+document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
+
+/* Subtle gold particles */
+(function(){
+  const c=document.getElementById('bgfx'),x=c.getContext('2d'); let w,h,p=[];
+  function R(){ w=c.width=innerWidth; h=c.height=innerHeight;
+    p=Array.from({length:Math.min(90,Math.floor(w*h/25000))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.3+.4}));
+  }
+  addEventListener('resize',R,{passive:true}); R();
+  (function t(){ x.clearRect(0,0,w,h);
+    for(const a of p){ a.x+=a.vx; a.y+=a.vy; if(a.x<0||a.x>w)a.vx*=-1; if(a.y<0||a.y>h)a.vy*=-1;
+      x.beginPath(); x.arc(a.x,a.y,a.r,0,Math.PI*2); x.fillStyle='rgba(215,184,106,.11)'; x.fill();
+    } requestAnimationFrame(t);
+  })();
+})();
+
+/* Testimonials — end-stop disabling + snap */
+(function(){
+  const track=document.getElementById('track'), prev=document.querySelector('.nav-btn.prev'), next=document.querySelector('.nav-btn.next');
+  if(!track||!prev||!next) return; let step=0, idx=0, max=0;
+  function measure(){
+    const card=track.querySelector('.tcard'); if(!card) return;
+    const gap=parseInt(getComputedStyle(track).columnGap||getComputedStyle(track).gap)||16;
+    step=card.offsetWidth + gap;
+    const count=track.querySelectorAll('.tcard').length;
+    const visible=Math.max(1,Math.round(track.clientWidth/step));
+    max=Math.max(0,count-visible); idx=Math.min(idx,max);
+    go(idx,false); update();
+  }
+  function update(){ prev.disabled=idx<=0; prev.setAttribute('aria-disabled',idx<=0); next.disabled=idx>=max; next.setAttribute('aria-disabled',idx>=max); }
+  function go(i,smooth=true){ idx=Math.max(0,Math.min(i,max)); track.scrollTo({left:idx*step,behavior:smooth?'smooth':'auto'}); update(); }
+  prev.addEventListener('click',()=>go(idx-1)); next.addEventListener('click',()=>go(idx+1));
+  let to; track.addEventListener('scroll',()=>{ clearTimeout(to); to=setTimeout(()=>{ const i=Math.round(track.scrollLeft/step); if(i!==idx) go(i); else update(); },80); });
+  addEventListener('resize',measure,{passive:true}); measure();
+})();
+</script>
 </body>
 </html>
-<!-- how.html -->
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>How It Works — Swae Systems</title><meta name="theme-color" content="#0A0A0B"/>
-<style>
-  /* same core styles as index for consistency */
-  :root{--bg:#0a0a0b;--panel:#0f0f11;--card:#111114;--text:#f3f3f4;--muted:#bababe;--line:rgba(255,255,255,.08);--gold:#d4af37;--gold-2:#f1d57a;--radius:16px;--radius-lg:22px;--shadow:0 12px 40px rgba(0,0,0,.45)}
-  *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  a{color:inherit;text-decoration:none} .container{max-width:1200px;margin:0 auto;padding:0 20px}
-  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:2000}
-  .nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,11,.35);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-  .brand{display:flex;align-items:center;gap:12px;font-weight:800}.mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 8px 22px rgba(212,175,55,.35)}
-  .links{display:flex;gap:20px;align-items:center}.links a{color:#e7e7ea;font-size:14px;opacity:.85}.links a:hover{opacity:1}
-  .hamburger{display:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06)}
-  .hamburger:before{content:"≡";display:block;text-align:center;line-height:36px;font-size:20px;color:#fff}
-  .drawer{position:fixed;inset:0 0 0 auto;width:min(86%,360px);background:#0c0c0e;border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s ease;z-index:1200;display:flex;flex-direction:column}
-  .drawer.open{transform:translateX(0)} .d-head{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--line)}
-  .d-links{display:flex;flex-direction:column;padding:12px}.d-links a{padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:rgba(255,255,255,.04)}
-  header{padding:70px 0 26px} h1{font-size: clamp(32px, 5vw, 48px);margin:0 0 10px}
-  .muted{color:#cfcfd3} .flow{margin:14px 0 40px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}@media(max-width:960px){.steps{grid-template-columns:1fr 1fr}}
-  .chip{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:10px;align-items:flex-start}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);margin-top:6px}
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;margin:20px 0}
-  footer{margin:60px 0 90px;color:#bababe}
-  .sticky-cta{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:1000;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#171717;border:none;border-radius:999px;padding:12px 20px;font-weight:900;box-shadow:0 16px 40px rgba(212,175,55,.35);display:flex;align-items:center;gap:10px}
-  @media (max-width:1024px){.links{display:none}.hamburger{display:block}}
-</style>
-</head>
-<body>
-  <div class="progress" id="progress"></div>
-  <nav class="nav"><div class="container nav-in">
-    <a class="brand" href="index.html"><div class="mark"></div><span>Swae Systems</span></a>
-    <div class="links">
-      <a href="how.html" style="opacity:1">How It Works</a>
-      <a href="features.html">Features</a>
-      <a href="demo.html">Demo</a>
-      <a href="book.html" class="panel" style="padding:8px 14px">Book</a>
-    </div>
-    <button class="hamburger" id="hamburger"></button>
-  </div></nav>
-  <aside class="drawer" id="drawer"><div class="d-head"><div class="brand"><div class="mark"></div><strong>Swae Systems</strong></div><button class="hamburger" id="closeDrawer" style="transform:rotate(90deg)">✕</button></div>
-    <nav class="d-links"><a href="index.html">Home</a><a href="how.html">How It Works</a><a href="features.html">Features</a><a href="demo.html">Demo</a><a href="book.html">Book a Demo</a></nav>
-  </aside>
-
-  <header class="container">
-    <h1>How it works</h1>
-    <p class="muted">Under 60 seconds from missed call/DM to a confirmed appointment on your calendar.</p>
-  </header>
-
-  <main class="container">
-    <section class="flow">
-      <div class="steps">
-        <div class="chip"><div class="dot"></div><div><strong>Detect</strong><br/>Missed call, DM, or form comes in — Swae picks it up instantly.</div></div>
-        <div class="chip"><div class="dot"></div><div><strong>Reply & qualify</strong><br/>Personalized response under a minute; gather intent, budget, and preferences.</div></div>
-        <div class="chip"><div class="dot"></div><div><strong>Offer times</strong><br/>Live availability pulled from your calendar with deposit options if needed.</div></div>
-        <div class="chip"><div class="dot"></div><div><strong>Book & remind</strong><br/>We confirm, send reminders, and sync to CRM. Your team just shows up.</div></div>
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2 style="margin:0 0 8px">Channels we watch</h2>
-      <p class="muted">SMS, Email, Instagram DMs, Facebook Messenger, and website forms. We unify it into one flow.</p>
-    </section>
-
-    <section class="panel">
-      <h2 style="margin:0 0 8px">What you’ll see</h2>
-      <p class="muted">A clean calendar filling with qualified bookings and fewer no-shows from smart confirmations and reminders.</p>
-      <div class="row" style="margin-top:10px">
-        <a class="panel" href="demo.html" style="display:inline-block">▶ Watch the 90-sec demo</a>
-        <a class="panel" href="book.html" style="display:inline-block">✨ Book a 15-min walkthrough</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="container">
-    <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:26px"></div>
-    <p>© Swae Systems.</p>
-  </footer>
-
-  <a class="sticky-cta" href="book.html">✨ Book Now</a>
-
-  <script>
-    const progress=document.getElementById('progress');
-    const onScroll=()=>{const h=document.documentElement;progress.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';};
-    document.addEventListener('scroll',onScroll,{passive:true});onScroll();
-    const drawer=document.getElementById('drawer');
-    document.getElementById('hamburger').onclick=()=>drawer.classList.add('open');
-    document.getElementById('closeDrawer').onclick=()=>drawer.classList.remove('open');
-    drawer.addEventListener('click',e=>{if(e.target===drawer)drawer.classList.remove('open');});
-  </script>
-</body></html>
-<!-- features.html -->
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Features — Swae Systems</title><meta name="theme-color" content="#0A0A0B"/>
-<style>
-  :root{--bg:#0a0a0b;--panel:#0f0f11;--card:#111114;--text:#f3f3f4;--muted:#bababe;--line:rgba(255,255,255,.08);--gold:#d4af37;--gold-2:#f1d57a;--radius:16px;--radius-lg:22px;--shadow:0 12px 40px rgba(0,0,0,.45)}
-  *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  a{color:inherit;text-decoration:none} .container{max-width:1200px;margin:0 auto;padding:0 20px}
-  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:2000}
-  .nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,11,.35);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-  .brand{display:flex;align-items:center;gap:12px;font-weight:800}.mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 8px 22px rgba(212,175,55,.35)}
-  .links{display:flex;gap:20px;align-items:center}.links a{color:#e7e7ea;font-size:14px;opacity:.85}.links a:hover{opacity:1}
-  .hamburger{display:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06)}
-  .hamburger:before{content:"≡";display:block;text-align:center;line-height:36px;font-size:20px;color:#fff}
-  .drawer{position:fixed;inset:0 0 0 auto;width:min(86%,360px);background:#0c0c0e;border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s ease;z-index:1200;display:flex;flex-direction:column}
-  .drawer.open{transform:translateX(0)} .d-head{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--line)}
-  .d-links{display:flex;flex-direction:column;padding:12px}.d-links a{padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:rgba(255,255,255,.04)}
-  header{padding:70px 0 26px} h1{font-size: clamp(32px, 5vw, 48px);margin:0 0 10px}.muted{color:#cfcfd3}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}@media(max-width:980px){.grid{grid-template-columns:1fr}}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
-  footer{margin:60px 0 90px;color:#bababe}
-  .sticky-cta{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:1000;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#171717;border:none;border-radius:999px;padding:12px 20px;font-weight:900;box-shadow:0 16px 40px rgba(212,175,55,.35);display:flex;align-items:center;gap:10px}
-  @media (max-width:1024px){.links{display:none}.hamburger{display:block}}
-</style>
-</head>
-<body>
-  <div class="progress" id="progress"></div>
-  <nav class="nav"><div class="container nav-in">
-    <a class="brand" href="index.html"><div class="mark"></div><span>Swae Systems</span></a>
-    <div class="links">
-      <a href="how.html">How It Works</a>
-      <a href="features.html" style="opacity:1">Features</a>
-      <a href="demo.html">Demo</a>
-      <a href="book.html" class="card" style="padding:8px 14px">Book</a>
-    </div>
-    <button class="hamburger" id="hamburger"></button>
-  </div></nav>
-  <aside class="drawer" id="drawer"><div class="d-head"><div class="brand"><div class="mark"></div><strong>Swae Systems</strong></div><button class="hamburger" id="closeDrawer" style="transform:rotate(90deg)">✕</button></div>
-    <nav class="d-links"><a href="index.html">Home</a><a href="how.html">How It Works</a><a href="features.html">Features</a><a href="demo.html">Demo</a><a href="book.html">Book a Demo</a></nav>
-  </aside>
-
-  <header class="container">
-    <h1>Features</h1>
-    <p class="muted">Everything you need — nothing you don’t.</p>
-  </header>
-
-  <main class="container">
-    <section class="grid">
-      <div class="card">✔ <strong>24/7 Intake & Qualification</strong> — turn calls, DMs, and forms into conversations that convert.</div>
-      <div class="card">✔ <strong>Calendar Booking</strong> — live slots from Google/Outlook/iCloud.</div>
-      <div class="card">✔ <strong>Smart Reminders</strong> — confirmations, reschedules, & no-show reduction.</div>
-      <div class="card">✔ <strong>CRM Sync</strong> — HubSpot, Pipedrive, HighLevel, Airtable.</div>
-      <div class="card">✔ <strong>Payments & Deposits</strong> — Stripe + deposit rules to protect your time.</div>
-      <div class="card">✔ <strong>Lead Scoring</strong> — qualify by budget, location, and service interest.</div>
-    </section>
-  </main>
-
-  <footer class="container">
-    <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:26px"></div>
-    <p>© Swae Systems.</p>
-  </footer>
-
-  <a class="sticky-cta" href="book.html">✨ Book Now</a>
-
-  <script>
-    const progress=document.getElementById('progress');
-    const onScroll=()=>{const h=document.documentElement;progress.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';};
-    document.addEventListener('scroll',onScroll,{passive:true});onScroll();
-    const drawer=document.getElementById('drawer');
-    document.getElementById('hamburger').onclick=()=>drawer.classList.add('open');
-    document.getElementById('closeDrawer').onclick=()=>drawer.classList.remove('open');
-    drawer.addEventListener('click',e=>{if(e.target===drawer)drawer.classList.remove('open');});
-  </script>
-</body></html>
-<!-- book.html -->
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Book a Demo — Swae Systems</title><meta name="theme-color" content="#0A0A0B"/>
-<style>
-  :root{--bg:#0a0a0b;--panel:#0f0f11;--card:#111114;--text:#f3f3f4;--muted:#bababe;--line:rgba(255,255,255,.08);--gold:#d4af37;--gold-2:#f1d57a;--radius:16px;--radius-lg:22px;--shadow:0 12px 40px rgba(0,0,0,.45)}
-  *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  a{color:inherit;text-decoration:none} .container{max-width:1200px;margin:0 auto;padding:0 20px}
-  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:2000}
-  .nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,11,.35);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-  .brand{display:flex;align-items:center;gap:12px;font-weight:800}.mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 8px 22px rgba(212,175,55,.35)}
-  .links{display:flex;gap:20px;align-items:center}.links a{color:#e7e7ea;font-size:14px;opacity:.85}.links a:hover{opacity:1}
-  .hamburger{display:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06)}
-  .hamburger:before{content:"≡";display:block;text-align:center;line-height:36px;font-size:20px;color:#fff}
-  .drawer{position:fixed;inset:0 0 0 auto;width:min(86%,360px);background:#0c0c0e;border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s ease;z-index:1200;display:flex;flex-direction:column}
-  .drawer.open{transform:translateX(0)} .d-head{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--line)}
-  .d-links{display:flex;flex-direction:column;padding:12px}.d-links a{padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:rgba(255,255,255,.04)}
-  header{padding:70px 0 26px} h1{font-size: clamp(32px, 5vw, 48px);margin:0 0 10px}.muted{color:#cfcfd3}
-  .book{margin:22px 0 40px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px}
-  form{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:860px}
-  input,textarea,select{padding:12px;border-radius:12px;border:1px solid var(--line);background:#0f0f11;color:#fff}
-  button{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#171717;border:none;font-weight:900;box-shadow:0 12px 30px rgba(212,175,55,.35)}
-  footer{margin:60px 0 90px;color:#bababe}
-  .sticky-cta{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:1000;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#171717;border:none;border-radius:999px;padding:12px 20px;font-weight:900;box-shadow:0 16px 40px rgba(212,175,55,.35);display:flex;align-items:center;gap:10px}
-  @media (max-width:1024px){.links{display:none}.hamburger{display:block} form{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-  <div class="progress" id="progress"></div>
-  <nav class="nav"><div class="container nav-in">
-    <a class="brand" href="index.html"><div class="mark"></div><span>Swae Systems</span></a>
-    <div class="links">
-      <a href="how.html">How It Works</a>
-      <a href="features.html">Features</a>
-      <a href="demo.html">Demo</a>
-      <a href="book.html" class="book" style="padding:8px 14px">Book</a>
-    </div>
-    <button class="hamburger" id="hamburger"></button>
-  </div></nav>
-  <aside class="drawer" id="drawer"><div class="d-head"><div class="brand"><div class="mark"></div><strong>Swae Systems</strong></div><button class="hamburger" id="closeDrawer" style="transform:rotate(90deg)">✕</button></div>
-    <nav class="d-links"><a href="index.html">Home</a><a href="how.html">How It Works</a><a href="features.html">Features</a><a href="demo.html">Demo</a><a href="book.html">Book a Demo</a></nav>
-  </aside>
-
-  <header class="container">
-    <h1>Book a walkthrough</h1>
-    <p class="muted">15 minutes to see exactly how Swae upgrades your intake & calendar.</p>
-  </header>
-
-  <main class="container">
-    <section class="book">
-      <form id="demoForm">
-        <input name="name" required placeholder="Full name"/>
-        <input name="email" required type="email" placeholder="Work email"/>
-        <input name="business" placeholder="Business name"/>
-        <input name="phone" placeholder="Phone (optional)"/>
-        <select name="industry">
-          <option value="">Select industry</option>
-          <option>Med Spa / Aesthetics</option>
-          <option>IV Therapy</option>
-          <option>Weight Loss / TRT</option>
-          <option>Wellness / Fitness</option>
-          <option>Home / Auto Services</option>
-        </select>
-        <textarea name="goals" rows="4" placeholder="What do you want to improve? (missed calls, response times, no-shows…)"></textarea>
-        <button type="submit" style="grid-column:1/-1">Request My Demo</button>
-      </form>
-      <p class="muted" style="margin-top:12px">We’ll reply within a few hours. Check your spam if you don’t see us.</p>
-    </section>
-  </main>
-
-  <footer class="container">
-    <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:26px"></div>
-    <p>© Swae Systems.</p>
-  </footer>
-
-  <a class="sticky-cta" href="book.html">✨ Book Now</a>
-
-  <!-- Chatbot widget (paste your real ID to go live) -->
-  <!-- <script src="//code.tidio.co/YOUR_PUBLIC_KEY.js" async></script> -->
-  <!-- <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="YOUR_WEBSITE_ID";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script> -->
-
-  <script>
-    // Progress
-    const progress=document.getElementById('progress');
-    const onScroll=()=>{const h=document.documentElement;progress.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';};
-    document.addEventListener('scroll',onScroll,{passive:true});onScroll();
-
-    // Drawer
-    const drawer=document.getElementById('drawer');
-    document.getElementById('hamburger').onclick=()=>drawer.classList.add('open');
-    document.getElementById('closeDrawer').onclick=()=>drawer.classList.remove('open');
-    drawer.addEventListener('click',e=>{if(e.target===drawer)drawer.classList.remove('open');});
-
-    // Form handling — opens a prefilled email & stores locally (swap for Formspree/Make if you want)
-    document.getElementById('demoForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const f=new FormData(e.target);
-      const data=Object.fromEntries(f.entries());
-      try{
-        const store=JSON.parse(localStorage.getItem('swae_leads')||'[]'); store.push({...data, ts:new Date().toISOString()});
-        localStorage.setItem('swae_leads', JSON.stringify(store));
-      }catch(err){}
-      const subject=encodeURIComponent('Swae Demo Request — ' + (data.name||''));
-      const body=encodeURIComponent(
-        `Name: ${data.name}\nEmail: ${data.email}\nBusiness: ${data.business||''}\nPhone: ${data.phone||''}\nIndustry: ${data.industry||''}\nGoals: ${data.goals||''}\n`
-      );
-      window.location.href=`mailto:swaeejb7@gmail.com?subject=${subject}&body=${body}`;
-      alert("Thanks! We’ll reach out ASAP.");
-      e.target.reset();
-    });
-  </script>
-</body></html>
-<!-- demo.html -->
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Product Demo — Swae Systems</title><meta name="theme-color" content="#0A0A0B"/>
-<style>
-  :root{--bg:#0a0a0b;--panel:#0f0f11;--card:#111114;--text:#f3f3f4;--muted:#bababe;--line:rgba(255,255,255,.08);--gold:#d4af37;--gold-2:#f1d57a;--radius:16px;--radius-lg:22px;--shadow:0 12px 40px rgba(0,0,0,.45)}
-  *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  a{color:inherit;text-decoration:none} .container{max-width:1200px;margin:0 auto;padding:0 20px}
-  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:2000}
-  .nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,11,.35);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-  .brand{display:flex;align-items:center;gap:12px;font-weight:800}.mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 8px 22px rgba(212,175,55,.35)}
-  .links{display:flex;gap:20px;align-items:center}.links a{color:#e7e7ea;font-size:14px;opacity:.85}.links a:hover{opacity:1}
-  .hamburger{display:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06)}
-  .hamburger:before{content:"≡";display:block;text-align:center;line-height:36px;font-size:20px;color:#fff}
-  .drawer{position:fixed;inset:0 0 0 auto;width:min(86%,360px);background:#0c0c0e;border-left:1px solid var(--line);transform:translateX(100%);transition:transform .25s ease;z-index:1200;display:flex;flex-direction:column}
-  .drawer.open{transform:translateX(0)} .d-head{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--line)}
-  .d-links{display:flex;flex-direction:column;padding:12px}.d-links a{padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:rgba(255,255,255,.04)}
-  header{padding:70px 0 26px} h1{font-size: clamp(32px, 5vw, 48px);margin:0 0 10px}.muted{color:#cfcfd3}
-  .demo{margin:22px 0 40px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
-  video, .ph{width:100%;display:block}
-  .ph{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#0b0b0d}
-  footer{margin:60px 0 90px;color:#bababe}
-  .sticky-cta{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:1000;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#171717;border:none;border-radius:999px;padding:12px 20px;font-weight:900;box-shadow:0 16px 40px rgba(212,175,55,.35);display:flex;align-items:center;gap:10px}
-  @media (max-width:1024px){.links{display:none}.hamburger{display:block}}
-</style>
-</head>
-<body>
-  <div class="progress" id="progress"></div>
-  <nav class="nav"><div class="container nav-in">
-    <a class="brand" href="index.html"><div class="mark"></div><span>Swae Systems</span></a>
-    <div class="links">
-      <a href="how.html">How It Works</a>
-      <a href="features.html">Features</a>
-      <a href="demo.html" style="opacity:1">Demo</a>
-      <a href="book.html" class="demo" style="padding:8px 14px">Book</a>
-    </div>
-    <button class="hamburger" id="hamburger"></button>
-  </div></nav>
-  <aside class="drawer" id="drawer"><div class="d-head"><div class="brand"><div class="mark"></div><strong>Swae Systems</strong></div><button class="hamburger" id="closeDrawer" style="transform:rotate(90deg)">✕</button></div>
-    <nav class="d-links"><a href="index.html">Home</a><a href="how.html">How It Works</a><a href="features.html">Features</a><a href="demo.html">Demo</a><a href="book.html">Book a Demo</a></nav>
-  </aside>
-
-  <header class="container">
-    <h1>Product demo</h1>
-    <p class="muted">Missed call → instant textback → qualification → offered times → booked & reminded.</p>
-  </header>
-
-  <main class="container">
-    <section class="demo">
-      <!-- If you have a video, save as demo-90s.mp4 in the root -->
-      <!-- This <video> will load automatically if the file exists -->
-      <video controls playsinline poster="demo-poster.PNG">
-        <source src="demo-90s.mp4" type="video/mp4"/>
-        <!-- Fallback preview if no video yet -->
-      </video>
-    </section>
-    <div class="muted">No video yet? Add <strong>demo-90s.mp4</strong> (16:9) and optional <strong>demo-poster.PNG</strong> for the thumbnail.</div>
-  </main>
-
-  <footer class="container">
-    <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:26px"></div>
-    <p>© Swae Systems.</p>
-  </footer>
-
-  <a class="sticky-cta" href="book.html">✨ Book Now</a>
-
-  <script>
-    const progress=document.getElementById('progress');
-    const onScroll=()=>{const h=document.documentElement;progress.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%';};
-    document.addEventListener('scroll',onScroll,{passive:true});onScroll();
-    const drawer=document.getElementById('drawer');
-    document.getElementById('hamburger').onclick=()=>drawer.classList.add('open');
-    document.getElementById('closeDrawer').onclick=()=>drawer.classList.remove('open');
-    drawer.addEventListener('click',e=>{if(e.target===drawer)drawer.classList.remove('open');});
-  </script>
-</body></html>
