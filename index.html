@@ -17,7 +17,7 @@
 <link rel="preload" as="image" href="og.png">
 <link rel="prefetch" href="contact.html" as="document"/>
 
-<!-- Open Graph / Twitter -->
+<!-- OG / Twitter -->
 <meta property="og:title" content="Swae Systems — Luxury AI Intake & Booking"/>
 <meta property="og:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Precision only."/>
 <meta property="og:type" content="website"/>
@@ -29,7 +29,7 @@
 <meta name="twitter:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Precision only."/>
 <meta name="twitter:image" content="og.png"/>
 
-<!-- JSON-LD (Organization + Service + FAQ for SEO trust) -->
+<!-- JSON-LD (Organization + Service + FAQ for rich results) -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -56,9 +56,10 @@
   "@context":"https://schema.org",
   "@type":"FAQPage",
   "mainEntity":[
-    {"@type":"Question","name":"Do I have to change my tools?","acceptedAnswer":{"@type":"Answer","text":"No. We drop into your calendars, CRM, forms, and inboxes. No rip-and-replace."}},
-    {"@type":"Question","name":"How fast is the setup?","acceptedAnswer":{"@type":"Answer","text":"Same day for core intake + booking. Full optimization typically in 48 hours."}},
-    {"@type":"Question","name":"Does it work after hours?","acceptedAnswer":{"@type":"Answer","text":"Yes. 24/7 intake, qualification, reminders, and follow-ups continue when your staff is offline."}}
+    {"@type":"Question","name":"Do I have to change my tools?","acceptedAnswer":{"@type":"Answer","text":"No. We drop into your calendars (Google/Outlook/iCloud), your CRM, and your existing forms. No rip-and-replace."}},
+    {"@type":"Question","name":"How fast is setup?","acceptedAnswer":{"@type":"Answer","text":"Same day for core intake + booking. We usually refine follow-ups and reminders within 48 hours."}},
+    {"@type":"Question","name":"Does Swae work after hours?","acceptedAnswer":{"@type":"Answer","text":"Yes. 24/7 intake, qualification, confirmations, reminders, deposits, and follow-ups."}},
+    {"@type":"Question","name":"What channels does it cover?","acceptedAnswer":{"@type":"Answer","text":"SMS, email, Instagram DMs, Facebook Messenger — plus missed-call textbacks."}}
   ]
 }
 </script>
@@ -99,7 +100,6 @@ img,video{display:block;max-width:100%}
 .topbar-inner{height:68px;display:flex;align-items:center;justify-content:space-between}
 .brand{font-weight:800;letter-spacing:.3px}
 .brand .accent{color:var(--gold)}
-/* burger */
 .burger{display:inline-flex;align-items:center;justify-content:center;width:46px;height:42px;border-radius:12px;background:var(--muted);border:1px solid var(--border);box-shadow:var(--shadow);cursor:pointer;transition:transform .12s ease}
 .burger:hover{transform:translateY(-1px)}
 .burger i,.burger i::before,.burger i::after{content:"";display:block;width:18px;height:2px;background:var(--text);position:relative;transition:.2s ease}
@@ -200,15 +200,19 @@ section{padding:64px 0}
 /* Floating Book button */
 .fab{position:fixed;right:18px;bottom:18px;z-index:70;height:52px;padding:0 18px;border-radius:999px;display:flex;align-items:center;gap:10px;color:var(--text);border:1px solid rgba(215,184,106,.45);background:linear-gradient(180deg, rgba(215,184,106,.20), rgba(160,120,42,.12));box-shadow:0 12px 40px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.10)}
 
-/* Stack / footer */
-.stack{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:18px}
-footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-size:14px}
-
+/* FAQ (luxury accordion) */
+.faq{margin-top:8px}
+.faq .item{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
+.faq .q{width:100%;text-align:left;background:transparent;border:0;color:var(--text);padding:16px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.faq .q span{font-weight:700}
+.faq .q i{transition:transform .2s ease}
+.faq .a{max-height:0;overflow:hidden;transition:max-height .25s ease,padding .25s ease;background:rgba(255,255,255,.02);border-top:1px solid var(--border);padding:0 18px}
+.faq .item.open .a{padding:14px 18px;max-height:280px}
+.faq .item.open .q i{transform:rotate(180deg)}
+.faq small{color:var(--sub)}
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
-  .card,.chip,.btn,.menu a,.btn.gold::after{transition:none}
-  .track{scroll-behavior:auto}
+  .faq .a{transition:none}
 }
 </style>
 </head>
@@ -233,21 +237,11 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
       <strong id="menuTitle">Swae <span class="accent" style="color:var(--gold)">Systems</span></strong>
       <button class="menu-close" id="closeMenu" aria-label="Close menu">Close ✕</button>
     </div>
-
-    <!-- NEW 4-ITEM LIST -->
     <div class="menu-list" id="menuList">
-      <a href="contact.html">
-        <span>Contact Us</span><small>Questions, support, quotes</small>
-      </a>
-      <a href="contact.html#book">
-        <span>Book a Walkthrough</span><small>Priority scheduling</small>
-      </a>
-      <a href="#compare">
-        <span>Head-to-Head: Swae vs Alternatives</span><small>Why teams switch</small>
-      </a>
-      <a href="industries.html">
-        <span>Industries We Serve</span><small>Clinics, wellness & more</small>
-      </a>
+      <a href="contact.html"><span>Contact Us</span><small>Questions, support, quotes</small></a>
+      <a href="contact.html#book"><span>Book a Walkthrough</span><small>Priority scheduling</small></a>
+      <a href="#compare"><span>Head-to-Head: Swae vs Alternatives</span><small>Why teams switch</small></a>
+      <a href="industries.html"><span>Industries We Serve</span><small>Clinics, wellness & more</small></a>
     </div>
   </div>
 </div>
@@ -299,7 +293,7 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
 
     <div class="demo reveal" id="demoCard">
       <div class="demo-inner">
-        <video id="demoVideo" autoplay muted playsinline loop poster="demo-poster.jpg" aria-label="15s loop of Swae intake to booking">
+        <video id="demoVideo" autoplay muted playsinline loop poster="demo-poster.jpg" width="1280" height="720" aria-label="15s loop of Swae intake to booking">
           <source src="demo.mp4" type="video/mp4" id="demoSrc"/>
         </video>
         <div class="overlay">
@@ -347,6 +341,44 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
     </div>
   </div>
 </section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <h2 class="title">Frequently Asked Questions</h2>
+    <p class="kicker">Short answers, real outcomes.</p>
+
+    <div class="faq" role="list">
+      <div class="item" role="listitem">
+        <button class="q" aria-expanded="false"><span>Do I have to change my tools?</span><i>⌄</i></button>
+        <div class="a" aria-hidden="true">
+          We drop in: Google/Outlook/iCloud calendars, your CRM (HubSpot, Pipedrive, HighLevel, Airtable), and your existing forms. No rip-and-replace.
+        </div>
+      </div>
+
+      <div class="item" role="listitem">
+        <button class="q" aria-expanded="false"><span>How fast is setup?</span><i>⌄</i></button>
+        <div class="a" aria-hidden="true">
+          Same-day core setup for intake + booking. We tune reminders/follow-ups within 48 hours based on your flow.
+        </div>
+      </div>
+
+      <div class="item" role="listitem">
+        <button class="q" aria-expanded="false"><span>Is it 24/7?</span><i>⌄</i></button>
+        <div class="a" aria-hidden="true">
+          Yes — missed-call textbacks, replies, qualification, confirmations, reminders, deposits, and follow-ups keep running after hours.
+        </div>
+      </div>
+
+      <div class="item" role="listitem">
+        <button class="q" aria-expanded="false"><span>Which channels does it cover?</span><i>⌄</i></button>
+        <div class="a" aria-hidden="true">
+          SMS, email, Instagram DMs, Facebook Messenger — all funneled into one booking flow synced to your calendar.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- CTA -->
 <section>
   <div class="wrap">
@@ -384,7 +416,7 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
 </footer>
 
 <script>
-/* Prevent scroll restore and set year */
+/* Prevent scroll restore + year */
 try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; }catch(e){}
 window.scrollTo(0,0);
 document.getElementById('y').textContent=new Date().getFullYear();
@@ -399,7 +431,7 @@ window.addEventListener('load',()=>{ setTimeout(()=>document.getElementById('loa
   update(); addEventListener('scroll',update,{passive:true}); addEventListener('resize',update,{passive:true});
 })();
 
-/* Fullscreen Menu (focus trap, esc, scroll lock, aria-expanded + burger morph) */
+/* Fullscreen Menu (focus trap, esc, scroll lock, aria-expanded) */
 (function(){
   const menu=document.getElementById('menu');
   const list=document.getElementById('menuList');
@@ -420,7 +452,6 @@ window.addEventListener('load',()=>{ setTimeout(()=>document.getElementById('loa
     (items[0]||closeBtn).focus();
     document.addEventListener('keydown',trap);
   }
-
   function close(){
     menu.classList.remove('active');
     openBtn.classList.remove('is-open');
@@ -430,7 +461,6 @@ window.addEventListener('load',()=>{ setTimeout(()=>document.getElementById('loa
     document.removeEventListener('keydown',trap);
     (lastFocus||openBtn).focus();
   }
-
   function trap(e){
     if(e.key==='Escape'){ e.preventDefault(); close(); return; }
     if(e.key!=='Tab') return;
@@ -439,7 +469,6 @@ window.addEventListener('load',()=>{ setTimeout(()=>document.getElementById('loa
     if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
     else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
   }
-
   openBtn.addEventListener('click',open);
   closeBtn.addEventListener('click',close);
   menu.addEventListener('click',e=>{ if(e.target===menu) close(); });
@@ -487,7 +516,7 @@ document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
   addEventListener('resize',measure,{passive:true}); measure();
 })();
 
-/* Demo fail-safe + pause offscreen (perf) */
+/* Demo fail-safe + pause offscreen */
 (function(){
   const video=document.getElementById('demoVideo');
   const src=document.getElementById('demoSrc');
@@ -507,7 +536,6 @@ document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
     const inner=card.querySelector('.demo-inner');
     inner.innerHTML=''; inner.appendChild(ph);
   }
-
   video.addEventListener('error',swapToPoster);
   setTimeout(()=>{ if(video.readyState < 2) swapToPoster(); }, 1400);
 
@@ -517,6 +545,29 @@ document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
     else{ try{ video.pause(); }catch(_){} }
   },{threshold:.25});
   visObs.observe(video);
+})();
+
+/* FAQ accordion */
+(function(){
+  const items = document.querySelectorAll('.faq .item');
+  items.forEach(item=>{
+    const btn = item.querySelector('.q');
+    const ans = item.querySelector('.a');
+    btn.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      items.forEach(i=>{
+        i.classList.remove('open');
+        const b=i.querySelector('.q'); const a=i.querySelector('.a');
+        if(b){ b.setAttribute('aria-expanded','false'); }
+        if(a){ a.setAttribute('aria-hidden','true'); }
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+        ans.setAttribute('aria-hidden','false');
+      }
+    });
+  });
 })();
 </script>
 <noscript><style>.reveal,.chip,.card{opacity:1!important;transform:none!important}</style></noscript>
