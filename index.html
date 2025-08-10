@@ -1,169 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta -->
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Swae Systems — 24/7 AI Intake & Booking</title>
-  <meta name="description" content="Never miss another lead. Swae Systems answers calls, texts, and DMs in seconds, books to your calendar, reduces no-shows, and syncs to your CRM."/>
+  <meta name="description" content="Turn missed calls and DMs into confirmed appointments. Instant replies, smart intake, calendar sync, and automated follow-up — all in your brand tone."/>
   <meta name="theme-color" content="#0A0A0B"/>
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Swae Systems — 24/7 AI Intake & Booking"/>
-  <meta property="og:description" content="Answer in seconds. Book automatically. Grow on autopilot."/>
-  <meta property="og:type" content="website"/>
 
   <style>
     :root{
-      --bg:#0A0A0B;
-      --ink:#FFFFFF;
-      --ink-dim:#C9C9C9;
-      --line:#1A1A1C;
-      /* Rich muted gold (not yellow) */
-      --gold-1:#D6B35A;
-      --gold-2:#B6933C;
-      --glass:rgba(10,10,11,0.55);
-      --shadow:0 20px 60px rgba(0,0,0,0.5);
-      --radius:14px;
-      --maxw:1200px;
+      --bg:#0A0A0B; --ink:#FFFFFF; --ink-dim:#C9C9C9; --line:#1A1A1C;
+      --gold-1:#D6B35A; --gold-2:#B6933C; /* rich gold (not yellow) */
+      --glass:rgba(10,10,11,.55); --shadow:0 20px 60px rgba(0,0,0,.5);
+      --radius:14px; --maxw:1200px;
     }
+    *{box-sizing:border-box} html,body{height:100%}
+    html,body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    img{max-width:100%;display:block} a{color:inherit}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html,body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    img{max-width:100%;display:block}
-
-    /* Layout helpers */
     .container{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-    .grid{display:grid;gap:28px}
-    .muted{color:var(--ink-dim)}
     .section{padding:90px 0;border-top:1px solid var(--line)}
-    .kicker{letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);font-size:.78rem}
+    .muted{color:var(--ink-dim)} .kicker{letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);font-size:.78rem}
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;border:1px solid rgba(255,255,255,.14)}
+    .btn--gold{background:linear-gradient(135deg,var(--gold-1),var(--gold-2));color:#111;border:none;box-shadow:0 8px 24px rgba(182,147,60,.35)}
+    .btn--gold:hover{filter:brightness(1.05)} .btn--ghost{color:var(--ink);background:transparent}
+    .btn-row{display:flex;gap:12px;flex-wrap:wrap}
 
-    /* Luxury nav */
-    .lux-nav{
-      position:fixed;inset:0 0 auto 0;z-index:1000;
-      backdrop-filter: blur(12px);
-      background:linear-gradient(180deg, rgba(10,10,11,0.55), rgba(10,10,11,0.25) 60%, rgba(10,10,11,0));
-      border-bottom:1px solid rgba(255,255,255,0.06);
-    }
-    .lux-nav__inner{
-      max-width:var(--maxw);margin:0 auto;padding:14px 22px;
-      display:flex;align-items:center;justify-content:space-between;
-    }
-    .lux-logo{
-      display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);
-      font-weight:800;letter-spacing:.6px;text-transform:uppercase;
-    }
-    .lux-logo__mark{
-      width:28px;height:28px;border-radius:8px;
-      background:linear-gradient(135deg,var(--gold-1),var(--gold-2));
-      box-shadow:0 6px 20px rgba(182,147,60,0.35);
-    }
-    .lux-links{display:flex;gap:28px}
-    .lux-links a{color:var(--ink-dim);text-decoration:none;font-weight:600}
+    /* NAV */
+    .lux-nav{position:fixed;inset:0 0 auto 0;z-index:1000;backdrop-filter:blur(12px);
+      background:linear-gradient(180deg, rgba(10,10,11,.55), rgba(10,10,11,.25) 60%, rgba(10,10,11,0));
+      border-bottom:1px solid rgba(255,255,255,.06);}
+    .lux-nav__inner{max-width:var(--maxw);margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between}
+    .lux-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:.6px;text-transform:uppercase}
+    .lux-logo__mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--gold-1),var(--gold-2));box-shadow:0 6px 20px rgba(182,147,60,.35)}
+    .lux-links{display:flex;gap:28px} .lux-links a{color:var(--ink-dim);text-decoration:none;font-weight:600}
     .lux-links a:hover{color:var(--ink)}
-
-    .lux-burger{
-      display:none;width:44px;height:44px;border:1px solid rgba(255,255,255,0.12);
-      background:var(--glass);border-radius:12px;cursor:pointer;
-      align-items:center;justify-content:center;
-    }
-    .lux-burger span{
-      display:block;width:20px;height:2px;background:var(--ink);
-      margin:3px 0;transition:transform .25s ease, opacity .2s ease;
-    }
+    .lux-burger{display:none;width:44px;height:44px;border:1px solid rgba(255,255,255,.12);background:var(--glass);border-radius:12px;cursor:pointer;align-items:center;justify-content:center}
+    .lux-burger span{display:block;width:20px;height:2px;background:var(--ink);margin:3px 0;transition:transform .25s,opacity .2s}
     .lux-burger.is-active span:nth-child(1){transform:translateY(5px) rotate(45deg)}
     .lux-burger.is-active span:nth-child(2){opacity:0}
     .lux-burger.is-active span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
-
-    .lux-mobile{
-      position:fixed;top:64px;left:20px;right:20px;z-index:999;
-      background:#111;border:1px solid rgba(255,255,255,0.08);
-      border-radius:14px;padding:10px;display:none;box-shadow:var(--shadow);
-    }
-    .lux-mobile a{
-      display:block;padding:14px 12px;text-decoration:none;color:var(--ink);
-      border-bottom:1px solid rgba(255,255,255,0.08);
-    }
+    .lux-mobile{position:fixed;top:64px;left:20px;right:20px;z-index:999;background:#111;border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;padding:10px;display:none;box-shadow:var(--shadow)}
+    .lux-mobile a{display:block;padding:14px 12px;text-decoration:none;color:var(--ink);border-bottom:1px solid rgba(255,255,255,.08)}
     .lux-mobile a:last-child{border-bottom:none}
+    @media (max-width:980px){.lux-links{display:none}.lux-burger{display:flex}}
 
-    @media (max-width: 980px){
-      .lux-links{display:none}
-      .lux-burger{display:flex}
-    }
-
-    /* Buttons */
-    .btn{
-      display:inline-block;padding:12px 18px;border-radius:12px;text-decoration:none;
-      font-weight:700;border:1px solid rgba(255,255,255,0.14)
-    }
-    .btn--gold{
-      background:linear-gradient(135deg,var(--gold-1),var(--gold-2));color:#111;border:none;
-      box-shadow:0 8px 24px rgba(182,147,60,0.35);
-    }
-    .btn--gold:hover{filter:brightness(1.05)}
-    .btn--ghost{color:var(--ink);background:transparent}
-    .btn-row{display:flex;gap:12px;flex-wrap:wrap}
-
-    /* Hero */
+    /* HERO */
     .hero{position:relative;min-height:90vh;display:grid;place-items:center;text-align:center}
-    .hero__media{
-      position:absolute;inset:0;
+    .hero__media{position:absolute;inset:0;
       background:
-        radial-gradient(1200px 600px at 60% -10%, rgba(214,179,90,0.18), transparent 60%),
-        radial-gradient(900px 500px at 20% 110%, rgba(182,147,60,0.18), transparent 55%),
-        url('hero-texture.PNG') center/cover no-repeat;
-      opacity:.9;
-    }
-    .hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,10,11,0.35), rgba(10,10,11,0.85) 60%, rgba(10,10,11,1))}
+        radial-gradient(1200px 600px at 60% -10%, rgba(214,179,90,.18), transparent 60%),
+        radial-gradient(900px 500px at 20% 110%, rgba(182,147,60,.18), transparent 55%),
+        url('hero-texture.PNG') center/cover no-repeat; opacity:.9}
+    .hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,10,11,.35), rgba(10,10,11,.85) 60%, rgba(10,10,11,1))}
     .hero__content{position:relative;z-index:1;max-width:900px;padding:120px 22px 80px}
     .hero h1{font-size:clamp(2rem,4.5vw,3.6rem);line-height:1.05;margin:0 0 10px}
     .hero p{color:var(--ink-dim);font-size:clamp(1rem,1.6vw,1.15rem);margin:0 0 22px}
-    .hero .badges{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:16px 0 0}
-    .badge{
-      padding:8px 12px;border:1px solid rgba(255,255,255,0.12);
-      border-radius:999px;color:var(--ink-dim);font-size:.92rem;
-      background:rgba(255,255,255,0.03)
-    }
+    .badges{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:16px 0 0}
+    .badge{padding:8px 12px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:var(--ink-dim);font-size:.92rem;background:rgba(255,255,255,.03)}
 
-    /* Cards / sections */
+    /* CARDS / GRID */
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{
-      background:#0F0F11;border:1px solid rgba(255,255,255,0.06);
-      border-radius:var(--radius);padding:22px;
-      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    }
-    .card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,0.35);border-color:rgba(255,255,255,0.12)}
+    .card{background:#0F0F11;border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:22px;transition:transform .25s,box-shadow .25s,border-color .25s}
+    .card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.35);border-color:rgba(255,255,255,.12)}
     .card h3{margin:4px 0 8px}
     .eyebrow{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+
+    /* TESTIMONIALS */
+    .t-slider{overflow:hidden;position:relative}
+    .t-track{display:flex;gap:18px;transition:transform .6s ease}
+    .t-card{min-width:calc(33.333% - 12px);background:#0F0F11;border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:22px}
+    .stars{font-size:1rem;letter-spacing:.15em;color:var(--gold-1);margin-bottom:10px}
+
+    /* FOOTER + REVEAL */
+    footer{border-top:1px solid var(--line);padding:32px 0 60px;color:var(--ink-dim)}
+    .footer-grid{display:grid;gap:18px;grid-template-columns:1fr auto}
+    .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s, transform .6s}
+    .reveal.show{opacity:1;transform:none}
 
     @media (max-width:900px){
       .cards{grid-template-columns:1fr}
       .section{padding:72px 0}
       .hero{min-height:86vh}
-    }
-
-    /* Testimonial slider (text only) */
-    .t-slider{overflow:hidden;position:relative}
-    .t-track{display:flex;gap:18px;transition:transform .6s ease}
-    .t-card{
-      min-width:calc(33.333% - 12px);background:#0F0F11;border:1px solid rgba(255,255,255,0.06);
-      border-radius:var(--radius);padding:22px
-    }
-    .stars{font-size:1rem;letter-spacing:.15em;color:var(--gold-1);margin-bottom:10px}
-    @media (max-width:900px){
       .t-card{min-width:85%}
+      .footer-grid{grid-template-columns:1fr}
     }
-
-    /* Footer */
-    footer{border-top:1px solid var(--line);padding:32px 0 60px;color:var(--ink-dim)}
-    .footer-grid{display:grid;gap:18px;grid-template-columns:1fr auto}
-    @media (max-width:800px){.footer-grid{grid-template-columns:1fr}}
-
-    /* Soft fade-in */
-    .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .6s ease}
-    .reveal.show{opacity:1;transform:none}
   </style>
 </head>
 <body>
@@ -175,19 +97,16 @@
         <span class="lux-logo__mark" aria-hidden="true"></span>
         Swae&nbsp;Systems
       </a>
-
       <nav class="lux-links" aria-label="Primary">
         <a href="https://cal.com/" target="_blank" rel="noopener">Book Demo</a>
         <a href="https://swaesystems.github.io/SwaeSystems/" target="_blank" rel="noopener">Products</a>
         <a href="https://docs.google.com/forms/" target="_blank" rel="noopener">Get Quote</a>
         <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
       </nav>
-
       <button class="lux-burger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-
     <div class="lux-mobile" aria-hidden="true">
       <a href="https://cal.com/" target="_blank" rel="noopener">Book Demo</a>
       <a href="https://swaesystems.github.io/SwaeSystems/" target="_blank" rel="noopener">Products</a>
@@ -206,37 +125,37 @@
       <p>We turn missed calls and DMs into confirmed appointments — 24/7. Zero extra staff. Fully synced to your calendar and CRM.</p>
       <div class="btn-row" style="margin-top:10px">
         <a class="btn btn--gold" href="https://cal.com/" target="_blank" rel="noopener">Book a 10-min Demo</a>
-        <a class="btn btn--ghost" href="#how" aria-label="Scroll to how it works">How it works</a>
+        <a class="btn btn--ghost" href="#how">How it works</a>
       </div>
       <div class="badges">
         <span class="badge">Avg. reply time: 2–7s</span>
-        <span class="badge">No-show reduction up to 30–40%</span>
-        <span class="badge">HIPAA-aware workflows available</span>
+        <span class="badge">No-shows down 25–40%</span>
+        <span class="badge">HIPAA-aware workflows</span>
       </div>
     </div>
   </section>
     <!-- HOW IT WORKS -->
   <section class="section" id="how">
-    <div class="container grid reveal" style="grid-template-columns:1.2fr 1fr;align-items:center">
-      <div>
+    <div class="container" style="display:grid;gap:28px;grid-template-columns:1.2fr 1fr;align-items:center">
+      <div class="reveal">
         <p class="kicker">How it works</p>
         <h2 style="margin:.3rem 0 10px;font-size:clamp(1.6rem,3vw,2.2rem)">From missed message to booked appointment — automatically</h2>
-        <p class="muted">Your leads text, call, or DM. Our AI answers instantly, qualifies, captures info, and books directly on your calendar with smart reminders and follow-ups.</p>
+        <p class="muted">Leads text, call, or DM. Our AI answers instantly, qualifies, captures info, and books directly on your calendar with reminders and follow-ups.</p>
         <div class="cards" style="margin-top:18px">
           <div class="card">
             <div class="eyebrow">01 — Capture</div>
             <h3>Instant replies</h3>
-            <p class="muted">Reply in seconds on phone, SMS, IG, FB, site chat. Never lose a lead to slow response again.</p>
+            <p class="muted">Reply in seconds across phone, SMS, IG, FB, and site chat. No lead left hanging.</p>
           </div>
           <div class="card">
             <div class="eyebrow">02 — Qualify</div>
             <h3>Smart intake</h3>
-            <p class="muted">Collect name, goal, timing, budget/eligibility. Push straight to your CRM or sheet.</p>
+            <p class="muted">Collect name, goal, timing, and eligibility. Push clean data to your CRM or Sheets.</p>
           </div>
           <div class="card">
             <div class="eyebrow">03 — Book</div>
             <h3>Calendar sync</h3>
-            <p class="muted">Offer real-time slots. Send confirmations, directions, and automated reminders.</p>
+            <p class="muted">Offer real-time slots. Send confirmations and automated reminders to cut no-shows.</p>
           </div>
         </div>
         <div class="btn-row" style="margin-top:18px">
@@ -245,8 +164,7 @@
         </div>
       </div>
 
-      <div class="card" style="padding:0;overflow:hidden">
-        <!-- Replace with your own video or image; keep filenames exact -->
+      <div class="card reveal" style="padding:0;overflow:hidden">
         <img src="flow-preview.PNG" alt="AI intake to booking flow preview"/>
       </div>
     </div>
@@ -254,65 +172,47 @@
 
   <!-- FEATURES -->
   <section class="section" id="features">
-    <div class="container">
+    <div class="container reveal">
       <p class="kicker">Why teams switch</p>
       <h2 style="margin:.3rem 0 18px;font-size:clamp(1.6rem,3vw,2.2rem)">Luxury experience. Enterprise reliability.</h2>
       <div class="cards">
-        <div class="card">
-          <h3>Real multi-channel</h3>
-          <p class="muted">Calls, SMS, IG/FB DMs, web chat — one AI that answers everywhere with your tone and rules.</p>
-        </div>
-        <div class="card">
-          <h3>Workflow automations</h3>
-          <p class="muted">Nurture, reactivation, no-show winbacks, and post-visit follow-ups run on autopilot.</p>
-        </div>
-        <div class="card">
-          <h3>CRM + calendar sync</h3>
-          <p class="muted">Google/Outlook calendars, Sheets/HubSpot/HighLevel — clean data in, clean reporting out.</p>
-        </div>
-        <div class="card">
-          <h3>Permissions & compliance</h3>
-          <p class="muted">Role-based access and HIPAA-aware pathways. Data retention and audit on request.</p>
-        </div>
-        <div class="card">
-          <h3>Human-handoff</h3>
-          <p class="muted">One tap to pull a human in. AI pauses and summarizes the convo for your staff.</p>
-        </div>
-        <div class="card">
-          <h3>No bloat, no fluff</h3>
-          <p class="muted">Fast, minimal UI for owners who care about results, not dashboards.</p>
-        </div>
+        <div class="card"><h3>Multi-channel</h3><p class="muted">Calls, SMS, IG/FB DMs, web chat — one AI with your tone and rules.</p></div>
+        <div class="card"><h3>Automation</h3><p class="muted">Nurture, reactivation, winbacks, and post-visit follow-ups run on autopilot.</p></div>
+        <div class="card"><h3>CRM + Calendar</h3><p class="muted">Google/Outlook calendars; Sheets/HubSpot/HighLevel supported.</p></div>
+        <div class="card"><h3>Compliance</h3><p class="muted">Role-based access and HIPAA-aware pathways with data minimization.</p></div>
+        <div class="card"><h3>Human handoff</h3><p class="muted">Staff can jump in; AI pauses and summarizes the convo in seconds.</p></div>
+        <div class="card"><h3>No fluff</h3><p class="muted">Fast, minimal UI for operators who care about results, not dashboards.</p></div>
       </div>
     </div>
   </section>
 
   <!-- RESULTS -->
   <section class="section" id="results">
-    <div class="container grid reveal" style="grid-template-columns:1fr 1fr;align-items:start">
-      <div>
+    <div class="container" style="display:grid;gap:28px;grid-template-columns:1fr 1fr;align-items:start">
+      <div class="reveal">
         <p class="kicker">Outcomes</p>
         <h2 style="margin:.3rem 0 10px;font-size:clamp(1.6rem,3vw,2.2rem)">What clients report after 30–60 days</h2>
         <ul class="muted" style="margin:10px 0 0;line-height:1.8">
           <li><strong style="color:var(--gold-1)">2–5× faster</strong> first response vs. front desk</li>
           <li><strong style="color:var(--gold-1)">+18–45%</strong> more bookings from DM/text leads</li>
-          <li><strong style="color:var(--gold-1)">–25–40%</strong> no-shows with reminders & confirmations</li>
-          <li>Cleaner CRM data and call notes auto-synced</li>
+          <li><strong style="color:var(--gold-1)">–25–40%</strong> no-shows with confirmations & reminders</li>
+          <li>Cleaner CRM data and auto notes on calls</li>
         </ul>
         <div class="btn-row" style="margin-top:18px">
           <a class="btn btn--gold" href="https://cal.com/" target="_blank" rel="noopener">Book a 10-min Demo</a>
           <a class="btn btn--ghost" href="#faq">FAQ</a>
         </div>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <div class="eyebrow">Proof</div>
         <h3>Before → After</h3>
-        <p class="muted">Replace missed calls and unread DMs with instant replies and a booked slot. Your calendar fills — without hiring.</p>
-        <img src="results-graph.PNG" alt="Results comparison graph placeholder" style="margin-top:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.08)"/>
+        <p class="muted">Replace missed calls/unread DMs with instant replies and a booked slot.</p>
+        <img src="results-graph.PNG" alt="Results comparison placeholder" style="margin-top:10px;border-radius:10px;border:1px solid rgba(255,255,255,.08)"/>
       </div>
     </div>
   </section>
 
-  <!-- TESTIMONIALS (text-only, horizontal slider) -->
+  <!-- TESTIMONIALS -->
   <section class="section" id="testimonials">
     <div class="container reveal">
       <p class="kicker">Testimonials</p>
@@ -326,7 +226,7 @@
           </div>
           <div class="t-card">
             <div class="stars">★★★★★</div>
-            <p>“Missed-call chaos is gone. Confirmations + reminders cut our no-shows in half.”</p>
+            <p>“Missed-call chaos is gone. Reminders cut our no-shows nearly in half.”</p>
             <p class="muted" style="margin-top:8px">Director, Aesthetics</p>
           </div>
           <div class="t-card">
@@ -334,16 +234,11 @@
             <p>“Staff focus on clients, not inboxes. Revenue up, payroll flat. Exactly what we needed.”</p>
             <p class="muted" style="margin-top:8px">COO, Multi-location Clinic</p>
           </div>
-          <div class="t-card">
-            <div class="stars">★★★★★</div>
-            <p>“Set it and forget it. The system books, we deliver. Simple.”</p>
-            <p class="muted" style="margin-top:8px">Founder, Med Spa</p>
-          </div>
         </div>
       </div>
       <div class="btn-row" style="margin-top:16px">
-        <button class="btn btn--ghost" id="tPrev" aria-label="Previous testimonials">‹ Prev</button>
-        <button class="btn btn--ghost" id="tNext" aria-label="Next testimonials">Next ›</button>
+        <button class="btn btn--ghost" id="tPrev" aria-label="Previous">‹ Prev</button>
+        <button class="btn btn--ghost" id="tNext" aria-label="Next">Next ›</button>
       </div>
     </div>
   </section>
@@ -359,7 +254,7 @@
         </div>
         <div class="card">
           <h3>Does it replace front desk?</h3>
-          <p class="muted">It handles intake, booking, and follow-ups. Staff can jump in anytime with seamless human-handoff.</p>
+          <p class="muted">It handles intake, booking, and follow-ups. Staff can jump in anytime with a seamless human-handoff.</p>
         </div>
         <div class="card">
           <h3>What do I need to start?</h3>
@@ -389,12 +284,6 @@
     </div>
   </footer>
 
-  <!-- Chatbot widget placeholder (insert your real script later) -->
-  <script>
-    /* Placeholder for AI chat bubble */
-    window.__swae_chat_placeholder = true;
-  </script>
-
   <!-- Scripts -->
   <script>
     // Year
@@ -420,8 +309,6 @@
       mobile.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
     }
     burger.addEventListener('click', ()=>toggleMenu());
-
-    // Close mobile menu on link click or outside click
     mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>toggleMenu(false)));
     document.addEventListener('click', (e)=>{
       const withinNav = e.target.closest('.lux-nav');
@@ -430,19 +317,21 @@
 
     // Testimonials slider (manual prev/next)
     const tTrack = document.getElementById('tTrack');
-    const tCards = Array.from(tTrack.children);
-    const tPrev = document.getElementById('tPrev');
-    const tNext = document.getElementById('tNext');
-    let tIndex = 0;
+    if(tTrack){
+      const tCards = Array.from(tTrack.children);
+      const tPrev = document.getElementById('tPrev');
+      const tNext = document.getElementById('tNext');
+      let tIndex = 0;
 
-    function updateT(){
-      const cardWidth = tCards[0].getBoundingClientRect().width + 18; // include gap
-      tTrack.style.transform = `translateX(${-tIndex * cardWidth}px)`;
+      function updateT(){
+        const cardWidth = tCards[0].getBoundingClientRect().width + 18; // include gap
+        tTrack.style.transform = `translateX(${-tIndex * cardWidth}px)`;
+      }
+      tPrev.addEventListener('click', ()=>{ tIndex = Math.max(0, tIndex-1); updateT(); });
+      tNext.addEventListener('click', ()=>{ tIndex = Math.min(tCards.length-1, tIndex+1); updateT(); });
+      window.addEventListener('resize', updateT);
+      updateT();
     }
-    tPrev.addEventListener('click', ()=>{ tIndex = Math.max(0, tIndex-1); updateT(); });
-    tNext.addEventListener('click', ()=>{ tIndex = Math.min(tCards.length-1, tIndex+1); updateT(); });
-    window.addEventListener('resize', updateT);
-    updateT();
   </script>
 </body>
 </html>
