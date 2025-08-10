@@ -11,12 +11,11 @@
 <meta name="robots" content="index,follow"/>
 <link rel="canonical" href="https://swaesystems.github.io/SwaeSystems/"/>
 
-<!-- Performance (UPGRADE) -->
-<link rel="preload" as="image" href="hero-bg.webp" imagesrcset="hero-bg.webp 1x, hero-bg.JPG 2x" imagesizes="100vw">
+<!-- Performance -->
+<link rel="preload" as="image" href="hero-bg.JPG">
 <link rel="preload" as="image" href="og.png">
-<link rel="preload" as="video" href="demo.mp4" type="video/mp4" media="(min-width:600px)">
 
-<!-- Open Graph / Twitter -->
+<!-- OG / Twitter -->
 <meta property="og:title" content="Swae Systems — Luxury AI Intake & Booking"/>
 <meta property="og:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Precision only."/>
 <meta property="og:type" content="website"/>
@@ -27,7 +26,7 @@
 <meta name="twitter:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Precision only."/>
 <meta name="twitter:image" content="og.png"/>
 
-<!-- JSON-LD (Organization + Service) (UPGRADE) -->
+<!-- JSON-LD (Organization + Service) -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -44,8 +43,7 @@
   "name":"24/7 AI Intake & Booking",
   "provider":{"@type":"Organization","name":"Swae Systems"},
   "serviceType":"Lead capture, qualification, scheduling automation",
-  "areaServed":"US",
-  "offers":{"@type":"Offer","priceCurrency":"USD","availability":"https://schema.org/InStock"}
+  "areaServed":"US"
 }
 </script>
 
@@ -83,14 +81,11 @@ img,video{display:block;max-width:100%}
 /* Header */
 .topbar{position:sticky;top:0;z-index:60;background:rgba(10,10,11,.72);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid var(--border)}
 .topbar-inner{height:68px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-weight:800;letter-spacing:.3px;user-select:none}
+.brand{font-weight:800;letter-spacing:.3px}
 .brand .accent{color:var(--gold)}
-/* hamburger with morph to X */
-.burger{display:inline-flex;align-items:center;justify-content:center;width:46px;height:42px;border-radius:12px;background:var(--muted);border:1px solid var(--border);box-shadow:var(--shadow);cursor:pointer;transition:transform .12s ease}
-.burger:hover{transform:translateY(-1px)}
-.burger i,
-.burger i::before,
-.burger i::after{content:"";display:block;width:18px;height:2px;background:var(--text);position:relative;transition:.2s ease}
+/* burger */
+.burger{display:inline-flex;align-items:center;justify-content:center;width:46px;height:42px;border-radius:12px;background:var(--muted);border:1px solid var(--border);box-shadow:var(--shadow);cursor:pointer}
+.burger i,.burger i::before,.burger i::after{content:"";display:block;width:18px;height:2px;background:var(--text);position:relative;transition:.2s ease}
 .burger i::before{position:absolute;top:-6px}
 .burger i::after{position:absolute;top:6px}
 .burger.is-open i{background:transparent}
@@ -98,7 +93,7 @@ img,video{display:block;max-width:100%}
 .burger.is-open i::after{top:0;transform:rotate(-45deg)}
 
 /* Fullscreen menu */
-.menu{position:fixed;inset:0;background:rgba(10,10,11,.78);backdrop-filter:blur(16px) saturate(140%);z-index:80;display:none}
+.menu{position:fixed;inset:0;background:rgba(10,10,11,.86);backdrop-filter:blur(16px) saturate(140%);z-index:80;display:none}
 .menu.active{display:block;animation:fadeIn .25s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .menu-inner{max-width:1120px;margin:0 auto;padding:22px 20px}
@@ -110,19 +105,12 @@ img,video{display:block;max-width:100%}
 .menu a:hover{background:rgba(255,255,255,.06);transform:translateY(-1px)}
 .menu-close{height:38px;padding:0 14px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text)}
 
-/* CINEMATIC HERO (IMAGE ONLY) */
-.hero{
-  position:relative; isolation:isolate; min-height:86vh; display:flex; align-items:center;
+/* Hero */
+.hero{position:relative; isolation:isolate; min-height:86vh; display:flex; align-items:center;
   background:#0b0b0d center/cover no-repeat;
-  /* WebP first, JPG fallback (UPGRADE) */
-  background-image: image-set( url("hero-bg.webp") type("image/webp") 1x, url("hero-bg.JPG") type("image/jpeg") 1x );
-}
-.hero::before{ /* dark overlay + gold vignette */
-  content:""; position:absolute; inset:0; z-index:0;
-  background:
-    radial-gradient(120% 80% at 80% 0%, rgba(215,184,106,.20), transparent 60%),
-    linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.65) 40%, rgba(0,0,0,.70) 100%);
-}
+  background-image:image-set(url("hero-bg.JPG") 1x);}
+.hero::before{content:""; position:absolute; inset:0; z-index:0;
+  background:radial-gradient(120% 80% at 80% 0%, rgba(215,184,106,.20), transparent 60%),linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.65) 40%, rgba(0,0,0,.65) 100%);}
 .hero .wrap{position:relative; z-index:1}
 .hero .headline{font-size:clamp(30px,6.2vw,64px);line-height:1.04;letter-spacing:-.6px;margin:0 0 12px;max-width:820px}
 .hero .sub{color:#dbdbdf;max-width:720px;margin-top:12px;font-size:clamp(15px,2.7vw,18.5px);line-height:1.55}
@@ -157,7 +145,7 @@ section{padding:64px 0}
 .demo .overlay .btn{backdrop-filter:blur(6px)}
 .demo-note{color:var(--sub);font-size:13px;margin-top:8px}
 
-/* Testimonials */
+/* Carousel */
 .carousel{position:relative}
 .track{display:flex;gap:var(--gap);overflow:auto scroll;padding:6px;scroll-behavior:smooth;scroll-snap-type:x mandatory}
 .track::-webkit-scrollbar{height:6px}.track::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px}
@@ -210,7 +198,7 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
 <!-- Header -->
 <header class="topbar" role="banner">
   <div class="wrap topbar-inner">
-    <a class="brand" href="/" aria-label="Swae Systems Home">Swae <span class="accent">Systems</span></a>
+    <a class="brand" href="index.html" aria-label="Swae Systems Home">Swae <span class="accent">Systems</span></a>
     <button class="burger" id="openMenu" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false"><i></i></button>
   </div>
 </header>
@@ -222,17 +210,25 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
       <strong id="menuTitle">Swae <span class="accent" style="color:var(--gold)">Systems</span></strong>
       <button class="menu-close" id="closeMenu" aria-label="Close menu">Close ✕</button>
     </div>
+
+    <!-- NEW 4-ITEM LIST -->
     <div class="menu-list" id="menuList">
-      <!-- External links per your request (UPGRADE). Adjust URLs as needed. -->
-      <a href="https://swaesystems.github.io/Demo-By-Swae/" target="_blank" rel="noopener"><span>Live Demo</span><small>Opens in new tab</small></a>
-      <a href="https://swaesystems.github.io/SwaeSystems/contact.html" target="_blank" rel="noopener"><span>Book a Walkthrough</span><small>Priority slot</small></a>
-      <a href="mailto:swaeejb7@gmail.com?subject=Swae%20Systems%20—%20Inquiry" target="_blank" rel="noopener"><span>Email Us</span><small>swaeejb7@gmail.com</small></a>
-      <a href="https://github.com/swaesystems" target="_blank" rel="noopener"><span>GitHub Portfolio</span><small>Build quality</small></a>
+      <a href="contact.html">
+        <span>Contact Us</span><small>Questions, support, quotes</small>
+      </a>
+      <a href="contact.html#book">
+        <span>Book a Walkthrough</span><small>Priority scheduling</small>
+      </a>
+      <a href="#compare">
+        <span>Head-to-Head: Swae vs Alternatives</span><small>Why teams switch</small>
+      </a>
+      <a href="industries.html">
+        <span>Industries We Serve</span><small>Clinics, wellness & more</small>
+      </a>
     </div>
   </div>
 </div>
-
-<!-- CINEMATIC HERO (IMAGE ONLY) -->
+<!-- HERO -->
 <section class="hero" id="hero" aria-label="Swae Systems">
   <div class="wrap">
     <h1 class="headline">Capture every lead. Reply in seconds. Book directly to your calendar.</h1>
@@ -273,15 +269,14 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
 </section>
 
 <!-- DEMO SPOTLIGHT -->
-<section id="compare">
+<section id="demo">
   <div class="wrap">
     <h2 class="title">Live Demo Spotlight</h2>
     <p class="kicker">Missed call → instant textback → qualification → booked on your calendar.</p>
 
     <div class="demo reveal" id="demoCard">
       <div class="demo-inner">
-        <!-- If demo.mp4 is missing, JS below swaps to a poster+CTA automatically -->
-        <video id="demoVideo" autoplay muted playsinline loop poster="demo-poster.jpg">
+        <video id="demoVideo" autoplay muted playsinline loop poster="demo-poster.jpg" aria-label="15s loop of Swae intake to booking">
           <source src="demo.mp4" type="video/mp4" id="demoSrc"/>
         </video>
         <div class="overlay">
@@ -290,6 +285,19 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
         </div>
       </div>
       <div class="demo-note">No sound, 15s loop. Full walk-through available on request.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Compare -->
+<section id="compare" aria-labelledby="compareTitle">
+  <div class="wrap">
+    <h2 class="title" id="compareTitle">Swae vs. Competitors</h2>
+    <p class="kicker">What you’ll notice in week one — and they won’t tell you.</p>
+    <div class="grid-3">
+      <div class="card luxe reveal"><h3>Speed to Value</h3><p>Same-day install, no workflow rebuild. Sub-60s replies out of the box.</p></div>
+      <div class="card reveal"><h3>Conversion Protection</h3><p>Missed-call textback + follow-ups. Reminders & deposits reduce no-shows.</p></div>
+      <div class="card reveal"><h3>Keep Your Stack</h3><p>Google/Outlook calendars, your CRM & forms. Drop-in clean — no rip-and-replace.</p></div>
     </div>
   </div>
 </section>
@@ -303,21 +311,19 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
     <div class="carousel">
       <button class="nav-btn prev" aria-label="Previous testimonials" role="button">‹</button>
       <div class="track" id="track" aria-live="polite">
-        <article class="tcard"><div class="stars" aria-hidden="true">★★★★★</div><div class="quote">“Clients thought we hired a full-time receptionist. It was Swae running 24/7 — missed calls became bookings.”</div><div class="client">— Clinic Owner</div></article>
-        <article class="tcard"><div class="stars" aria-hidden="true">★★★★★</div><div class="quote">“We reply in under a minute and auto-book consults. Zero extra staff, fewer no-shows.”</div><div class="client">— Med Spa Manager</div></article>
-        <article class="tcard"><div class="stars" aria-hidden="true">★★★★★</div><div class="quote">“DMs, forms, and calls funnel into one flow. Calendar stays full.”</div><div class="client">— Wellness Studio</div></article>
-        <article class="tcard"><div class="stars" aria-hidden="true">★★★★★</div><div class="quote">“Implementation took an afternoon. It just works.”</div><div class="client">— Owner, IV Therapy</div></article>
+        <article class="tcard"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><div class="quote">“Clients thought we hired a full-time receptionist. It was Swae running 24/7 — missed calls became bookings.”</div><div class="client">— Clinic Owner</div></article>
+        <article class="tcard"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><div class="quote">“We reply in under a minute and auto-book consults. Zero extra staff, fewer no-shows.”</div><div class="client">— Med Spa Manager</div></article>
+        <article class="tcard"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><div class="quote">“DMs, forms, and calls funnel into one flow. Calendar stays full.”</div><div class="client">— Wellness Studio</div></article>
+        <article class="tcard"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><div class="quote">“Implementation took an afternoon. It just works.”</div><div class="client">— Owner, IV Therapy</div></article>
       </div>
       <button class="nav-btn next" aria-label="Next testimonials" role="button">›</button>
     </div>
 
-    <!-- Inline CTA -->
     <div class="btn-row" style="margin-top:12px">
       <a class="btn gold" href="contact.html" aria-label="Book a demo after reading testimonials">✨ Book a Demo</a>
     </div>
   </div>
 </section>
-
 <!-- CTA -->
 <section>
   <div class="wrap">
@@ -355,12 +361,12 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--sub);font-s
 </footer>
 
 <script>
-/* No half-way start + year */
+/* Prevent scroll restore and set year */
 try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; }catch(e){}
 window.scrollTo(0,0);
 document.getElementById('y').textContent=new Date().getFullYear();
 
-/* Loader */
+/* Loader fade */
 window.addEventListener('load',()=>{ setTimeout(()=>document.getElementById('loader').classList.add('hide'),250); });
 
 /* Progress bar */
@@ -416,19 +422,18 @@ window.addEventListener('load',()=>{ setTimeout(()=>document.getElementById('loa
   menu.addEventListener('click',e=>{ if(e.target===menu) close(); });
 })();
 
-/* Hero parallax (image) — super subtle, disabled for reduced motion (UPGRADE) */
+/* Hero parallax — super subtle, disabled for reduced motion */
 (function(){
   const hero=document.getElementById('hero');
   if(!hero) return;
-  const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(rm) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let lastY=0;
   const onScroll=()=>{ const y=window.scrollY; if(Math.abs(y-lastY)>2){ hero.style.backgroundPosition=`center ${Math.min(0, -y*0.08)}px`; lastY=y; } };
   document.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
 })();
 
-/* Reveal on scroll (one-shot, avoids layout thrash) */
+/* Reveal on scroll (one-shot) */
 const io=new IntersectionObserver(entries=>{
   for(const e of entries){
     if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='translateY(0)'; io.unobserve(e.target); }
@@ -436,7 +441,7 @@ const io=new IntersectionObserver(entries=>{
 },{threshold:.18});
 document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
 
-/* Testimonials — end-stop disabling + snap */
+/* Testimonials — snapping + end-stop disabling */
 (function(){
   const track=document.getElementById('track'), prev=document.querySelector('.nav-btn.prev'), next=document.querySelector('.nav-btn.next');
   if(!track||!prev||!next) return; let step=0, idx=0, max=0;
@@ -459,7 +464,7 @@ document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
   addEventListener('resize',measure,{passive:true}); measure();
 })();
 
-/* Demo fail-safe: if video fails/missing, show poster with CTA + pause offscreen (UPGRADE) */
+/* Demo fail-safe + pause offscreen */
 (function(){
   const video=document.getElementById('demoVideo');
   const src=document.getElementById('demoSrc');
@@ -483,17 +488,14 @@ document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
   video.addEventListener('error',swapToPoster);
   setTimeout(()=>{ if(video.readyState < 2) swapToPoster(); }, 1400);
 
-  /* Pause when offscreen to save CPU */
   const visObs = new IntersectionObserver(([e])=>{
     if(!e) return;
     if(e.isIntersecting){ try{ video.play(); }catch(_){} }
     else{ try{ video.pause(); }catch(_){} }
-  },{threshold: .2});
+  },{threshold:.25});
   visObs.observe(video);
 })();
 </script>
-<noscript>
-  <style>.reveal,.chip,.card{opacity:1!important;transform:none!important}</style>
-</noscript>
+<noscript><style>.reveal,.chip,.card{opacity:1!important;transform:none!important}</style></noscript>
 </body>
 </html>
