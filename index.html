@@ -1,337 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Swae Systems — 24/7 AI Intake & Booking</title>
-  <meta name="description" content="Turn missed calls and DMs into confirmed appointments. Instant replies, smart intake, calendar sync, and automated follow-up — all in your brand tone."/>
-  <meta name="theme-color" content="#0A0A0B"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Swae Systems — Luxury AI Intake & Booking</title>
 
-  <style>
-    :root{
-      --bg:#0A0A0B; --ink:#FFFFFF; --ink-dim:#C9C9C9; --line:#1A1A1C;
-      --gold-1:#D6B35A; --gold-2:#B6933C; /* rich gold (not yellow) */
-      --glass:rgba(10,10,11,.55); --shadow:0 20px 60px rgba(0,0,0,.5);
-      --radius:14px; --maxw:1200px;
-    }
-    *{box-sizing:border-box} html,body{height:100%}
-    html,body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    img{max-width:100%;display:block} a{color:inherit}
+<!-- Meta -->
+<meta name="description" content="Capture every lead, reply in seconds, and book straight to your calendar — without adding headcount. Concierge-grade AI for real businesses."/>
+<meta name="theme-color" content="#0A0A0B"/>
+<meta name="color-scheme" content="dark"/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://swaesystems.github.io/SwaeSystems/"/>
 
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-    .section{padding:90px 0;border-top:1px solid var(--line)}
-    .muted{color:var(--ink-dim)} .kicker{letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);font-size:.78rem}
-    .btn{display:inline-block;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;border:1px solid rgba(255,255,255,.14)}
-    .btn--gold{background:linear-gradient(135deg,var(--gold-1),var(--gold-2));color:#111;border:none;box-shadow:0 8px 24px rgba(182,147,60,.35)}
-    .btn--gold:hover{filter:brightness(1.05)} .btn--ghost{color:var(--ink);background:transparent}
-    .btn-row{display:flex;gap:12px;flex-wrap:wrap}
+<!-- Performance -->
+<link rel="preload" as="image" href="hero-bg.webp" imagesrcset="hero-bg.webp 1x, hero-bg.JPG 2x" imagesizes="100vw">
+<link rel="preload" as="image" href="og.png">
+<link rel="prefetch" href="contact.html" as="document"/>
 
-    /* NAV */
-    .lux-nav{position:fixed;inset:0 0 auto 0;z-index:1000;backdrop-filter:blur(12px);
-      background:linear-gradient(180deg, rgba(10,10,11,.55), rgba(10,10,11,.25) 60%, rgba(10,10,11,0));
-      border-bottom:1px solid rgba(255,255,255,.06);}
-    .lux-nav__inner{max-width:var(--maxw);margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between}
-    .lux-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:.6px;text-transform:uppercase}
-    .lux-logo__mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--gold-1),var(--gold-2));box-shadow:0 6px 20px rgba(182,147,60,.35)}
-    .lux-links{display:flex;gap:28px} .lux-links a{color:var(--ink-dim);text-decoration:none;font-weight:600}
-    .lux-links a:hover{color:var(--ink)}
-    .lux-burger{display:none;width:44px;height:44px;border:1px solid rgba(255,255,255,.12);background:var(--glass);border-radius:12px;cursor:pointer;align-items:center;justify-content:center}
-    .lux-burger span{display:block;width:20px;height:2px;background:var(--ink);margin:3px 0;transition:transform .25s,opacity .2s}
-    .lux-burger.is-active span:nth-child(1){transform:translateY(5px) rotate(45deg)}
-    .lux-burger.is-active span:nth-child(2){opacity:0}
-    .lux-burger.is-active span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
-    .lux-mobile{position:fixed;top:64px;left:20px;right:20px;z-index:999;background:#111;border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;padding:10px;display:none;box-shadow:var(--shadow)}
-    .lux-mobile a{display:block;padding:14px 12px;text-decoration:none;color:var(--ink);border-bottom:1px solid rgba(255,255,255,.08)}
-    .lux-mobile a:last-child{border-bottom:none}
-    @media (max-width:980px){.lux-links{display:none}.lux-burger{display:flex}}
+<!-- OG / Twitter -->
+<meta property="og:title" content="Swae Systems — Luxury AI Intake & Booking"/>
+<meta property="og:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Precision only."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://swaesystems.github.io/SwaeSystems/"/>
+<meta property="og:image" content="og.png"/>
+<meta property="og:image:alt" content="Swae Systems — luxury AI intake and booking preview"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Swae Systems — Luxury AI Intake & Booking"/>
+<meta name="twitter:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Precision only."/>
+<meta name="twitter:image" content="og.png"/>
 
-    /* HERO */
-    .hero{position:relative;min-height:90vh;display:grid;place-items:center;text-align:center}
-    .hero__media{position:absolute;inset:0;
-      background:
-        radial-gradient(1200px 600px at 60% -10%, rgba(214,179,90,.18), transparent 60%),
-        radial-gradient(900px 500px at 20% 110%, rgba(182,147,60,.18), transparent 55%),
-        url('hero-texture.PNG') center/cover no-repeat; opacity:.9}
-    .hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,10,11,.35), rgba(10,10,11,.85) 60%, rgba(10,10,11,1))}
-    .hero__content{position:relative;z-index:1;max-width:900px;padding:120px 22px 80px}
-    .hero h1{font-size:clamp(2rem,4.5vw,3.6rem);line-height:1.05;margin:0 0 10px}
-    .hero p{color:var(--ink-dim);font-size:clamp(1rem,1.6vw,1.15rem);margin:0 0 22px}
-    .badges{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:16px 0 0}
-    .badge{padding:8px 12px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:var(--ink-dim);font-size:.92rem;background:rgba(255,255,255,.03)}
+<!-- JSON-LD (Organization + Service + FAQ for rich results) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Swae Systems",
+  "url":"https://swaesystems.github.io/SwaeSystems/",
+  "logo":"og.png",
+  "sameAs":[]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Service",
+  "name":"24/7 AI Intake & Booking",
+  "provider":{"@type":"Organization","name":"Swae Systems"},
+  "serviceType":"Lead capture, qualification, scheduling automation",
+  "areaServed":"US",
+  "offers":{"@type":"Offer","priceCurrency":"USD","availability":"https://schema.org/InStock"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Do I have to change my tools?","acceptedAnswer":{"@type":"Answer","text":"No. We drop into your calendars (Google/Outlook/iCloud), your CRM, and your existing forms. No rip-and-replace."}},
+    {"@type":"Question","name":"How fast is setup?","acceptedAnswer":{"@type":"Answer","text":"Same day for core intake + booking. We usually refine follow-ups and reminders within 48 hours."}},
+    {"@type":"Question","name":"Does Swae work after hours?","acceptedAnswer":{"@type":"Answer","text":"Yes. 24/7 intake, qualification, confirmations, reminders, deposits, and follow-ups."}},
+    {"@type":"Question","name":"What channels does it cover?","acceptedAnswer":{"@type":"Answer","text":"SMS, email, Instagram DMs, Facebook Messenger — plus missed-call textbacks."}}
+  ]
+}
+</script>
 
-    /* CARDS / GRID */
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:#0F0F11;border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:22px;transition:transform .25s,box-shadow .25s,border-color .25s}
-    .card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.35);border-color:rgba(255,255,255,.12)}
-    .card h3{margin:4px 0 8px}
-    .eyebrow{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+<link rel="icon" href="favicon.ico"/>
 
-    /* TESTIMONIALS */
-    .t-slider{overflow:hidden;position:relative}
-    .t-track{display:flex;gap:18px;transition:transform .6s ease}
-    .t-card{min-width:calc(33.333% - 12px);background:#0F0F11;border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:22px}
-    .stars{font-size:1rem;letter-spacing:.15em;color:var(--gold-1);margin-bottom:10px}
+<style>
+:root{
+  --bg:#0a0a0b; --panel:#121214; --muted:#151517;
+  --text:#e8e8ea; --sub:#a9a9af;
+  --gold:#D7B86A; --gold-deep:#A0782A; --gold-hi:#F4E2A6;
+  --border:rgba(255,255,255,.08);
+  --shadow:0 12px 40px rgba(0,0,0,.45);
+  --r:18px; --gap:16px; --glow:0 0 80px rgba(215,184,106,.15);
+}
 
-    /* FOOTER + REVEAL */
-    footer{border-top:1px solid var(--line);padding:32px 0 60px;color:var(--ink-dim)}
-    .footer-grid{display:grid;gap:18px;grid-template-columns:1fr auto}
-    .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s, transform .6s}
-    .reveal.show{opacity:1;transform:none}
+/* Base */
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:2px solid rgba(215,184,106,.6);outline-offset:3px;border-radius:10px}
 
-    @media (max-width:900px){
-      .cards{grid-template-columns:1fr}
-      .section{padding:72px 0}
-      .hero{min-height:86vh}
-      .t-card{min-width:85%}
-      .footer-grid{grid-template-columns:1fr}
-    }
-  </style>
+/* Progress bar */
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold-hi),var(--gold-deep));width:0;z-index:90}
+
+/* Soft loader */
+.loader{position:fixed;inset:0;background:#0a0a0b;display:grid;place-items:center;z-index:100;transition:opacity .4s ease}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:var(--glow);animation:bounce 1s infinite ease-in-out;position:relative}
+.dot::before,.dot::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.dot::before{transform:translateX(-14px)} .dot::after{transform:translateX(14px)}
+@keyframes bounce{0%,80%,100%{transform:scale(.8)}40%{transform:scale(1)}}
+.loader.hide{opacity:0;pointer-events:none}
+
+/* Header */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(10,10,11,.72);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid var(--border)}
+.topbar-inner{height:68px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;letter-spacing:.3px}
+.brand .accent{color:var(--gold)}
+.burger{display:inline-flex;align-items:center;justify-content:center;width:46px;height:42px;border-radius:12px;background:var(--muted);border:1px solid var(--border);box-shadow:var(--shadow);cursor:pointer;transition:transform .12s ease}
+.burger:hover{transform:translateY(-1px)}
+.burger i,.burger i::before,.burger i::after{content:"";display:block;width:18px;height:2px;background:var(--text);position:relative;transition:.2s ease}
+.burger i::before{position:absolute;top:-6px}
+.burger i::after{position:absolute;top:6px}
+.burger.is-open i{background:transparent}
+.burger.is-open i::before{top:0;transform:rotate(45deg)}
+.burger.is-open i::after{top:0;transform:rotate(-45deg)}
+
+/* Fullscreen menu */
+.menu{position:fixed;inset:0;background:rgba(10,10,11,.86);backdrop-filter:blur(16px) saturate(140%);z-index:80;display:none}
+.menu.active{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.menu-inner{max-width:1120px;margin:0 auto;padding:22px 20px}
+.menu-head{height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.menu-list{padding:22px 0;display:grid;gap:12px}
+.menu a{display:flex;justify-content:space-between;align-items:center;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.03);opacity:0;transform:translateY(12px);font-weight:600}
+.menu a small{color:var(--sub)}
+.menu a.show{opacity:1;transform:translateY(0);transition:.35s ease}
+.menu a:hover{background:rgba(255,255,255,.06);transform:translateY(-1px)}
+.menu-close{height:38px;padding:0 14px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text)}
+
+/* Hero */
+.hero{
+  position:relative; isolation:isolate; min-height:86vh; display:flex; align-items:center;
+  background:#0b0b0d center/cover no-repeat;
+  background-image:image-set( url("hero-bg.webp") type("image/webp") 1x, url("hero-bg.JPG") type("image/jpeg") 1x );
+}
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(120% 80% at 80% 0%, rgba(215,184,106,.20), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.65) 40%, rgba(0,0,0,.70) 100%);
+}
+.hero .wrap{position:relative; z-index:1}
+.hero .headline{font-size:clamp(30px,6.2vw,64px);line-height:1.04;letter-spacing:-.6px;margin:0 0 12px;max-width:820px}
+.hero .sub{color:#dbdbdf;max-width:720px;margin-top:12px;font-size:clamp(15px,2.7vw,18.5px);line-height:1.55}
+.hero .trust{margin-top:16px;color:#cfcfd3;font-size:14px;opacity:.95}
+@media (max-width:820px){ .hero{min-height:78vh} }
+
+/* Sections */
+section{padding:64px 0}
+@media(min-width:1100px){ section{padding:76px 0} }
+.title{font-size:26px;font-weight:800;margin:0 0 16px}
+.kicker{color:var(--sub);margin:0 0 22px}
+
+/* Cards & grids */
+.grid-3{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);transform:translateY(8px);opacity:0;transition:transform .6s ease,opacity .6s ease}
+.card h3{margin:0 0 8px;font-size:18px}
+.card p{margin:0;color:var(--sub);line-height:1.6}
+
+/* Luxe accents */
+.card.luxe,.panel.luxe{border:1px solid rgba(215,184,106,.40);box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 60px rgba(215,184,106,.08)}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(215,184,106,.35),transparent);margin:32px 0}
+
+/* Chips */
+.chip-row{display:flex;flex-wrap:wrap;gap:10px}
+.chip{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:14px;transform:translateY(8px);opacity:0;transition:transform .6s ease,opacity .6s ease}
+
+/* Demo Spotlight */
+.demo{position:relative;border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,rgba(215,184,106,.08),rgba(255,255,255,0));overflow:hidden}
+.demo-inner{position:relative;aspect-ratio:16/9;background:radial-gradient(100% 80% at 50% 0%,rgba(255,255,255,.06),transparent 70%)}
+.demo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.demo .overlay{position:absolute;inset:auto 16px 16px 16px;display:flex;gap:10px;flex-wrap:wrap}
+.demo .overlay .btn{backdrop-filter:blur(6px)}
+.demo-note{color:var(--sub);font-size:13px;margin-top:8px}
+
+/* Carousel */
+.carousel{position:relative}
+.track{display:flex;gap:var(--gap);overflow:auto scroll;padding:6px;scroll-behavior:smooth;scroll-snap-type:x mandatory}
+.track::-webkit-scrollbar{height:6px}.track::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px}
+.tcard{min-width:300px;max-width:360px;flex:0 0 auto;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:18px;scroll-snap-align:start;box-shadow:var(--shadow)}
+.stars{letter-spacing:2px;margin-bottom:10px;color:var(--gold)}
+.quote{font-size:15.5px;line-height:1.55}
+.client{margin-top:12px;color:var(--sub);font-size:14px}
+
+/* Arrows */
+.nav-btn{-webkit-appearance:none;appearance:none;color:#e8e8ea;font-weight:700;line-height:1;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);width:44px;height:44px;border-radius:12px;cursor:pointer;backdrop-filter:blur(10px)}
+.nav-btn:hover{background:rgba(255,255,255,.12)}
+.nav-btn:focus-visible{outline:2px solid rgba(215,184,106,.6); outline-offset:3px}
+.nav-btn[disabled]{opacity:.35;pointer-events:none;cursor:not-allowed}
+.prev{position:absolute;top:50%;left:-6px;transform:translateY(-50%)}
+.next{position:absolute;top:50%;right:-6px;transform:translateY(-50%)}
+@media(min-width:900px){.prev{left:-14px}.next{right:-14px}}
+
+/* CTA / buttons */
+.cta{padding:34px;border:1px solid var(--border);border-radius:var(--r);background:linear-gradient(180deg,rgba(215,184,106,.06),rgba(255,255,255,0));display:flex;flex-direction:column;gap:10px}
+.cta h3{margin:0;font-size:20px}
+.cta p{margin:0;color:var(--sub)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 16px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.04);cursor:pointer;transition:transform .15s ease}
+.btn.gold{position:relative;overflow:hidden;background:linear-gradient(180deg, rgba(215,184,106,.26), rgba(160,120,42,.16));border-color:rgba(215,184,106,.55)}
+.btn.gold::after{content:"";position:absolute;inset:0;background:linear-gradient(75deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);transform:translateX(-120%);transition:transform .8s ease}
+.btn.gold:hover::after{transform:translateX(120%)}
+.btn:hover{transform:translateY(-1px)}
+
+/* Floating Book button */
+.fab{position:fixed;right:18px;bottom:18px;z-index:70;height:52px;padding:0 18px;border-radius:999px;display:flex;align-items:center;gap:10px;color:var(--text);border:1px solid rgba(215,184,106,.45);background:linear-gradient(180deg, rgba(215,184,106,.20), rgba(160,120,42,.12));box-shadow:0 12px 40px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.10)}
+
+/* FAQ (luxury accordion) */
+.faq{margin-top:8px}
+.faq .item{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
+.faq .q{width:100%;text-align:left;background:transparent;border:0;color:var(--text);padding:16px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.faq .q span{font-weight:700}
+.faq .q i{transition:transform .2s ease}
+.faq .a{max-height:0;overflow:hidden;transition:max-height .25s ease,padding .25s ease;background:rgba(255,255,255,.02);border-top:1px solid var(--border);padding:0 18px}
+.faq .item.open .a{padding:14px 18px;max-height:280px}
+.faq .item.open .q i{transform:rotate(180deg)}
+.faq small{color:var(--sub)}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .faq .a{transition:none}
+}
+</style>
 </head>
 <body>
+<div class="progress" id="progress" role="presentation"></div>
 
-  <!-- NAV -->
-  <header class="lux-nav">
-    <div class="lux-nav__inner">
-      <a href="/" class="lux-logo">
-        <span class="lux-logo__mark" aria-hidden="true"></span>
-        Swae&nbsp;Systems
-      </a>
-      <nav class="lux-links" aria-label="Primary">
-        <a href="https://cal.com/" target="_blank" rel="noopener">Book Demo</a>
-        <a href="https://swaesystems.github.io/SwaeSystems/" target="_blank" rel="noopener">Products</a>
-        <a href="https://docs.google.com/forms/" target="_blank" rel="noopener">Get Quote</a>
-        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-      </nav>
-      <button class="lux-burger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="lux-mobile" aria-hidden="true">
-      <a href="https://cal.com/" target="_blank" rel="noopener">Book Demo</a>
-      <a href="https://swaesystems.github.io/SwaeSystems/" target="_blank" rel="noopener">Products</a>
-      <a href="https://docs.google.com/forms/" target="_blank" rel="noopener">Get Quote</a>
-      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-    </div>
-  </header>
+<!-- Soft loader -->
+<div class="loader" id="loader" aria-hidden="true"><div class="dot" aria-hidden="true"></div></div>
 
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="hero__media" role="img" aria-label="Cinematic abstract texture"></div>
-    <div class="hero__scrim"></div>
-    <div class="hero__content container reveal">
-      <p class="kicker">AI Intake • Booking • Follow-up</p>
-      <h1>Answer in seconds. <br/>Book automatically.</h1>
-      <p>We turn missed calls and DMs into confirmed appointments — 24/7. Zero extra staff. Fully synced to your calendar and CRM.</p>
-      <div class="btn-row" style="margin-top:10px">
-        <a class="btn btn--gold" href="https://cal.com/" target="_blank" rel="noopener">Book a 10-min Demo</a>
-        <a class="btn btn--ghost" href="#how">How it works</a>
-      </div>
-      <div class="badges">
-        <span class="badge">Avg. reply time: 2–7s</span>
-        <span class="badge">No-shows down 25–40%</span>
-        <span class="badge">HIPAA-aware workflows</span>
-      </div>
-    </div>
-  </section>
-    <!-- HOW IT WORKS -->
-  <section class="section" id="how">
-    <div class="container" style="display:grid;gap:28px;grid-template-columns:1.2fr 1fr;align-items:center">
-      <div class="reveal">
-        <p class="kicker">How it works</p>
-        <h2 style="margin:.3rem 0 10px;font-size:clamp(1.6rem,3vw,2.2rem)">From missed message to booked appointment — automatically</h2>
-        <p class="muted">Leads text, call, or DM. Our AI answers instantly, qualifies, captures info, and books directly on your calendar with reminders and follow-ups.</p>
-        <div class="cards" style="margin-top:18px">
-          <div class="card">
-            <div class="eyebrow">01 — Capture</div>
-            <h3>Instant replies</h3>
-            <p class="muted">Reply in seconds across phone, SMS, IG, FB, and site chat. No lead left hanging.</p>
-          </div>
-          <div class="card">
-            <div class="eyebrow">02 — Qualify</div>
-            <h3>Smart intake</h3>
-            <p class="muted">Collect name, goal, timing, and eligibility. Push clean data to your CRM or Sheets.</p>
-          </div>
-          <div class="card">
-            <div class="eyebrow">03 — Book</div>
-            <h3>Calendar sync</h3>
-            <p class="muted">Offer real-time slots. Send confirmations and automated reminders to cut no-shows.</p>
-          </div>
-        </div>
-        <div class="btn-row" style="margin-top:18px">
-          <a class="btn btn--gold" href="https://cal.com/" target="_blank" rel="noopener">See it live</a>
-          <a class="btn btn--ghost" href="https://docs.google.com/forms/" target="_blank" rel="noopener">Get a quote</a>
-        </div>
-      </div>
+<!-- Header -->
+<header class="topbar" role="banner">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html" aria-label="Swae Systems Home">Swae <span class="accent">Systems</span></a>
+    <button class="burger" id="openMenu" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false"><i></i></button>
+  </div>
+</header>
 
-      <div class="card reveal" style="padding:0;overflow:hidden">
-        <img src="flow-preview.PNG" alt="AI intake to booking flow preview"/>
-      </div>
+<!-- Fullscreen Menu -->
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+  <div class="menu-inner">
+    <div class="menu-head">
+      <strong id="menuTitle">Swae <span class="accent" style="color:var(--gold)">Systems</span></strong>
+      <button class="menu-close" id="closeMenu" aria-label="Close menu">Close ✕</button>
     </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="section" id="features">
-    <div class="container reveal">
-      <p class="kicker">Why teams switch</p>
-      <h2 style="margin:.3rem 0 18px;font-size:clamp(1.6rem,3vw,2.2rem)">Luxury experience. Enterprise reliability.</h2>
-      <div class="cards">
-        <div class="card"><h3>Multi-channel</h3><p class="muted">Calls, SMS, IG/FB DMs, web chat — one AI with your tone and rules.</p></div>
-        <div class="card"><h3>Automation</h3><p class="muted">Nurture, reactivation, winbacks, and post-visit follow-ups run on autopilot.</p></div>
-        <div class="card"><h3>CRM + Calendar</h3><p class="muted">Google/Outlook calendars; Sheets/HubSpot/HighLevel supported.</p></div>
-        <div class="card"><h3>Compliance</h3><p class="muted">Role-based access and HIPAA-aware pathways with data minimization.</p></div>
-        <div class="card"><h3>Human handoff</h3><p class="muted">Staff can jump in; AI pauses and summarizes the convo in seconds.</p></div>
-        <div class="card"><h3>No fluff</h3><p class="muted">Fast, minimal UI for operators who care about results, not dashboards.</p></div>
-      </div>
+    <div class="menu-list" id="menuList">
+      <a href="contact.html"><span>Contact Us</span><small>Questions, support, quotes</small></a>
+      <a href="contact.html#book"><span>Book a Walkthrough</span><small>Priority scheduling</small></a>
+      <a href="#compare"><span>Head-to-Head: Swae vs Alternatives</span><small>Why teams switch</small></a>
+      <a href="industries.html"><span>Industries We Serve</span><small>Clinics, wellness & more</small></a>
     </div>
-  </section>
+  </div>
+</div>
+<!-- HERO -->
+<section class="hero" id="hero" aria-label="Swae Systems">
+  <div class="wrap">
+    <h1 class="headline">Capture every lead. Reply in seconds. Book directly to your calendar.</h1>
+    <p class="sub">Concierge-level AI across SMS, email, and DMs — intake, qualification, scheduling, and follow-ups handled with precision and synced to your tools.</p>
+    <div class="trust" aria-label="Trusted by">Trusted by busy clinics & service teams • Same-day setup • No workflow rebuild</div>
+  </div>
+</section>
 
-  <!-- RESULTS -->
-  <section class="section" id="results">
-    <div class="container" style="display:grid;gap:28px;grid-template-columns:1fr 1fr;align-items:start">
-      <div class="reveal">
-        <p class="kicker">Outcomes</p>
-        <h2 style="margin:.3rem 0 10px;font-size:clamp(1.6rem,3vw,2.2rem)">What clients report after 30–60 days</h2>
-        <ul class="muted" style="margin:10px 0 0;line-height:1.8">
-          <li><strong style="color:var(--gold-1)">2–5× faster</strong> first response vs. front desk</li>
-          <li><strong style="color:var(--gold-1)">+18–45%</strong> more bookings from DM/text leads</li>
-          <li><strong style="color:var(--gold-1)">–25–40%</strong> no-shows with confirmations & reminders</li>
-          <li>Cleaner CRM data and auto notes on calls</li>
-        </ul>
-        <div class="btn-row" style="margin-top:18px">
-          <a class="btn btn--gold" href="https://cal.com/" target="_blank" rel="noopener">Book a 10-min Demo</a>
-          <a class="btn btn--ghost" href="#faq">FAQ</a>
+<!-- Outcomes -->
+<section>
+  <div class="wrap">
+    <h2 class="title">What you get on day one</h2>
+    <p class="kicker">Fast wins without rebuilding your workflow.</p>
+    <div class="grid-3">
+      <div class="card reveal luxe"><h3>More Bookings</h3><p>Turn missed calls and DMs into confirmed appointments automatically — even after hours.</p></div>
+      <div class="card reveal"><h3>Faster Response</h3><p>Sub-60s replies keep prospects engaged and prevent drop-off.</p></div>
+      <div class="card reveal"><h3>Fewer No-Shows</h3><p>Smart confirmations & reminders reduce flakes and protect your calendar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities -->
+<section>
+  <div class="wrap">
+    <h2 class="title">Capabilities at a glance</h2>
+    <p class="kicker">A focused toolkit — no bloat, just results.</p>
+    <div class="chip-row">
+      <span class="chip reveal">24/7 Intake & Qualification</span>
+      <span class="chip reveal">Calendar Booking</span>
+      <span class="chip reveal">Auto Follow-ups</span>
+      <span class="chip reveal">Missed-Call Textbacks</span>
+      <span class="chip reveal">CRM Sync</span>
+      <span class="chip reveal">Lead Scoring</span>
+      <span class="chip reveal">Multi-channel (SMS/Email/DMs)</span>
+      <span class="chip reveal">Payments & Deposits</span>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO SPOTLIGHT -->
+<section id="demo">
+  <div class="wrap">
+    <h2 class="title">Live Demo Spotlight</h2>
+    <p class="kicker">Missed call → instant textback → qualification → booked on your calendar.</p>
+
+    <div class="demo reveal" id="demoCard">
+      <div class="demo-inner">
+        <video id="demoVideo" autoplay muted playsinline loop poster="demo-poster.jpg" width="1280" height="720" aria-label="15s loop of Swae intake to booking">
+          <source src="demo.mp4" type="video/mp4" id="demoSrc"/>
+        </video>
+        <div class="overlay">
+          <a class="btn gold" href="contact.html">Book a Walkthrough</a>
+          <a class="btn" href="cases.html">See Real Results</a>
         </div>
       </div>
-      <div class="card reveal">
-        <div class="eyebrow">Proof</div>
-        <h3>Before → After</h3>
-        <p class="muted">Replace missed calls/unread DMs with instant replies and a booked slot.</p>
-        <img src="results-graph.PNG" alt="Results comparison placeholder" style="margin-top:10px;border-radius:10px;border:1px solid rgba(255,255,255,.08)"/>
+      <div class="demo-note">No sound, 15s loop. Full walk-through available on request.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Compare -->
+<section id="compare" aria-labelledby="compareTitle">
+  <div class="wrap">
+    <h2 class="title" id="compareTitle">Swae vs. Competitors</h2>
+    <p class="kicker">What you’ll notice in week one — and they won’t tell you.</p>
+    <div class="grid-3">
+      <div class="card luxe reveal"><h3>Speed to Value</h3><p>Same-day install, no workflow rebuild. Sub-60s replies out of the box.</p></div>
+      <div class="card reveal"><h3>Conversion Protection</h3><p>Missed-call textback + follow-ups. Reminders & deposits reduce no-shows.</p></div>
+      <div class="card reveal"><h3>Keep Your Stack</h3><p>Google/Outlook calendars, your CRM & forms. Drop-in clean — no rip-and-replace.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="wrap">
+    <h2 class="title">Testimonials</h2>
+    <p class="kicker">What clients say once Swae replaces missed calls and slow DMs.</p>
+
+    <div class="carousel">
+      <button class="nav-btn prev" aria-label="Previous testimonials" role="button">‹</button>
+      <div class="track" id="track" aria-live="polite">
+        <article class="tcard"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><div class="quote">“Clients thought we hired a full-time receptionist. It was Swae running 24/7 — missed calls became bookings.”</div><div class="client">— Clinic Owner</div></article>
+        <article class="tcard"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><div class="quote">“We reply in under a minute and auto-book consults. Zero extra staff, fewer no-shows.”</div><div class="client">— Med Spa Manager</div></article>
+        <article class="tcard"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><div class="quote">“DMs, forms, and calls funnel into one flow. Calendar stays full.”</div><div class="client">— Wellness Studio</div></article>
+        <article class="tcard"><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><div class="quote">“Implementation took an afternoon. It just works.”</div><div class="client">— Owner, IV Therapy</div></article>
+      </div>
+      <button class="nav-btn next" aria-label="Next testimonials" role="button">›</button>
+    </div>
+
+    <div class="btn-row" style="margin-top:12px">
+      <a class="btn gold" href="contact.html" aria-label="Book a demo after reading testimonials">✨ Book a Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <h2 class="title">Frequently Asked Questions</h2>
+    <p class="kicker">Short answers, real outcomes.</p>
+
+    <div class="faq" role="list">
+      <div class="item" role="listitem">
+        <button class="q" aria-expanded="false"><span>Do I have to change my tools?</span><i>⌄</i></button>
+        <div class="a" aria-hidden="true">
+          We drop in: Google/Outlook/iCloud calendars, your CRM (HubSpot, Pipedrive, HighLevel, Airtable), and your existing forms. No rip-and-replace.
+        </div>
+      </div>
+
+      <div class="item" role="listitem">
+        <button class="q" aria-expanded="false"><span>How fast is setup?</span><i>⌄</i></button>
+        <div class="a" aria-hidden="true">
+          Same-day core setup for intake + booking. We tune reminders/follow-ups within 48 hours based on your flow.
+        </div>
+      </div>
+
+      <div class="item" role="listitem">
+        <button class="q" aria-expanded="false"><span>Is it 24/7?</span><i>⌄</i></button>
+        <div class="a" aria-hidden="true">
+          Yes — missed-call textbacks, replies, qualification, confirmations, reminders, deposits, and follow-ups keep running after hours.
+        </div>
+      </div>
+
+      <div class="item" role="listitem">
+        <button class="q" aria-expanded="false"><span>Which channels does it cover?</span><i>⌄</i></button>
+        <div class="a" aria-hidden="true">
+          SMS, email, Instagram DMs, Facebook Messenger — all funneled into one booking flow synced to your calendar.
+        </div>
       </div>
     </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="section" id="testimonials">
-    <div class="container reveal">
-      <p class="kicker">Testimonials</p>
-      <h2 style="margin:.3rem 0 18px;font-size:clamp(1.6rem,3vw,2.2rem)">What operators say</h2>
-      <div class="t-slider">
-        <div class="t-track" id="tTrack">
-          <div class="t-card">
-            <div class="stars">★★★★★</div>
-            <p>“We were drowning in DMs after hours. Swae turned that into booked consults overnight.”</p>
-            <p class="muted" style="margin-top:8px">Owner, Wellness Clinic</p>
-          </div>
-          <div class="t-card">
-            <div class="stars">★★★★★</div>
-            <p>“Missed-call chaos is gone. Reminders cut our no-shows nearly in half.”</p>
-            <p class="muted" style="margin-top:8px">Director, Aesthetics</p>
-          </div>
-          <div class="t-card">
-            <div class="stars">★★★★★</div>
-            <p>“Staff focus on clients, not inboxes. Revenue up, payroll flat. Exactly what we needed.”</p>
-            <p class="muted" style="margin-top:8px">COO, Multi-location Clinic</p>
-          </div>
-        </div>
-      </div>
-      <div class="btn-row" style="margin-top:16px">
-        <button class="btn btn--ghost" id="tPrev" aria-label="Previous">‹ Prev</button>
-        <button class="btn btn--ghost" id="tNext" aria-label="Next">Next ›</button>
+  </div>
+</section>
+<!-- CTA -->
+<section>
+  <div class="wrap">
+    <div class="cta reveal luxe">
+      <h3>See the flow in 3 minutes.</h3>
+      <p>Watch a live demo or send us your process — we’ll map the upgrade.</p>
+      <div class="btn-row">
+        <a class="btn gold" href="contact.html">Book a Demo</a>
+        <a class="btn" href="contact.html">Talk to Swae</a>
       </div>
     </div>
-  </section>
-    <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="container reveal">
-      <p class="kicker">FAQ</p>
-      <h2 style="margin:.3rem 0 18px;font-size:clamp(1.6rem,3vw,2.2rem)">Good to know</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>Is this HIPAA-compliant?</h3>
-          <p class="muted">We support HIPAA-aware workflows, data minimization, and signed BAA on eligible plans. Ask during your demo.</p>
-        </div>
-        <div class="card">
-          <h3>Does it replace front desk?</h3>
-          <p class="muted">It handles intake, booking, and follow-ups. Staff can jump in anytime with a seamless human-handoff.</p>
-        </div>
-        <div class="card">
-          <h3>What do I need to start?</h3>
-          <p class="muted">Your calendar, a few FAQs/policies, and preferred intake fields. We set it up end-to-end for you.</p>
-        </div>
-      </div>
-      <div class="btn-row" style="margin-top:18px">
-        <a class="btn btn--gold" href="https://cal.com/" target="_blank" rel="noopener">Book a 10-min Demo</a>
-        <a class="btn btn--ghost" href="https://docs.google.com/forms/" target="_blank" rel="noopener">Get a quote</a>
-      </div>
+  </div>
+</section>
+
+<!-- Stack -->
+<section>
+  <div class="wrap">
+    <h2 class="title">Works with your stack</h2>
+    <p class="kicker">Drop-in connections. Keep what already works.</p>
+    <div class="stack">
+      <div class="panel reveal">Calendars: Google, Outlook, iCloud</div>
+      <div class="panel reveal">Messaging: SMS, Email, IG DMs, FB Messenger</div>
+      <div class="panel reveal">CRMs: HubSpot, Pipedrive, HighLevel, Airtable</div>
+      <div class="panel reveal">Forms & Payments: Typeform, Jotform, Stripe</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-grid">
-      <div>
-        <div class="lux-logo" style="margin-bottom:8px">
-          <span class="lux-logo__mark" aria-hidden="true"></span>Swae&nbsp;Systems
-        </div>
-        <div class="muted">© <span id="year"></span> Swae Systems. All rights reserved.</div>
-      </div>
-      <div class="muted" style="text-align:right">
-        <a href="https://instagram.com/" target="_blank" rel="noopener" style="color:var(--ink-dim);text-decoration:none;margin-right:14px">Instagram</a>
-        <a href="mailto:hello@swaesystems.com" style="color:var(--ink-dim);text-decoration:none">Contact</a>
-      </div>
-    </div>
-  </footer>
+<!-- Floating Book Demo -->
+<a class="fab" href="contact.html" aria-label="Book a demo">✨ Book Demo</a>
 
-  <!-- Scripts -->
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+<!-- Footer -->
+<footer role="contentinfo">
+  <div class="wrap">© <span id="y"></span> Swae Systems.</div>
+</footer>
 
-    // Reveal on scroll
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+<script>
+/* Prevent scroll restore + year */
+try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; }catch(e){}
+window.scrollTo(0,0);
+document.getElementById('y').textContent=new Date().getFullYear();
+
+/* Loader fade */
+window.addEventListener('load',()=>{ setTimeout(()=>document.getElementById('loader').classList.add('hide'),250); });
+
+/* Progress bar */
+(function(){
+  const bar=document.getElementById('progress');
+  const update=()=>{ const h=document.documentElement; const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight); bar.style.width=(p*100)+'%'; };
+  update(); addEventListener('scroll',update,{passive:true}); addEventListener('resize',update,{passive:true});
+})();
+
+/* Fullscreen Menu (focus trap, esc, scroll lock, aria-expanded) */
+(function(){
+  const menu=document.getElementById('menu');
+  const list=document.getElementById('menuList');
+  const openBtn=document.getElementById('openMenu');
+  const closeBtn=document.getElementById('closeMenu');
+  let lastFocus=null;
+
+  function focusables(root){ return [...root.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')].filter(el=>!el.hasAttribute('disabled') && el.offsetParent!==null); }
+
+  function open(){
+    lastFocus=document.activeElement;
+    document.body.style.overflow='hidden';
+    menu.classList.add('active');
+    openBtn.classList.add('is-open');
+    openBtn.setAttribute('aria-expanded','true');
+    const items=focusables(menu);
+    items.forEach((a,i)=> setTimeout(()=>a.classList?.add('show'), 80*i));
+    (items[0]||closeBtn).focus();
+    document.addEventListener('keydown',trap);
+  }
+  function close(){
+    menu.classList.remove('active');
+    openBtn.classList.remove('is-open');
+    openBtn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    list.querySelectorAll('a').forEach(a=>a.classList.remove('show'));
+    document.removeEventListener('keydown',trap);
+    (lastFocus||openBtn).focus();
+  }
+  function trap(e){
+    if(e.key==='Escape'){ e.preventDefault(); close(); return; }
+    if(e.key!=='Tab') return;
+    const f=focusables(menu); if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  }
+  openBtn.addEventListener('click',open);
+  closeBtn.addEventListener('click',close);
+  menu.addEventListener('click',e=>{ if(e.target===menu) close(); });
+})();
+
+/* Hero parallax — subtle, disabled for reduced motion */
+(function(){
+  const hero=document.getElementById('hero');
+  if(!hero) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let lastY=0;
+  const onScroll=()=>{ const y=window.scrollY; if(Math.abs(y-lastY)>2){ hero.style.backgroundPosition=`center ${Math.min(0, -y*0.08)}px`; lastY=y; } };
+  document.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+
+/* Reveal on scroll (one-shot) */
+const io=new IntersectionObserver(entries=>{
+  for(const e of entries){
+    if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='translateY(0)'; io.unobserve(e.target); }
+  }
+},{threshold:.18});
+document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
+
+/* Testimonials — snapping + end-stop disabling */
+(function(){
+  const track=document.getElementById('track'), prev=document.querySelector('.nav-btn.prev'), next=document.querySelector('.nav-btn.next');
+  if(!track||!prev||!next) return; let step=0, idx=0, max=0;
+  function measure(){
+    const card=track.querySelector('.tcard'); if(!card) return;
+    const gap=parseInt(getComputedStyle(track).columnGap||getComputedStyle(track).gap)||16;
+    step=card.offsetWidth + gap;
+    const count=track.querySelectorAll('.tcard').length;
+    const visible=Math.max(1,Math.round(track.clientWidth/step));
+    max=Math.max(0,count-visible); idx=Math.min(idx,max);
+    go(idx,false); update();
+  }
+  function update(){ const atStart=idx<=0, atEnd=idx>=max;
+    prev.disabled=atStart; prev.setAttribute('aria-disabled',atStart);
+    next.disabled=atEnd;   next.setAttribute('aria-disabled',atEnd);
+  }
+  function go(i,smooth=true){ idx=Math.max(0,Math.min(i,max)); track.scrollTo({left:idx*step,behavior:smooth?'smooth':'auto'}); update(); }
+  prev.addEventListener('click',()=>go(idx-1)); next.addEventListener('click',()=>go(idx+1));
+  let to; track.addEventListener('scroll',()=>{ clearTimeout(to); to=setTimeout(()=>{ const i=Math.round(track.scrollLeft/step); if(i!==idx) go(i); else update(); },80); });
+  addEventListener('resize',measure,{passive:true}); measure();
+})();
+
+/* Demo fail-safe + pause offscreen */
+(function(){
+  const video=document.getElementById('demoVideo');
+  const src=document.getElementById('demoSrc');
+  const card=document.getElementById('demoCard');
+  if(!video||!src) return;
+
+  function swapToPoster(){
+    if(!card) return;
+    const ph=document.createElement('a');
+    ph.href='contact.html';
+    ph.setAttribute('aria-label','Book a walkthrough');
+    ph.style.display='block';
+    ph.style.position='relative';
+    ph.style.aspectRatio='16/9';
+    ph.style.background='center / cover no-repeat url("demo-poster.jpg"), #0b0b0d';
+    ph.innerHTML='<span style="position:absolute;inset:auto auto 16px 16px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06)">▶ Book a walkthrough</span>';
+    const inner=card.querySelector('.demo-inner');
+    inner.innerHTML=''; inner.appendChild(ph);
+  }
+  video.addEventListener('error',swapToPoster);
+  setTimeout(()=>{ if(video.readyState < 2) swapToPoster(); }, 1400);
+
+  const visObs = new IntersectionObserver(([e])=>{
+    if(!e) return;
+    if(e.isIntersecting){ try{ video.play(); }catch(_){} }
+    else{ try{ video.pause(); }catch(_){} }
+  },{threshold:.25});
+  visObs.observe(video);
+})();
+
+/* FAQ accordion */
+(function(){
+  const items = document.querySelectorAll('.faq .item');
+  items.forEach(item=>{
+    const btn = item.querySelector('.q');
+    const ans = item.querySelector('.a');
+    btn.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      items.forEach(i=>{
+        i.classList.remove('open');
+        const b=i.querySelector('.q'); const a=i.querySelector('.a');
+        if(b){ b.setAttribute('aria-expanded','false'); }
+        if(a){ a.setAttribute('aria-hidden','true'); }
       });
-    },{threshold:.14});
-    revealEls.forEach(el=>io.observe(el));
-
-    // Burger menu
-    const burger = document.querySelector('.lux-burger');
-    const mobile = document.querySelector('.lux-mobile');
-    function toggleMenu(force){
-      const willOpen = force ?? mobile.style.display !== 'block';
-      mobile.style.display = willOpen ? 'block' : 'none';
-      burger.classList.toggle('is-active', willOpen);
-      burger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-      mobile.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
-    }
-    burger.addEventListener('click', ()=>toggleMenu());
-    mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>toggleMenu(false)));
-    document.addEventListener('click', (e)=>{
-      const withinNav = e.target.closest('.lux-nav');
-      if(!withinNav && mobile.style.display==='block'){ toggleMenu(false); }
-    });
-
-    // Testimonials slider (manual prev/next)
-    const tTrack = document.getElementById('tTrack');
-    if(tTrack){
-      const tCards = Array.from(tTrack.children);
-      const tPrev = document.getElementById('tPrev');
-      const tNext = document.getElementById('tNext');
-      let tIndex = 0;
-
-      function updateT(){
-        const cardWidth = tCards[0].getBoundingClientRect().width + 18; // include gap
-        tTrack.style.transform = `translateX(${-tIndex * cardWidth}px)`;
+      if(!isOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+        ans.setAttribute('aria-hidden','false');
       }
-      tPrev.addEventListener('click', ()=>{ tIndex = Math.max(0, tIndex-1); updateT(); });
-      tNext.addEventListener('click', ()=>{ tIndex = Math.min(tCards.length-1, tIndex+1); updateT(); });
-      window.addEventListener('resize', updateT);
-      updateT();
-    }
-  </script>
+    });
+  });
+})();
+</script>
+<noscript><style>.reveal,.chip,.card{opacity:1!important;transform:none!important}</style></noscript>
 </body>
 </html>
