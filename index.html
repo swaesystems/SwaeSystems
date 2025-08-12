@@ -29,7 +29,7 @@
 <meta name="twitter:description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Precision only."/>
 <meta name="twitter:image" content="og.png"/>
 
-<!-- JSON-LD (Organization + Service + FAQ for rich results) -->
+<!-- JSON-LD -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -139,6 +139,27 @@ img,video{display:block;max-width:100%}
 .hero .sub{color:#dbdbdf;max-width:720px;margin-top:12px;font-size:clamp(15px,2.7vw,18.5px);line-height:1.55}
 .hero .trust{margin-top:16px;color:#cfcfd3;font-size:14px;opacity:.95}
 @media (max-width:820px){ .hero{min-height:78vh} }
+
+/* Sections */
+section{padding:64px 0}
+@media(min-width:1100px){ section{padding:76px 0} }
+.title{font-size:26px;font-weight:800;margin:0 0 16px}
+.kicker{color:var(--sub);margin:0 0 22px}
+
+/* Built For styles */
+.industries{padding:64px 0}
+.industries .eyebrow{color:var(--sub);margin:0 0 8px}
+.industries .title{margin-bottom:18px}
+.ind-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:760px){ .ind-grid{grid-template-columns:repeat(3,1fr)} }
+.ind-card{position:relative;overflow:hidden;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--border);box-shadow:var(--shadow);height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.ind-card span{font-weight:700;letter-spacing:.2px}
+.ind-card i{font-style:normal;opacity:.7;transition:transform .18s ease,opacity .18s ease}
+.ind-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(80% 120% at 110% -10%, rgba(215,184,106,.18), transparent 40%);opacity:0;transition:opacity .2s ease}
+.ind-card:hover{transform:translateY(-1px);background:rgba(255,255,255,.045);border-color:rgba(215,184,106,.45)}
+.ind-card:hover i{transform:translateX(2px);opacity:.95}
+.ind-card:hover::before{opacity:1}
+.ind-card:focus-visible{outline:2px solid rgba(215,184,106,.6);outline-offset:3px}
   </style>
 </head>
 <body>
@@ -180,13 +201,12 @@ img,video{display:block;max-width:100%}
   </div>
 </section>
 
-<!-- BUILT FOR GRID -->
+<!-- BUILT FOR -->
 <section class="industries" aria-labelledby="builtForTitle">
   <div class="wrap">
     <p class="eyebrow">Built for</p>
     <h2 class="title" id="builtForTitle">Your Industry</h2>
     <p class="kicker">Choose a lane to see the tailored flow and copy.</p>
-
     <div class="ind-grid" role="list">
       <a class="ind-card" role="listitem" href="medspa.html" aria-label="Med Spa">
         <span>Med Spa</span><i>›</i>
@@ -246,7 +266,6 @@ img,video{display:block;max-width:100%}
   <div class="wrap">
     <h2 class="title">Live Demo Spotlight</h2>
     <p class="kicker">Missed call → instant textback → qualification → booked on your calendar.</p>
-
     <div class="demo reveal" id="demoCard">
       <div class="demo-inner">
         <video id="demoVideo" autoplay muted playsinline loop poster="demo-poster.jpg" width="1280" height="720" aria-label="15s loop of Swae intake to booking">
@@ -261,7 +280,6 @@ img,video{display:block;max-width:100%}
     </div>
   </div>
 </section>
-
 <!-- Compare -->
 <section id="compare" aria-labelledby="compareTitle">
   <div class="wrap">
@@ -297,6 +315,7 @@ img,video{display:block;max-width:100%}
     </div>
   </div>
 </section>
+
 <!-- FAQ -->
 <section id="faq">
   <div class="wrap">
@@ -449,7 +468,7 @@ const io=new IntersectionObserver(entries=>{
 },{threshold:.18});
 document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
 
-/* Testimonials carousel */
+/* Testimonials scroll */
 (function(){
   const track=document.getElementById('track'), prev=document.querySelector('.nav-btn.prev'), next=document.querySelector('.nav-btn.next');
   if(!track||!prev||!next) return; let step=0, idx=0, max=0;
@@ -462,14 +481,17 @@ document.querySelectorAll('.reveal,.chip,.card').forEach(el=>io.observe(el));
     max=Math.max(0,count-visible); idx=Math.min(idx,max);
     go(idx,false); update();
   }
-  function update(){ prev.disabled=idx<=0; next.disabled=idx>=max; }
+  function update(){ const atStart=idx<=0, atEnd=idx>=max;
+    prev.disabled=atStart; prev.setAttribute('aria-disabled',atStart);
+    next.disabled=atEnd;   next.setAttribute('aria-disabled',atEnd);
+  }
   function go(i,smooth=true){ idx=Math.max(0,Math.min(i,max)); track.scrollTo({left:idx*step,behavior:smooth?'smooth':'auto'}); update(); }
   prev.addEventListener('click',()=>go(idx-1)); next.addEventListener('click',()=>go(idx+1));
   let to; track.addEventListener('scroll',()=>{ clearTimeout(to); to=setTimeout(()=>{ const i=Math.round(track.scrollLeft/step); if(i!==idx) go(i); else update(); },80); });
   addEventListener('resize',measure,{passive:true}); measure();
 })();
 
-/* Demo fail-safe + pause offscreen */
+/* Demo fail-safe */
 (function(){
   const video=document.getElementById('demoVideo');
   const src=document.getElementById('demoSrc');
