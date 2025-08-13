@@ -6,7 +6,7 @@
 <meta name="format-detection" content="telephone=no,email=no,address=no"/>
 <title>Swae Systems — Luxury AI Intake & Booking</title>
 
-<meta name="description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Pricing up front. Proof on day one.">
+<meta name="description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Sub-60s replies, fewer no-shows, and direct calendar booking.">
 <meta name="theme-color" content="#0A0A0B"/>
 <meta name="color-scheme" content="dark"/>
 <link rel="icon" href="favicon.ico"/>
@@ -27,7 +27,6 @@
   --shadow:0 12px 40px rgba(0,0,0,.45);
   --r:18px; --gap:16px;
 }
-/* Base */
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Inter,Segoe UI,Roboto,Arial,sans-serif}
 a, a:visited, a:active{color:var(--text);text-decoration:none}
@@ -90,7 +89,7 @@ section{padding:64px 0}
 .btn.white{background:#fff;border-color:#fff;color:#000}
 .btn:focus-visible{outline:2px solid rgba(215,184,106,.6);outline-offset:3px}
 
-/* Differentiators / How it works / Proof */
+/* Content grids/cards */
 .grid-3{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
 .card.luxe{border:1px solid rgba(215,184,106,.40);box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 60px rgba(215,184,106,.08)}
@@ -168,7 +167,6 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
     </div>
   </div>
 </section>
-
 <!-- Differentiators -->
 <section>
   <div class="wrap">
@@ -286,7 +284,6 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
     </div>
   </div>
 </section>
-
 <!-- Book -->
 <section id="book" aria-labelledby="bookTitle">
   <div class="wrap">
@@ -294,8 +291,14 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
     <p class="kicker">Tell us where to send the calendar invite.</p>
     <form class="card" action="mailto:hello@swaesystems.com" method="post" enctype="text/plain">
       <div class="grid-3" style="grid-template-columns:1fr 1fr">
-        <div class="input"><label for="name">Name</label><input id="name" name="name" required style="height:42px;border-radius:10px;border:1px solid var(--border);background:#0f0f11;color:var(--text);padding:0 10px"></div>
-        <div class="input"><label for="email">Email</label><input id="email" name="email" type="email" required style="height:42px;border-radius:10px;border:1px solid var(--border);background:#0f0f11;color:var(--text);padding:0 10px"></div>
+        <div class="input"><label for="name">Name</label>
+          <input id="name" name="name" required
+                 style="height:42px;border-radius:10px;border:1px solid var(--border);background:#0f0f11;color:var(--text);padding:0 10px">
+        </div>
+        <div class="input"><label for="email">Email</label>
+          <input id="email" name="email" type="email" required
+                 style="height:42px;border-radius:10px;border:1px solid var(--border);background:#0f0f11;color:var(--text);padding:0 10px">
+        </div>
       </div>
       <div class="btn-row" style="margin-top:12px"><button class="btn gold" type="submit">Request Invite</button></div>
     </form>
