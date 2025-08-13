@@ -48,7 +48,7 @@
   --shadow:0 12px 40px rgba(0,0,0,.45);
   --r:18px; --gap:16px;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box; -webkit-tap-highlight-color: rgba(0,0,0,0);}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Inter,Segoe UI,Roboto,Arial,sans-serif}
 a, a:visited, a:active{color:var(--text);text-decoration:none}
 img,video{display:block;max-width:100%}
@@ -156,8 +156,15 @@ section{padding:64px 0}
 .price-grid{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(215,184,106,.35),transparent);margin:12px 0}
 
-/* Floating CTA */
-.fab{position:fixed;right:18px;bottom:18px;z-index:60;height:52px;padding:0 18px;border-radius:999px;display:flex;align-items:center;gap:10px;color:#000;border:1px solid rgba(215,184,106,.75);background:linear-gradient(180deg, rgba(215,184,106,.95), rgba(160,120,42,.65));box-shadow:0 12px 40px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.10)}
+/* Floating CTA: respect iOS safe area */
+.fab{
+  position:fixed;right:18px;
+  bottom:calc(18px + env(safe-area-inset-bottom, 0px));
+  z-index:60;height:52px;padding:0 18px;border-radius:999px;display:flex;align-items:center;gap:10px;
+  color:#000;border:1px solid rgba(215,184,106,.75);
+  background:linear-gradient(180deg, rgba(215,184,106,.95), rgba(160,120,42,.65));
+  box-shadow:0 12px 40px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.10)
+}
 
 /* Footer */
 footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
@@ -186,7 +193,7 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
   </div>
 </header>
 
-<!-- Menu -->
+<!-- Menu (now external links, as agreed) -->
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
   <div class="menu-inner">
     <div class="menu-head">
@@ -194,10 +201,18 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
       <button class="burger" id="closeMenu" aria-label="Close menu"><i></i></button>
     </div>
     <div class="menu-list" id="menuList">
-      <a href="#hero"><span>Home</span><small>Start here</small></a>
-      <a href="#features"><span>Features</span><small>What you get</small></a>
-      <a href="#pricing"><span>Pricing</span><small>Setup + monthly</small></a>
-      <a href="#book"><span>Contact</span><small>Book a demo</small></a>
+      <a href="https://swaesystems.github.io/SwaeSystems/" target="_blank" rel="noopener">
+        <span>Home</span><small>Start here</small>
+      </a>
+      <a href="https://swaesystems.com/features" target="_blank" rel="noopener">
+        <span>Features</span><small>Deep dive</small>
+      </a>
+      <a href="https://swaesystems.com/pricing" target="_blank" rel="noopener">
+        <span>Pricing</span><small>Setup + monthly</small>
+      </a>
+      <a href="mailto:hello@swaesystems.com?subject=Swae%20Demo" target="_blank" rel="noopener">
+        <span>Contact</span><small>Book a demo</small>
+      </a>
     </div>
   </div>
 </div>
@@ -269,7 +284,7 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
   </div>
 </section>
 
-<!-- Swae vs Others (inline strip) -->
+<!-- Swae vs Others -->
 <section aria-labelledby="compareInlineTitle">
   <div class="wrap">
     <h2 class="title" id="compareInlineTitle">Swae vs Others</h2>
@@ -387,7 +402,6 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
     </div>
   </div>
 </section>
-
 <!-- Contact / Book -->
 <section id="book" aria-labelledby="bookTitle">
   <div class="wrap">
@@ -414,17 +428,13 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
   </div>
 </section>
 
+<!-- Single floating CTA -->
 <a class="fab" href="#book" aria-label="Book a demo">✨ Book Demo</a>
 
-<footer>
+<!-- Footer -->
+<footer role="contentinfo">
   <div class="wrap">© <span id="y"></span> Swae Systems.</div>
 </footer>
-
-<!-- Sticky micro-CTA (shows after hero) -->
-<div id="stickyBar" style="position:fixed;left:50%;transform:translateX(-50%);bottom:18px;display:none;gap:10px;z-index:60">
-  <a class="btn black" href="#pricing">See Pricing</a>
-  <a class="btn gold" href="#book">Book a Demo</a>
-</div>
 
 <script>
 /* Year + progress bar */
@@ -435,7 +445,7 @@ document.getElementById('y').textContent=new Date().getFullYear();
   update(); addEventListener('scroll',update,{passive:true}); addEventListener('resize',update,{passive:true});
 })();
 
-/* Menu */
+/* Menu open/close */
 (function(){
   const menu=document.getElementById('menu');
   const openBtn=document.getElementById('openMenu');
@@ -502,26 +512,10 @@ document.getElementById('y').textContent=new Date().getFullYear();
   addEventListener('resize',measure,{passive:true}); measure();
 })();
 
-/* Sticky micro-CTA: appear after hero */
-(function(){
-  let shown=false; const bar=document.getElementById('stickyBar');
-  const hero=document.getElementById('hero');
-  if(!bar || !hero) return;
-  const io=new IntersectionObserver(([e])=>{
-    if(e?.isIntersecting){ shown=false; bar.style.display='none'; }
-    else if(!shown){ shown=true; bar.style.display='flex'; }
-  },{threshold:.1});
-  io.observe(hero);
-})();
-
-/* Start at top for clean first impression */
+/* Start at top */
 window.scrollTo(0,0);
 </script>
 
-<noscript>
-  <style>
-    .btn:hover{transform:none;box-shadow:none}
-  </style>
-</noscript>
+<noscript><style>.btn:hover{transform:none;box-shadow:none}</style></noscript>
 </body>
 </html>
