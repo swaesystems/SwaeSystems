@@ -21,12 +21,13 @@
 <style>
 :root{
   --bg:#0a0a0b; --panel:#121214; --muted:#151517;
-  --text:#eaeaea; --sub:#a9a9af;
+  --text:#ececee; --sub:#a9a9af;
   --gold:#D7B86A; --gold-deep:#A0782A; --gold-hi:#F4E2A6;
   --border:rgba(255,255,255,.08);
   --shadow:0 12px 40px rgba(0,0,0,.45);
   --r:18px; --gap:16px;
 }
+/* Base */
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Inter,Segoe UI,Roboto,Arial,sans-serif}
 a, a:visited, a:active{color:var(--text);text-decoration:none}
@@ -37,6 +38,7 @@ section{padding:64px 0}
 .title{font-size:26px;font-weight:800;margin:0 0 12px}
 .kicker{color:var(--sub);margin:0 0 18px}
 :focus-visible{outline:2px solid rgba(215,184,106,.6);outline-offset:3px;border-radius:10px}
+[id]{scroll-margin-top:84px}
 
 /* Progress bar */
 .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold-hi),var(--gold-deep));width:0;z-index:90}
@@ -50,13 +52,13 @@ section{padding:64px 0}
 .burger i,.burger i::before,.burger i::after{content:"";display:block;width:18px;height:2px;background:var(--text);position:relative}
 .burger i::before{position:absolute;top:-6px} .burger i::after{position:absolute;top:6px}
 
-/* Minimal menu (no in-page links) */
+/* Minimal menu (no in-page duplicates) */
 .menu{position:fixed;inset:0;background:rgba(10,10,11,.86);backdrop-filter:blur(16px) saturate(140%);z-index:80;display:none}
 .menu.active{display:block}
 .menu-inner{max-width:1120px;margin:0 auto;padding:22px 20px}
 .menu-head{height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
 .menu-list{padding:22px 0;display:grid;gap:12px}
-.menu a{display:flex;justify-content:space-between;align-items:center;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.03);font-weight:600}
+.menu a{display:flex;justify-content:space-between;align-items:center;padding:18px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.03);font-weight:700}
 
 /* Hero */
 .hero{
@@ -79,45 +81,22 @@ section{padding:64px 0}
 .hero-demo .inner{position:relative;aspect-ratio:16/9}
 .hero-demo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
-/* Buttons */
+/* Buttons — only BLACK / WHITE / GOLD */
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.btn{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 16px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.04);cursor:pointer;transition:transform .15s ease}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 18px;border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:transform .15s ease,background .15s ease,color .15s ease}
 .btn:hover{transform:translateY(-1px)}
-.btn.gold{position:relative;overflow:hidden;background:linear-gradient(180deg, rgba(215,184,106,.26), rgba(160,120,42,.16));border-color:rgba(215,184,106,.55)}
-.btn.gold::after{content:"";position:absolute;inset:0;background:linear-gradient(75deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);transform:translateX(-120%);transition:transform .8s ease}
-.btn.gold:hover::after{transform:translateX(120%)}
+.btn.gold{background:linear-gradient(180deg, rgba(215,184,106,.26), rgba(160,120,42,.16));border-color:rgba(215,184,106,.55);color:var(--text)}
+.btn.black{background:#0f0f11;border-color:#242427;color:#fff}
+.btn.white{background:#fff;border-color:#fff;color:#000}
+.btn:focus-visible{outline:2px solid rgba(215,184,106,.6);outline-offset:3px}
 
-/* Built For */
-.eyebrow{color:var(--sub);margin:0 0 8px}
-.ind-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
-@media(min-width:760px){ .ind-grid{grid-template-columns:repeat(3,1fr)} }
-.ind-card{position:relative;overflow:hidden;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--border);box-shadow:var(--shadow);height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
-.ind-card span{font-weight:700;letter-spacing:.2px}
-.ind-card i{font-style:normal;opacity:.7}
-
-/* Cards / grid */
+/* Differentiators / How it works / Proof */
 .grid-3{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
 .card.luxe{border:1px solid rgba(215,184,106,.40);box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 60px rgba(215,184,106,.08)}
+.icon{font-size:24px;margin-bottom:8px}
 
-/* ROI */
-.roi{display:grid;gap:18px;grid-template-columns:1fr 1fr}
-@media(max-width:900px){.roi{grid-template-columns:1fr}}
-.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
-.input-row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
-@media(max-width:540px){.input-row{grid-template-columns:1fr}}
-.input{display:flex;flex-direction:column;gap:6px}
-.input label{font-size:13px;color:var(--sub)}
-.input input{height:40px;border-radius:10px;border:1px solid var(--border);background:#0f0f11;color:var(--text);padding:0 10px}
-.metrics{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
-.metric{padding:12px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.03)}
-.metric b{display:block;font-size:18px;margin-bottom:4px}
-.chart-card{padding:18px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.03)}
-.chart-card canvas{display:block;width:100%;height:220px}
-.chart-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;color:var(--sub);font-size:13px}
-.legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:currentColor;opacity:.9}
-
-/* Carousel */
+/* Testimonials */
 .carousel{position:relative}
 .track{display:flex;gap:var(--gap);overflow:auto scroll;padding:6px;scroll-behavior:smooth;scroll-snap-type:x mandatory}
 .track::-webkit-scrollbar{height:6px}.track::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:999px}
@@ -129,25 +108,28 @@ section{padding:64px 0}
 .prev{position:absolute;top:50%;left:-6px;transform:translateY(-50%)} .next{position:absolute;top:50%;right:-6px;transform:translateY(-50%)}
 @media(min-width:900px){.prev{left:-14px}.next{right:-14px}}
 
-/* Floating CTA */
-.fab{position:fixed;right:18px;bottom:18px;z-index:70;height:52px;padding:0 18px;border-radius:999px;display:flex;align-items:center;gap:10px;color:var(--text);border:1px solid rgba(215,184,106,.45);background:linear-gradient(180deg, rgba(215,184,106,.20), rgba(160,120,42,.12));box-shadow:0 12px 40px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.10)}
+/* Pricing */
+.price-grid{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(215,184,106,.35),transparent);margin:12px 0}
 
+/* Floating CTA */
+.fab{position:fixed;right:18px;bottom:18px;z-index:70;height:52px;padding:0 18px;border-radius:999px;display:flex;align-items:center;gap:10px;color:#000;border:1px solid rgba(215,184,106,.75);background:linear-gradient(180deg, rgba(215,184,106,.95), rgba(160,120,42,.65));box-shadow:0 12px 40px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.10)}
+
+/* Footer */
 footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
-/* Anchor offset for sticky header */
-[id]{scroll-margin-top:84px}
 </style>
 </head>
 <body>
-<div class="progress" id="progress" role="presentation"></div>
+<div class="progress" id="progress"></div>
 
-<header class="topbar" role="banner">
+<header class="topbar">
   <div class="wrap topbar-inner">
     <a class="brand" href="#hero" aria-label="Swae Systems Home">Swae <span class="accent">Systems</span></a>
     <button class="burger" id="openMenu" aria-label="Open menu"><i></i></button>
   </div>
 </header>
 
-<!-- Minimal menu (no duplicate in-page links) -->
+<!-- Minimal menu -->
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
   <div class="menu-inner">
     <div class="menu-head">
@@ -156,7 +138,8 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
     </div>
     <div class="menu-list" id="menuList">
       <a href="mailto:hello@swaesystems.com"><span>Contact</span><small>Sales & Support</small></a>
-      <a href="https://instagram.com" target="_blank" rel="noopener"><span>Instagram</span><small>DM us</small></a>
+      <a href="compare.html"><span>Swae vs Competitors</span><small>Why teams switch</small></a>
+      <a href="cases.html"><span>Case Studies</span><small>Real results</small></a>
     </div>
   </div>
 </div>
@@ -165,16 +148,14 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
 <section class="hero" id="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1 class="headline">Capture every lead. Reply in seconds. Book straight to your calendar.</h1>
-      <p class="sub">Concierge-grade AI turns missed calls & DMs into confirmed appointments — <strong>24/7</strong>, synced to your calendar and CRM.</p>
+      <h1 class="headline">Convert every missed call into a paying client — instantly.</h1>
+      <p class="sub">Concierge-grade AI replies in seconds, qualifies, and books straight to your calendar. Keep your tools. Add results.</p>
       <div style="display:flex;align-items:center;gap:10px;margin:12px 0 6px">
-        <span style="display:inline-flex;align-items:center;height:30px;padding:0 10px;border-radius:999px;border:1px solid rgba(215,184,106,.45);background:linear-gradient(180deg, rgba(215,184,106,.16), rgba(160,120,42,.10));font-size:13px">
-          Plans from <strong style="margin-left:6px">$189/mo</strong>
-        </span>
+        <span class="btn white" style="height:34px;padding:0 12px;border-radius:999px;border:1px solid #fff;color:#000">Plans from <strong style="margin-left:6px">$189/mo</strong></span>
       </div>
       <div class="btn-row">
-        <a class="btn gold" href="#book">✨ Book a Walkthrough</a>
-        <a class="btn" href="#pricing">See Pricing</a>
+        <a class="btn gold" href="#book">✨ Book a Demo</a>
+        <a class="btn black" href="#pricing">See Pricing</a>
       </div>
       <p class="kicker" style="margin-top:12px"><strong>+42% after-hours bookings</strong> • <strong>-31% no-shows</strong> • <strong>sub-60s replies</strong></p>
     </div>
@@ -188,74 +169,40 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
   </div>
 </section>
 
-<!-- Built For -->
-<section class="industries" aria-labelledby="builtForTitle">
-  <div class="wrap">
-    <p class="eyebrow">Built for</p>
-    <h2 class="title" id="builtForTitle">Your industry</h2>
-    <div class="ind-grid" role="list">
-      <a class="ind-card" role="listitem" href="#book" aria-label="Med Spa"><span>Med Spa</span><i>›</i></a>
-      <a class="ind-card" role="listitem" href="#book" aria-label="Dental"><span>Dental</span><i>›</i></a>
-      <a class="ind-card" role="listitem" href="#book" aria-label="Tattoo Studio"><span>Tattoo</span><i>›</i></a>
-      <a class="ind-card" role="listitem" href="#book" aria-label="Wellness"><span>Wellness</span><i>›</i></a>
-      <a class="ind-card" role="listitem" href="#book" aria-label="Salon"><span>Salon</span><i>›</i></a>
-      <a class="ind-card" role="listitem" href="#book" aria-label="Massage"><span>Massage</span><i>›</i></a>
-    </div>
-  </div>
-</section>
-
-<!-- Outcomes -->
+<!-- Differentiators -->
 <section>
   <div class="wrap">
-    <h2 class="title">What you get on day one</h2>
-    <p class="kicker">Fast wins without rebuilding your workflow.</p>
+    <h2 class="title">Why teams choose Swae</h2>
+    <p class="kicker">We’re not another inbox. We’re your always-on concierge that closes the loop.</p>
     <div class="grid-3">
-      <div class="card luxe"><h3>More Bookings</h3><p>Turn missed calls & DMs into confirmed appointments — even after hours.</p></div>
-      <div class="card"><h3>Faster Response</h3><p>Sub-60s replies keep prospects engaged and prevent drop-off.</p></div>
-      <div class="card"><h3>Fewer No-Shows</h3><p>Deposits, confirmations & reminders protect your calendar.</p></div>
+      <div class="card luxe"><div class="icon">⚡️</div><h3>Instant replies</h3><p>Sub-60s responses across SMS, email & DMs keep prospects engaged.</p></div>
+      <div class="card"><div class="icon">📅</div><h3>Direct booking</h3><p>Books into Google/Outlook/iCloud calendars with deposits & reminders.</p></div>
+      <div class="card"><div class="icon">🔗</div><h3>Works with your stack</h3><p>Drop-in with HubSpot, HighLevel, Pipedrive, Airtable — no rip-and-replace.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ROI -->
-<section id="roi" aria-labelledby="roiTitle">
+<!-- How it works -->
+<section>
   <div class="wrap">
-    <h2 class="title" id="roiTitle">Your ROI in 30 seconds</h2>
-    <p class="kicker">Estimate the extra bookings and revenue Swae unlocks — then send it to your inbox.</p>
+    <h2 class="title">How it works</h2>
+    <p class="kicker">Three steps to more bookings — with zero headcount.</p>
+    <div class="grid-3">
+      <div class="card"><div class="icon">📱</div><h3>1. Reach out</h3><p>Lead calls or messages — Swae replies instantly with the right questions.</p></div>
+      <div class="card"><div class="icon">🧭</div><h3>2. Qualify</h3><p>We gather intent, budget, and timing; sync to your CRM automatically.</p></div>
+      <div class="card"><div class="icon">✅</div><h3>3. Book</h3><p>We place it on your calendar with confirmations, deposits, and reminders.</p></div>
+    </div>
+  </div>
+</section>
 
-    <div class="roi">
-      <div class="panel">
-        <div class="input-row">
-          <div class="input"><label for="calls">Missed calls / day</label><input id="calls" type="number" min="0" value="6"></div>
-          <div class="input"><label for="ticket">Avg ticket ($)</label><input id="ticket" type="number" min="1" value="180"></div>
-        </div>
-        <div class="input-row" style="margin-top:10px">
-          <div class="input"><label for="show">Show rate (%)</label><input id="show" type="number" min="1" max="100" value="78"></div>
-          <div class="input"><label for="convert">Swae converts (%)</label><input id="convert" type="number" min="1" max="100" value="42"></div>
-        </div>
-        <div class="btn-row" style="margin-top:12px">
-          <button class="btn gold" id="calc" type="button">Calculate</button>
-          <button class="btn" id="sendRoi" type="button">Email me this</button>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="metrics">
-          <div class="metric"><b id="addedBookings">—</b><small>Added bookings / month</small></div>
-          <div class="metric"><b id="addedRevenue">—</b><small>Projected revenue / month</small></div>
-          <div class="metric"><b id="payback">—</b><small>Estimated payback period</small></div>
-          <div class="metric"><b id="coverage">—</b><small>Cost coverage vs plan</small></div>
-        </div>
-        <div class="chart-card" style="margin-top:12px">
-          <canvas id="roiChart" width="600" height="280" aria-label="ROI trend chart"></canvas>
-          <div class="chart-legend">
-            <span style="color:#D7B86A"><i class="legend-dot"></i>Bookings (↑)</span>
-            <span style="color:#9bd18e"><i class="legend-dot"></i>Response time (↓)</span>
-            <span style="color:#d89bb0"><i class="legend-dot"></i>No-shows (↓)</span>
-          </div>
-        </div>
-        <p class="kicker" style="margin-top:12px">Assumes realistic after-hours recapture and reminder-driven show rates. We’ll tune to your numbers on setup.</p>
-      </div>
+<!-- Proof / Results -->
+<section>
+  <div class="wrap">
+    <h2 class="title">Proof on day one</h2>
+    <div class="grid-3">
+      <div class="card luxe"><h3>+25% bookings</h3><p>Typical lift in month one from missed-call textbacks and weekend coverage.</p></div>
+      <div class="card"><h3>-30% no-shows</h3><p>Deposits + reminders stabilize schedules and protect chair time.</p></div>
+      <div class="card"><h3>< 1 min responses</h3><p>Hold attention while the intent is high — the conversion edge.</p></div>
     </div>
   </div>
 </section>
@@ -275,20 +222,33 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
         </article>
         <article class="tcard">
           <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-          <div class="quote"><strong>-33% no-shows</strong> after deposits + reminder flows. Calendar finally stabilized.</div>
+          <div class="quote"><strong>-33% no-shows</strong> after deposits + reminder flows.</div>
           <div class="client">— <strong>Dr. Evan Ross</strong>, Downtown Dental (Austin)</div>
         </article>
         <article class="tcard">
           <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
-          <div class="quote">Replies under a minute across SMS + IG DMs. We win weekends now. <strong>+19% rebooks</strong>.</div>
+          <div class="quote">Replies under a minute across SMS + IG DMs. <strong>+19% rebooks</strong>.</div>
           <div class="client">— <strong>Kayla Ortiz</strong>, Mono Ink Tattoo (LA)</div>
         </article>
         <article class="tcard">
-          <div class="quote"><strong>CASE SNAPSHOT — Med Spa (2 rooms)</strong><br/>Before: 6 missed calls/day, 72% show rate<br/>After Swae: <strong>+25% bookings</strong>, no-shows down to <strong>19%</strong>, setup in one afternoon.</div>
+          <div class="quote"><strong>CASE SNAPSHOT — Med Spa (2 rooms)</strong><br/>Before: 6 missed calls/day, 72% show rate<br/>After Swae: <strong>+25% bookings</strong>, no-shows down to <strong>19%</strong>.</div>
           <div class="client">— Swae onboarding data, 30 days</div>
         </article>
       </div>
       <button class="nav-btn next" aria-label="Next testimonials" role="button">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- Integrations -->
+<section>
+  <div class="wrap">
+    <h2 class="title">Works with your tools</h2>
+    <p class="kicker">Calendars: Google, Outlook, iCloud • CRMs: HubSpot, HighLevel, Pipedrive, Airtable • Channels: SMS, Email, IG DMs</p>
+    <div class="grid-3">
+      <div class="card">Calendars: Google, Outlook, iCloud</div>
+      <div class="card">CRMs: HubSpot, HighLevel, Pipedrive, Airtable</div>
+      <div class="card">Messaging: SMS, Email, Instagram DMs</div>
     </div>
   </div>
 </section>
@@ -298,9 +258,9 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
   <div class="wrap">
     <h2 class="title" id="pricingTitle">Simple pricing, fast payback</h2>
     <p class="kicker">Plans from <strong>$189/mo</strong>. Cancel anytime.</p>
-    <div class="grid-3">
+    <div class="price-grid">
       <div class="card luxe">
-        <h3>Launch</h3><p>Best for single-location teams</p><div style="height:1px;background:linear-gradient(90deg,transparent,rgba(215,184,106,.35),transparent);margin:12px 0"></div>
+        <h3>Launch</h3><p>Single location</p><div class="divider"></div>
         <p><strong>$189/mo</strong> per location</p>
         <ul style="margin:10px 0 0 18px; color:var(--sub); line-height:1.6">
           <li>24/7 intake & qualification</li><li>SMS / Email / IG DMs</li><li>Calendar booking + deposits</li><li>Smart reminders & follow-ups</li>
@@ -308,20 +268,20 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
         <div class="btn-row" style="margin-top:12px"><a class="btn gold" href="#book">Start</a></div>
       </div>
       <div class="card">
-        <h3>Scale</h3><p>Multi-location & higher volume</p><div style="height:1px;background:linear-gradient(90deg,transparent,rgba(215,184,106,.35),transparent);margin:12px 0"></div>
+        <h3>Scale</h3><p>Multi-location</p><div class="divider"></div>
         <p><strong>$289/mo</strong> per location</p>
         <ul style="margin:10px 0 0 18px; color:var(--sub); line-height:1.6">
           <li>Everything in Launch</li><li>CRM sync & lead scoring</li><li>Priority SLAs</li><li>Custom reporting</li>
         </ul>
-        <div class="btn-row" style="margin-top:12px"><a class="btn gold" href="#book">Talk to Sales</a></div>
+        <div class="btn-row" style="margin-top:12px"><a class="btn black" href="#book">Talk to Sales</a></div>
       </div>
       <div class="card">
-        <h3>Enterprise</h3><p>Custom workflows & controls</p><div style="height:1px;background:linear-gradient(90deg,transparent,rgba(215,184,106,.35),transparent);margin:12px 0"></div>
+        <h3>Enterprise</h3><p>Custom workflows</p><div class="divider"></div>
         <p><strong>Let’s scope</strong></p>
         <ul style="margin:10px 0 0 18px; color:var(--sub); line-height:1.6">
           <li>SSO & audit controls</li><li>Data retention options</li><li>Sandbox & approvals</li><li>Custom integrations</li>
         </ul>
-        <div class="btn-row" style="margin-top:12px"><a class="btn gold" href="#book">Get a Quote</a></div>
+        <div class="btn-row" style="margin-top:12px"><a class="btn white" href="#book">Get a Quote</a></div>
       </div>
     </div>
   </div>
@@ -330,21 +290,21 @@ footer{border-top:1px solid var(--border);padding:28px 0;color:var(--sub)}
 <!-- Book -->
 <section id="book" aria-labelledby="bookTitle">
   <div class="wrap">
-    <h2 class="title" id="bookTitle">Book a Walkthrough</h2>
+    <h2 class="title" id="bookTitle">Book a Demo</h2>
     <p class="kicker">Tell us where to send the calendar invite.</p>
-    <form class="panel" action="mailto:hello@swaesystems.com" method="post" enctype="text/plain">
-      <div class="input-row">
-        <div class="input"><label for="name">Name</label><input id="name" name="name" required></div>
-        <div class="input"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+    <form class="card" action="mailto:hello@swaesystems.com" method="post" enctype="text/plain">
+      <div class="grid-3" style="grid-template-columns:1fr 1fr">
+        <div class="input"><label for="name">Name</label><input id="name" name="name" required style="height:42px;border-radius:10px;border:1px solid var(--border);background:#0f0f11;color:var(--text);padding:0 10px"></div>
+        <div class="input"><label for="email">Email</label><input id="email" name="email" type="email" required style="height:42px;border-radius:10px;border:1px solid var(--border);background:#0f0f11;color:var(--text);padding:0 10px"></div>
       </div>
       <div class="btn-row" style="margin-top:12px"><button class="btn gold" type="submit">Request Invite</button></div>
     </form>
   </div>
 </section>
 
-<a class="fab" href="#book" aria-label="Book a walkthrough">✨ Book Walkthrough</a>
+<a class="fab" href="#book" aria-label="Book a demo">✨ Book Demo</a>
 
-<footer role="contentinfo">
+<footer>
   <div class="wrap">© <span id="y"></span> Swae Systems.</div>
 </footer>
 
@@ -368,18 +328,15 @@ document.getElementById('y').textContent=new Date().getFullYear();
   menu.addEventListener('click',e=>{ if(e.target===menu) close(); });
 })();
 
-/* Videos: fallback + pause offscreen */
+/* Video fallback + pause offscreen */
 (function(){
-  const vids=['heroVideo'];
-  vids.forEach(id=>{
-    const v=document.getElementById(id); if(!v) return;
-    function swap(){ const ph=document.createElement('div'); ph.style.aspectRatio='16/9'; ph.style.background='center / cover no-repeat url("demo-poster.jpg"), #0b0b0d'; v.replaceWith(ph); }
-    v.addEventListener('error',swap); setTimeout(()=>{ if(v.readyState<2) swap(); },1400);
-    const io=new IntersectionObserver(([e])=>{ if(!e) return; if(e.isIntersecting){ try{v.play();}catch(_){} } else { try{v.pause();}catch(_){} } },{threshold:.25}); io.observe(v);
-  });
+  const v=document.getElementById('heroVideo'); if(!v) return;
+  function swap(){ const ph=document.createElement('div'); ph.style.aspectRatio='16/9'; ph.style.background='center / cover no-repeat url("demo-poster.jpg"), #0b0b0d'; v.replaceWith(ph); }
+  v.addEventListener('error',swap); setTimeout(()=>{ if(v.readyState<2) swap(); },1400);
+  const io=new IntersectionObserver(([e])=>{ if(!e) return; if(e.isIntersecting){ try{v.play();}catch(_){} } else { try{v.pause();}catch(_){} } },{threshold:.25}); io.observe(v);
 })();
 
-/* Carousel */
+/* Testimonials carousel */
 (function(){
   const track=document.getElementById('track'), prev=document.querySelector('.nav-btn.prev'), next=document.querySelector('.nav-btn.next');
   if(!track||!prev||!next) return; let step=0, idx=0, max=0;
@@ -396,66 +353,6 @@ document.getElementById('y').textContent=new Date().getFullYear();
   let to; track.addEventListener('scroll',()=>{ clearTimeout(to); to=setTimeout(()=>{ const i=Math.round(track.scrollLeft/step); if(i!==idx) go(i); else update(); },80); });
   addEventListener('resize',measure,{passive:true}); measure();
 })();
-
-/* ROI calc + responsive chart */
-(function(){
-  const $=id=>document.getElementById(id);
-  const fmt=n=>n.toLocaleString(undefined,{maximumFractionDigits:0});
-  const calls=$('calls'), ticket=$('ticket'), show=$('show'), conv=$('convert');
-  const outB=$('addedBookings'), outR=$('addedRevenue'), outP=$('payback'), outC=$('coverage');
-  function calc(){
-    const c=+(calls.value||0), t=+(ticket.value||0), s=(+(show.value||0))/100, k=(+(conv.value||0))/100;
-    const opp=c*30, added=Math.round(opp*k*s), rev=added*t, cost=189;
-    const pay=rev>0?Math.max(1,Math.round((cost/Math.max(1,rev))*30)):0, cov=rev>0?Math.round((rev/cost)*100):0;
-    outB.textContent=added?fmt(added):'—'; outR.textContent=rev?'$'+fmt(rev):'—'; outP.textContent=pay?pay+' days':'—'; outC.textContent=cov?cov+'%':'—';
-    try{ localStorage.setItem('swae_roi', JSON.stringify({c,t,s:s*100,k:k*100,added,rev})); }catch(_){}
-    updateChart(added, Math.max(10, 90 - Math.floor(k*60)), Math.max(5, 35 - Math.floor(s*20)));
-  }
-  ['input','change'].forEach(evt=>[calls,ticket,show,conv].forEach(i=>i.addEventListener(evt,calc)));
-  $('calc').addEventListener('click',calc); calc();
-  $('sendRoi').addEventListener('click', ()=>{
-    const d=JSON.parse(localStorage.getItem('swae_roi')||'{}');
-    const body=encodeURIComponent(`Swae ROI Estimate
-Missed calls/day: ${d.c||''}
-Avg ticket: $${d.t||''}
-Show rate: ${d.s||''}%
-Swae converts: ${d.k||''}%
-
-Added bookings/month: ${d.added||''}
-Projected revenue/month: $${d.rev||''}`);
-    location.href=`mailto:hello@swaesystems.com?subject=Swae ROI&body=${body}`;
-  });
-
-  /* Canvas sizing + draw */
-  const canvas=$('roiChart'), ctx=canvas.getContext('2d');
-  function sizeCanvas(){
-    const dpr=Math.max(1,Math.floor(window.devicePixelRatio||1));
-    const r=canvas.getBoundingClientRect(); canvas.width=Math.floor(r.width*dpr); canvas.height=Math.floor(r.height*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0); drawBase();
-  }
-  function drawBase(){
-    const w=canvas.clientWidth, h=canvas.clientHeight;
-    ctx.clearRect(0,0,w,h);
-    ctx.globalAlpha=.25; ctx.strokeStyle="#fff"; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(40,10); ctx.lineTo(40,h-30); ctx.lineTo(w-10,h-30); ctx.stroke(); ctx.globalAlpha=1;
-  }
-  function line(points,color){ ctx.beginPath(); ctx.strokeStyle=color; ctx.lineWidth=2; points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y)); ctx.stroke(); }
-  function updateChart(book,resp,noshow){
-    drawBase();
-    const w=canvas.clientWidth, h=canvas.clientHeight;
-    const X=i=>40+(i*((w-50)/5)), Yup=v=>(h-30)-(v*((h-50)/100)), Ydown=v=>20+(v*((h-50)/100));
-    const b=[5,8,12,14,16, Math.max(16,Math.min(60,book))];
-    const r=[75,70,66,62,58, Math.max(10,Math.min(90,resp))];
-    const n=[28,27,26,25,24, Math.max(5,Math.min(35,noshow))];
-    line(b.map((v,i)=>({x:X(i),y:Yup(v)})),'#D7B86A');
-    line(r.map((v,i)=>({x:X(i),y:Ydown(v)})),'#9bd18e');
-    line(n.map((v,i)=>({x:X(i),y:Ydown(v)})),'#d89bb0');
-  }
-  sizeCanvas(); addEventListener('resize',sizeCanvas,{passive:true});
-})();
-
-/* Progress smoothness on first paint */
-window.scrollTo(0,0);
 </script>
 </body>
 </html>
