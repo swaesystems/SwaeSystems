@@ -1,293 +1,484 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Swae Systems — 24/7 AI Intake & Booking That Converts</title>
-  <meta name="description" content="Stop missing leads. Swae answers calls, texts, and DMs in seconds, books on your calendar, reduces no-shows, and syncs to your CRM."/>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="Swae Systems — 24/7 AI Intake & Booking" />
-  <meta property="og:description" content="Stop missing leads. Instant replies, automated booking, fewer no-shows." />
-  <meta property="og:image" content="og-cover.JPG" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="format-detection" content="telephone=no,email=no,address=no"/>
+  <title>Swae Systems — Luxury AI Intake & Booking</title>
+  <meta name="description" content="Concierge-grade AI that turns missed calls & DMs into bookings. Sub-60s replies, fewer no-shows, direct calendar booking.">
+  <meta name="theme-color" content="#0A0A0B"/>
+  <meta name="color-scheme" content="dark"/>
+  <link rel="icon" href="favicon.ico"/>
+  <link rel="canonical" href="https://swaesystems.github.io/SwaeSystems/"/>
+  <!-- Social -->
+  <meta property="og:title" content="Swae Systems — Luxury AI Intake & Booking">
+  <meta property="og:description" content="Capture every lead. Reply in seconds. Book straight to your calendar.">
+  <meta property="og:image" content="og.JPG">
+  <meta property="og:image:alt" content="Swae Systems — luxury AI intake and booking preview">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://swaesystems.github.io/SwaeSystems/">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Perf -->
+  <link rel="preload" as="image" href="hero-bg.JPG" imagesrcset="hero-bg.JPG 1x, hero-bg-2x.JPG 2x" imagesizes="100vw">
+  <link rel="preload" as="image" href="demo-poster.JPG">
+  <!-- FAQ JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Do I have to change my tools?","acceptedAnswer":{"@type":"Answer","text":"No—Swae drops into your existing calendars and CRM. No rip-and-replace."}},
+      {"@type":"Question","name":"How fast is setup?","acceptedAnswer":{"@type":"Answer","text":"Same day for core intake and booking. We fine-tune reminders within 48 hours."}},
+      {"@type":"Question","name":"Does Swae work after hours?","acceptedAnswer":{"@type":"Answer","text":"Yes—24/7 intake, qualification, confirmations, reminders, deposits, and follow-ups."}}
+    ]
+  }
+  </script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #0a0a0b;
-      color: white;
-      overflow-x: hidden;
+    :root {
+      --bg: #0a0a0b; --panel: #121214; --muted: #151517;
+      --text: #ececee; --sub: #a9a9af;
+      --gold: #D7B86A; --gold-deep: #A0782A; --gold-hi: #F4E2A6;
+      --border: rgba(255,255,255,.08);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --r: 18px; --gap: 16px;
     }
-    nav {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(10, 10, 11, 0.7);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-    }
-    nav h1 {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: gold;
-    }
-    .burger {
-      display: none;
-      cursor: pointer;
-      font-size: 1.8rem;
-      color: gold;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: white;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    .nav-links a:hover { color: gold; }
-
-    @media(max-width: 768px) {
-      .burger { display: block; }
-      .nav-links {
-        position: absolute;
-        top: 70px;
-        right: -100%;
-        flex-direction: column;
-        background: rgba(10, 10, 11, 0.95);
-        width: 200px;
-        padding: 1rem;
-        transition: right 0.3s ease;
-      }
-      .nav-links.open { right: 0; }
-    }
-
+    * { box-sizing: border-box; -webkit-tap-highlight-color: rgba(0,0,0,0); }
+    html, body { margin: 0; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Inter, Segoe UI, Roboto, Arial, sans-serif; }
+    a, a:visited, a:active { color: var(--text); text-decoration: none; }
+    img, video { display: block; max-width: 100%; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 64px 0; }
+    @media (min-width: 1100px) { section { padding: 76px 0; } }
+    .title { font-size: 26px; font-weight: 800; margin: 0 0 12px; }
+    .kicker { color: var(--sub); margin: 0 0 18px; }
+    :focus-visible { outline: 2px solid rgba(215,184,106,.6); outline-offset: 3px; border-radius: 10px; }
+    [id] { scroll-margin-top: 84px; }
+    /* Progress */
+    .progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--gold-hi), var(--gold-deep)); width: 0; z-index: 90; }
+    /* Topbar */
+    .topbar { position: sticky; top: 0; z-index: 60; background: rgba(10,10,11,.72); backdrop-filter: saturate(140%) blur(14px); border-bottom: 1px solid var(--border); }
+    .topbar-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-weight: 800; letter-spacing: .3px; }
+    .brand .accent { color: var(--gold); }
+    .burger { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 42px; border-radius: 12px; background: var(--muted); border: 1px solid var(--border); box-shadow: var(--shadow); cursor: pointer; }
+    .burger i, .burger i::before, .burger i::after { content: ""; display: block; width: 18px; height: 2px; background: var(--text); position: relative; }
+    .burger i::before { position: absolute; top: -6px; } .burger i::after { position: absolute; top: 6px; }
+    /* Menu */
+    .menu { position: fixed; inset: 0; background: rgba(10,10,11,.86); backdrop-filter: blur(16px) saturate(140%); z-index: 80; display: none; }
+    .menu.active { display: block; }
+    .menu-inner { max-width: 1120px; margin: 0 auto; padding: 22px 20px; }
+    .menu-head { height: 64px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+    .menu-list { padding: 22px 0; display: grid; gap: 12px; }
+    .menu a { display: flex; justify-content: space-between; align-items: center; padding: 18px; border: 1px solid var(--border); border-radius: 14px; background: rgba(255,255,255,.03); font-weight: 700; }
+    /* Hero */
     .hero {
-      min-height: 100vh;
-      background: url('hero.JPG') no-repeat center center/cover;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 2rem;
+      position: relative; isolation: isolate; min-height: 86vh; display: flex; align-items: center;
+      background: #0b0b0d center/cover no-repeat;
+      background-image: image-set(url("hero-bg.JPG") type("image/jpeg") 1x, url("hero-bg-2x.JPG") type("image/jpeg") 2x);
     }
-    .hero h2 {
-      font-size: 3rem;
-      color: gold;
-      margin-bottom: 1rem;
-      animation: fadeInUp 1s ease forwards;
+    .hero::before {
+      content: ""; position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(120% 80% at 80% 0%, rgba(215,184,106,.18), transparent 60%), linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.68) 40%, rgba(0,0,0,.74) 100%);
     }
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      line-height: 1.6;
-      opacity: 0.9;
-      animation: fadeInUp 1.2s ease forwards;
+    .hero .wrap { position: relative; z-index: 1; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center; }
+    @media (max-width: 940px) { .hero-grid { grid-template-columns: 1fr; } }
+    .headline { font-size: clamp(30px, 6vw, 64px); line-height: 1.04; letter-spacing: -.02em; margin: 0 0 12px; }
+    .sub { color: #d4d4da; max-width: 720px; margin-top: 10px; font-size: clamp(15px, 2.7vw, 18.5px); line-height: 1.55; }
+    .hero-demo { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, rgba(215,184,106,.08), rgba(255,255,255,0)); }
+    .hero-demo .inner { position: relative; aspect-ratio: 16/9; max-width: 100%; }
+    .hero-demo video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* Buttons */
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 18px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: transform .15s ease, background .15s ease, color .15s ease, box-shadow .15s ease; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+    .btn.gold { background: linear-gradient(180deg, rgba(215,184,106,.26), rgba(160,120,42,.16)); border-color: rgba(215,184,106,.70); color: var(--text); position: relative; overflow: hidden; }
+    .btn.gold::after { content: ""; position: absolute; inset: 0; background: linear-gradient(75deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%); transform: translateX(-120%); transition: transform .8s ease; }
+    .btn.gold:hover::after { transform: translateX(120%); }
+    .btn.black { background: #0f0f11; border-color: #242427; color: #fff; }
+    .btn.white { background: #fff; border-color: #fff; color: #000; }
+    .btn:focus-visible { box-shadow: 0 0 0 3px rgba(215,184,106,.4); }
+    /* Cards & grids */
+    .grid-3 { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { line-height: 1.22; }
+    .card p { line-height: 1.6; }
+    .card.luxe { border: 1px solid rgba(215,184,106,.40); box-shadow: 0 10px 30px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.08); }
+    .icon { font-size: 24px; margin-bottom: 8px; }
+    /* Built For */
+    .eyebrow { color: var(--sub); margin: 0 0 8px; }
+    .ind-grid { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 760px) { .ind-grid { grid-template-columns: repeat(3, 1fr); } }
+    .ind-card { position: relative; overflow: hidden; border-radius: 14px; background: rgba(255,255,255,.03); border: 1px solid var(--border); box-shadow: var(--shadow); height: 76px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; transition: transform .12s ease, background .12s ease; }
+    .ind-card span { font-weight: 700; letter-spacing: .2px; }
+    .ind-card i { font-style: normal; opacity: .7; transition: transform .15s ease, opacity .15s ease; }
+    .ind-card:hover { transform: translateY(-1px); background: rgba(255,255,255,.05); }
+    .ind-card:hover i { transform: translateX(4px); opacity: .9; }
+    .ind-card:hover span { text-decoration: underline; text-decoration-color: rgba(215,184,106,.65); }
+    /* Testimonials */
+    .carousel { position: relative; }
+    .track { display: flex; gap: var(--gap); overflow: auto scroll; padding: 6px; scroll-behavior: smooth; scroll-snap-type: x mandatory; }
+    .track::-webkit-scrollbar { height: 6px; } .track::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 999px; }
+    .tcard { min-width: 300px; max-width: 360px; flex: 0 0 auto; background: var(--panel); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; scroll-snap-align: start; box-shadow: var(--shadow); }
+    .stars { letter-spacing: 2px; margin-bottom: 10px; color: var(--gold); opacity: .9; }
+    .quote { font-size: 16px; line-height: 1.55; }
+    .client { margin-top: 12px; color: var(--sub); font-size: 14px; }
+    .nav-btn { appearance: none; color: #e8e8ea; font-weight: 700; line-height: 1; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.07); width: 44px; height: 44px; border-radius: 12px; cursor: pointer; backdrop-filter: blur(10px); }
+    .prev { position: absolute; top: 50%; left: -6px; transform: translateY(-50%); } .next { position: absolute; top: 50%; right: -6px; transform: translateY(-50%); }
+    @media (min-width: 900px) { .prev { left: -14px; } .next { right: -14px; } }
+    /* Pricing */
+    .price-grid { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(215,184,106,.35), transparent); margin: 12px 0; }
+    /* Book form */
+    .form-grid { display: flex; gap: 14px; flex-wrap: wrap; }
+    .field { flex: 1 1 280px; max-width: 360px; }
+    .inputbox { height: 42px; width: 100%; border-radius: 10px; border: 1px solid var(--border); background: #0f0f11; color: var(--text); padding: 0 10px; }
+    /* FAB */
+    .fab {
+      position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 60;
+      height: 52px; padding: 0 18px; border-radius: 999px; display: flex; align-items: center; gap: 10px;
+      color: #000; border: 1px solid rgba(215,184,106,.75);
+      background: linear-gradient(180deg, rgba(215,184,106,.95), rgba(160,120,42,.65));
+      box-shadow: 0 12px 40px rgba(0,0,0,.45), 0 0 60px rgba(215,184,106,.10);
     }
-    .cta-btn {
-      margin-top: 2rem;
-      padding: 0.8rem 2rem;
-      background: gold;
-      color: black;
-      font-weight: 600;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 28px 0; color: var(--sub); }
+    /* Mobile */
+    @media (max-width: 760px) {
+      .title { margin-bottom: 18px; }
+      section { padding: 76px 0; }
+      .card { padding: 20px; }
+      .btn-row { row-gap: 10px; }
     }
-    .cta-btn:hover {
-      background: #ffd700;
-      transform: translateY(-3px);
-    }
-
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
     }
   </style>
 </head>
 <body>
+  <div class="progress" id="progress"></div>
 
-<nav>
-  <h1>Swae Systems</h1>
-  <div class="burger" id="burger">☰</div>
-  <div class="nav-links" id="nav-links">
-    <a href="https://httpstat.us/404" target="_blank" rel="noopener">About</a>
-    <a href="https://httpstat.us/404" target="_blank" rel="noopener">Services</a>
-    <a href="https://httpstat.us/404" target="_blank" rel="noopener">FAQ</a>
-    <a href="https://httpstat.us/404" target="_blank" rel="noopener">Contact</a>
-  </div>
-</nav>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/404-home.html" aria-label="Swae Systems Home">Swae <span class="accent">Systems</span></a>
+      <button class="burger" id="openMenu" aria-label="Open menu"><i></i></button>
+    </div>
+  </header>
 
-<section class="hero">
-  <h2>Your Front Desk, on Autopilot.</h2>
-  <p>Answers calls, texts, and DMs — then books for you.</p>
-  <button class="cta-btn" onclick="window.open('https://httpstat.us/404','_blank')">See a Live Demo</button>
-</section>
-<!-- ===== Features / Grid ===== -->
-<style>
-  .section { padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
-  .section h3 { font-size: 2rem; margin-bottom: 12px; color: gold; text-align: center; }
-  .section p.lead { text-align: center; opacity: .9; max-width: 720px; margin: 0 auto 40px; }
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .card {
-    background: #111215; border: 1px solid #1e1f24; border-radius: 10px; padding: 22px;
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    text-decoration: none; color: white; display: block; min-height: 160px;
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.35); border-color: #2a2b31; }
-  .card h4 { margin: 0 0 6px; font-size: 1.1rem; color: gold; }
-  .card p { margin: 0; opacity: .9; line-height: 1.5; }
-  @media(max-width: 900px){ .grid { grid-template-columns: 1fr 1fr; } }
-  @media(max-width: 600px){ .grid { grid-template-columns: 1fr; } }
-
-  /* Trust row */
-  .trust-row { display:flex; gap: 18px; flex-wrap: wrap; align-items:center; justify-content:center; opacity:.9 }
-  .trust-pill {
-    padding:10px 14px; border:1px solid #2a2b31; border-radius: 999px; background:#111215;
-    font-size:.95rem;
-  }
-
-  /* Testimonials */
-  .slider-wrap { position: relative; overflow: hidden; }
-  .slides { display: flex; gap: 16px; transition: transform .5s ease; }
-  .slide {
-    min-width: 320px; max-width: 420px; flex: 0 0 80%;
-    background:#111215; border:1px solid #1e1f24; border-radius:10px; padding:20px;
-  }
-  .stars { letter-spacing: 1px; margin-bottom: 8px; color: gold; }
-  .slider-ctr { display:flex; gap:10px; justify-content:center; margin-top:16px; }
-  .slider-btn { background: gold; color:#000; border:0; padding:8px 12px; border-radius:6px; cursor:pointer; }
-  .cta-bar { text-align:center; padding: 60px 24px; background: linear-gradient(180deg, #0a0a0b 0%, #0f0f12 100%); border-top:1px solid #1e1f24; border-bottom:1px solid #1e1f24; }
-  .cta-bar h4 { color:gold; margin:0 0 10px; font-size:1.6rem; }
-  .cta-bar p { margin:0 0 18px; opacity:.9 }
-  .cta-btn.secondary { background: transparent; color: gold; border:1px solid gold; }
-  .cta-btn.secondary:hover { background: rgba(255,215,0,.1); }
-</style>
-
-<section class="section" id="features">
-  <h3>What You Get — Fast</h3>
-  <p class="lead">24/7 AI intake, instant replies, and booked appointments that don’t slip through the cracks.</p>
-
-  <div class="grid">
-    <a class="card" href="https://httpstat.us/404" target="_blank" rel="noopener">
-      <h4>Instant Intake</h4>
-      <p>Answer calls, texts, and DMs in seconds—no staff needed.</p>
-    </a>
-    <a class="card" href="https://httpstat.us/404" target="_blank" rel="noopener">
-      <h4>Calendar Booking</h4>
-      <p>Auto-schedule appointments and send confirmations.</p>
-    </a>
-    <a class="card" href="https://httpstat.us/404" target="_blank" rel="noopener">
-      <h4>No-Show Reduction</h4>
-      <p>Smart reminders and rescheduling to keep your calendar full.</p>
-    </a>
-    <a class="card" href="https://httpstat.us/404" target="_blank" rel="noopener">
-      <h4>Lead Follow-Ups</h4>
-      <p>Automated drip messages until they book or say no.</p>
-    </a>
-    <a class="card" href="https://httpstat.us/404" target="_blank" rel="noopener">
-      <h4>CRM Sync</h4>
-      <p>Push every lead and conversation into your system.</p>
-    </a>
-    <a class="card" href="https://httpstat.us/404" target="_blank" rel="noopener">
-      <h4>Reports</h4>
-      <p>See response times, conversion rates, and show-ups at a glance.</p>
-    </a>
-  </div>
-</section>
-
-<section class="section" id="trust">
-  <h3>Trusted Across High-Volume Teams</h3>
-  <p class="lead">Built for clinics and service businesses that can’t afford to miss a lead.</p>
-  <div class="trust-row">
-    <div class="trust-pill">Med Spas</div>
-    <div class="trust-pill">IV Therapy</div>
-    <div class="trust-pill">Weight Loss</div>
-    <div class="trust-pill">TRT Clinics</div>
-    <div class="trust-pill">Dental</div>
-    <div class="trust-pill">Home Services</div>
-  </div>
-</section>
-
-<section class="section" id="testimonials">
-  <h3>Results That Stick</h3>
-  <div class="slider-wrap">
-    <div class="slides" id="slides">
-      <div class="slide">
-        <div class="stars">★★★★★</div>
-        <p>“We stopped missing DMs and booked 40% more consults in the first month.”</p>
-        <p style="opacity:.7;margin-top:8px;">— Clinic Owner</p>
+  <!-- Menu: Updated with 404 links -->
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+    <div class="menu-inner">
+      <div class="menu-head">
+        <strong id="menuTitle">Swae <span class="accent" style="color:var(--gold)">Systems</span></strong>
+        <button class="burger" id="closeMenu" aria-label="Close menu"><i></i></button>
       </div>
-      <div class="slide">
-        <div class="stars">★★★★★</div>
-        <p>“Patients get answers instantly. No more phone tag.”</p>
-        <p style="opacity:.7;margin-top:8px;">— Practice Manager</p>
-      </div>
-      <div class="slide">
-        <div class="stars">★★★★★</div>
-        <p>“The no-show rate dropped and our calendar actually stays full.”</p>
-        <p style="opacity:.7;margin-top:8px;">— Operations Lead</p>
+      <div class="menu-list" id="menuList">
+        <a href="/404-home.html"><span>Home</span><small>Main page</small></a>
+        <a href="/404-comparisons.html"><span>Swae vs Competitors</span><small>Why teams switch</small></a>
+        <a href="/404-book-demo.html"><span>Book Demo</span><small>20-min consultation</small></a>
       </div>
     </div>
   </div>
-  <div class="slider-ctr">
-    <button class="slider-btn" data-dir="-1">Prev</button>
-    <button class="slider-btn" data-dir="1">Next</button>
-  </div>
-</section>
 
-<section class="cta-bar">
-  <h4>Ready to see it live?</h4>
-  <p>We’ll show you exactly how the AI answers, books, and follows up for you.</p>
-  <button class="cta-btn" onclick="window.open('https://httpstat.us/404','_blank')">See a Live Demo</button>
-  <button class="cta-btn secondary" onclick="window.open('https://httpstat.us/404','_blank')">Learn More</button>
-</section>
-<!-- ===== Footer ===== -->
-<footer class="section" style="text-align:center; opacity:.8;">
-  <p style="margin:0 0 8px;">© <span id="year"></span> Swae Systems</p>
-  <p style="margin:0;">Built for teams that hate missing leads.</p>
-</footer>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 class="headline">Convert every missed call into a paying client — instantly.</h1>
+        <p class="sub">Concierge-grade AI replies in seconds, qualifies, and books straight to your calendar. Keep your tools. Add results.</p>
+        <div style="display:flex;align-items:center;gap:10px;margin:12px 0 6px">
+          <span class="btn white" style="height:34px;padding:0 12px;border-radius:999px;border:1px solid #fff;color:#000">Plans from <strong style="margin-left:6px">$229/mo</strong></span>
+        </div>
+        <div class="btn-row">
+          <a class="btn gold" href="/404-book-demo.html">✨ Book a Demo</a>
+          <a class="btn black" href="/404-pricing.html">See Pricing</a>
+        </div>
+        <p class="kicker" style="margin-top:12px"><strong>+25% bookings</strong> • <strong>-30% no-shows</strong> • <strong>sub-60s replies</strong></p>
+      </div>
+      <div class="hero-demo">
+        <div class="inner">
+          <video id="heroVideo" autoplay muted playsinline loop poster="demo-poster.JPG" width="1280" height="720">
+            <source src="demo.mp4" type="video/mp4"/>
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ===== Scripts ===== -->
-<script>
-  // Set current year
-  document.getElementById('year').textContent = new Date().getFullYear();
+  <!-- Built For -->
+  <section class="industries" aria-labelledby="builtForTitle">
+    <div class="wrap">
+      <p class="eyebrow">Built for</p>
+      <h2 class="title" id="builtForTitle">High-volume service businesses</h2>
+      <div class="ind-grid" role="list">
+        <a class="ind-card" role="listitem" href="/404-medspa.html"><span>Med Spa</span><i>›</i></a>
+        <a class="ind-card" role="listitem" href="/404-dental.html"><span>Dental</span><i>›</i></a>
+        <a class="ind-card" role="listitem" href="/404-tattoo.html"><span>Tattoo</span><i>›</i></a>
+        <a class="ind-card" role="listitem" href="/404-wellness.html"><span>Wellness</span><i>›</i></a>
+        <a class="ind-card" role="listitem" href="/404-salon.html"><span>Salon</span><i>›</i></a>
+        <a class="ind-card" role="listitem" href="/404-massage.html"><span>Massage</span><i>›</i></a>
+      </div>
+    </div>
+  </section>
 
-  // Burger menu toggle
-  const burger = document.getElementById('burger');
-  const navLinks = document.getElementById('nav-links');
-  burger?.addEventListener('click', () => navLinks.classList.toggle('open'));
-  document.addEventListener('click', (e) => {
-    if (!navLinks.contains(e.target) && e.target !== burger) {
-      navLinks.classList.remove('open');
-    }
-  });
+  <!-- Features -->
+  <section id="features" aria-labelledby="featuresTitle">
+    <div class="wrap">
+      <h2 class="title" id="featuresTitle">Why teams choose Swae</h2>
+      <p class="kicker">We’re not another inbox. We’re your always-on concierge that closes the loop.</p>
+      <div class="grid-3">
+        <div class="card luxe"><div class="icon">⚡️</div><h3>Instant replies</h3><p>Sub-60s responses across SMS, email & DMs keep prospects engaged.</p></div>
+        <div class="card"><div class="icon">📅</div><h3>Direct booking</h3><p>Books into Google/Outlook/iCloud calendars with deposits & reminders.</p></div>
+        <div class="card"><div class="icon">🔗</div><h3>Keep your stack</h3><p>HubSpot, HighLevel, Pipedrive, Airtable — drop-in, no rip-and-replace.</p></div>
+      </div>
+    </div>
+  </section>
 
-  // Testimonials slider logic
-  const slides = document.getElementById('slides');
-  const btns = document.querySelectorAll('.slider-btn');
-  let index = 0;
-  function go(dir){
-    const total = slides.children.length;
-    index = (index + dir + total) % total;
-    slides.style.transform = `translateX(${-(index * (slides.children[0].offsetWidth + 16))}px)`;
-  }
-  btns.forEach(b=> b.addEventListener('click', ()=> go(parseInt(b.dataset.dir))));
-  window.addEventListener('resize', ()=> go(0));
-</script>
+  <!-- How it works -->
+  <section aria-labelledby="howTitle">
+    <div class="wrap">
+      <h2 class="title" id="howTitle">How it works</h2>
+      <p class="kicker">Three steps to more bookings — with zero headcount.</p>
+      <div class="grid-3">
+        <div class="card"><div class="icon">📱</div><h3>1. Reach out</h3><p>Lead calls or messages — Swae replies instantly with the right questions.</p></div>
+        <div class="card"><div class="icon">🧭</div><h3>2. Qualify</h3><p>We gather intent, budget, and timing; sync to your CRM automatically.</p></div>
+        <div class="card"><div class="icon">✅</div><h3>3. Book</h3><p>We place it on your calendar with confirmations, deposits, and reminders.</p></div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Swae vs Others -->
+  <section aria-labelledby="compareInlineTitle">
+    <div class="wrap">
+      <h2 class="title" id="compareInlineTitle">Swae vs Competitors</h2>
+      <p class="kicker">What you’ll notice in week one — and they won’t tell you.</p>
+      <div class="grid-3">
+        <div class="card luxe">
+          <h3>Instant replies</h3>
+          <p><strong>Swae:</strong> Sub-60s on SMS/Email/DMs<br><strong>Others:</strong> Hours or next business day</p>
+        </div>
+        <div class="card">
+          <h3>Direct booking</h3>
+          <p><strong>Swae:</strong> Books into Google/Outlook with deposits & reminders<br><strong>Others:</strong> Manual callbacks</p>
+        </div>
+        <div class="card">
+          <h3>Keep your stack</h3>
+          <p><strong>Swae:</strong> HubSpot, HighLevel, Pipedrive, Airtable — drop-in<br><strong>Others:</strong> Rip-and-replace</p>
+        </div>
+      </div>
+      <div class="btn-row" style="margin-top:14px">
+        <a class="btn gold" href="/404-book-demo.html">Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section aria-labelledby="proofTitle">
+    <div class="wrap">
+      <h2 class="title" id="proofTitle">Proof on day one</h2>
+      <div class="grid-3">
+        <div class="card luxe"><h3>+25% bookings</h3><p>Typical lift in month one from missed-call textbacks and weekend coverage.</p></div>
+        <div class="card"><h3>-30% no-shows</h3><p>Deposits + reminders stabilize schedules and protect chair time.</p></div>
+        <div class="card"><h3>&lt; 1 min responses</h3><p>Hold attention while the intent is high — the conversion edge.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="wrap">
+      <h2 class="title">Operators who switched to Swae</h2>
+      <p class="kicker">Real teams, real numbers — month one.</p>
+      <div class="carousel">
+        <button class="nav-btn prev" aria-label="Previous testimonials" role="button">‹</button>
+        <div class="track" id="track" aria-live="polite">
+          <article class="tcard">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+            <div class="quote"><strong>+27% bookings</strong> in 30 days. After-hours texts close what we used to miss.</div>
+            <div class="client">— <strong>Maria Chen</strong>, Luxe Med Spa (Scottsdale)</div>
+          </article>
+          <article class="tcard">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+            <div class="quote"><strong>-33% no-shows</strong> after deposits + reminder flows.</div>
+            <div class="client">— <strong>Dr. Evan Ross</strong>, Downtown Dental (Austin)</div>
+          </article>
+          <article class="tcard">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+            <div class="quote">Replies under a minute across SMS + IG DMs. <strong>+19% rebooks</strong>.</div>
+            <div class="client">— <strong>Kayla Ortiz</strong>, Mono Ink Tattoo (LA)</div>
+          </article>
+        </div>
+        <button class="nav-btn next" aria-label="Next testimonials" role="button">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integrations -->
+  <section aria-labelledby="stackTitle">
+    <div class="wrap">
+      <h2 class="title" id="stackTitle">Works with your tools</h2>
+      <p class="kicker">Calendars: Google, Outlook, iCloud • CRMs: HubSpot, HighLevel, Pipedrive, Airtable • Channels: SMS, Email, IG DMs</p>
+      <div class="grid-3">
+        <div class="card">Calendars: Google, Outlook, iCloud</div>
+        <div class="card">CRMs: HubSpot, HighLevel, Pipedrive, Airtable</div>
+        <div class="card">Messaging: SMS, Email, Instagram DMs</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" aria-labelledby="pricingTitle">
+    <div class="wrap">
+      <h2 class="title" id="pricingTitle">Simple pricing, fast payback</h2>
+      <p class="kicker">Transparent setup + monthly. Cancel anytime.</p>
+      <div class="price-grid">
+        <div class="card luxe">
+          <h3>Launch</h3><p>Single location</p><div class="divider"></div>
+          <p><strong>Setup: $499</strong><br><strong>$229/mo</strong> per location</p>
+          <ul style="margin:10px 0 0 18px;color:var(--sub);line-height:1.6">
+            <li>24/7 intake & qualification</li><li>SMS / Email / IG DMs</li><li>Calendar booking + deposits</li><li>Smart reminders & follow-ups</li>
+          </ul>
+          <div class="btn-row" style="margin-top:12px">
+            <a class="btn gold" href="/404-launch-plan.html">Choose Launch</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Scale</h3><p>Multi-location</p><div class="divider"></div>
+          <p><strong>Setup: $1,250</strong><br><strong>$329/mo</strong> per location</p>
+          <ul style="margin:10px 0 0 18px;color:var(--sub);line-height:1.6">
+            <li>Everything in Launch</li><li>CRM sync & lead scoring</li><li>Priority SLAs</li><li>Custom reporting</li>
+          </ul>
+          <div class="btn-row" style="margin-top:12px">
+            <a class="btn black" href="/404-scale-plan.html">Choose Scale</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Enterprise</h3><p>Custom workflows</p><div class="divider"></div>
+          <p><strong>Setup: Custom</strong><br><strong>Monthly: Custom</strong></p>
+          <ul style="margin:10px 0 0 18px;color:var(--sub);line-height:1.6">
+            <li>SSO & audit controls</li><li>Data retention options</li><li>Sandbox & approvals</li><li>Custom integrations</li>
+          </ul>
+          <div class="btn-row" style="margin-top:12px">
+            <a class="btn white" href="/404-enterprise-plan.html">Talk to Sales</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Book -->
+  <section id="book" aria-labelledby="bookTitle">
+    <div class="wrap">
+      <h2 class="title" id="bookTitle">Book a Demo</h2>
+      <p class="kicker">Tell us where to send the calendar invite.</p>
+      <form class="card" action="/404-book-demo.html" method="post" enctype="text/plain">
+        <input type="hidden" name="plan" id="selPlan" value="">
+        <div id="planPill" style="display:none;margin-bottom:10px">
+          <span class="btn white" style="height:32px;padding:0 12px;border-radius:999px;border:1px solid #fff;color:#000" aria-live="polite"></span>
+          <a id="clearPlan" href="/404-book-demo.html" style="margin-left:8px;color:#a9a9af;text-decoration:underline">change</a>
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" class="inputbox" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" class="inputbox" required>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top:12px">
+          <button class="btn gold" type="submit">Request Invite</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Single floating CTA -->
+  <a class="fab" href="/404-book-demo.html" aria-label="Book a demo">✨ Book Demo</a>
+
+  <footer role="contentinfo">
+    <div class="wrap">© <span id="y"></span> Swae Systems.</div>
+  </footer>
+
+  <script>
+    /* Year + progress */
+    document.getElementById('y').textContent = new Date().getFullYear();
+    (function() {
+      const bar = document.getElementById('progress');
+      const update = () => { const h = document.documentElement; const p = h.scrollTop / (h.scrollHeight - h.clientHeight); bar.style.width = (p * 100) + '%'; };
+      update(); addEventListener('scroll', update, { passive: true }); addEventListener('resize', update, { passive: true });
+    })();
+
+    /* Menu open/close */
+    (function() {
+      const menu = document.getElementById('menu');
+      const openBtn = document.getElementById('openMenu');
+      const closeBtn = document.getElementById('closeMenu');
+      function open() { document.body.style.overflow = 'hidden'; menu.classList.add('active'); }
+      function close() { menu.classList.remove('active'); document.body.style.overflow = ''; }
+      openBtn.addEventListener('click', open); closeBtn.addEventListener('click', close);
+      menu.addEventListener('click', e => { if (e.target === menu) close(); });
+    })();
+
+    /* Video fallback + pause offscreen */
+    (function() {
+      const v = document.getElementById('heroVideo'); if (!v) return;
+      function fallback() { const ph = document.createElement('div'); ph.style.aspectRatio = '16/9'; ph.style.background = 'center / cover no-repeat url("demo-poster.JPG"), #0b0b0d'; v.replaceWith(ph); }
+      v.addEventListener('error', fallback); setTimeout(() => { if (v.readyState < 2) fallback(); }, 1400);
+      const io = new IntersectionObserver(([e]) => { if (!e) return; if (e.isIntersecting) { try { v.play(); } catch (_) {} } else { try { v.pause(); } catch (_) {} } }, { threshold: .25 }); io.observe(v);
+    })();
+
+    /* Plan passthrough */
+    (function() {
+      const pillWrap = document.getElementById('planPill');
+      const pillSpan = pillWrap?.querySelector('span');
+      const sel = document.getElementById('selPlan');
+      function parseParams() {
+        const href = location.href;
+        const hash = href.split('#')[1] || '';
+        const afterHash = hash.includes('?') ? hash.split('?')[1] : '';
+        const qs = new URLSearchParams(afterHash);
+        return { plan: qs.get('plan'), setup: qs.get('setup'), monthly: qs.get('monthly') };
+      }
+      const { plan, setup, monthly } = parseParams();
+      if (plan) {
+        sel.value = plan + (setup || monthly ? ` | Setup $${setup || '—'} • $${monthly || '—'}/mo` : '');
+        if (pillSpan) {
+          pillSpan.textContent = `Selected: ${plan}` + (setup || monthly ? ` — Setup $${setup || '—'} • $${monthly || '—'}/mo` : '');
+          pillWrap.style.display = 'block';
+        }
+        const form = document.querySelector('#book form');
+        if (form) setTimeout(() => form.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+      }
+      document.getElementById('clearPlan')?.addEventListener('click', e => {
+        e.preventDefault(); sel.value = ''; pillWrap.style.display = 'none';
+      });
+    })();
+
+    /* Testimonials carousel */
+    (function() {
+      const track = document.getElementById('track'), prev = document.querySelector('.nav-btn.prev'), next = document.querySelector('.nav-btn.next');
+      if (!track || !prev || !next) return; let step = 0, idx = 0, max = 0;
+      function measure() {
+        const card = track.querySelector('.tcard'); if (!card) return;
+        const gap = parseInt(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 16;
+        step = card.offsetWidth + gap; const count = track.querySelectorAll('.tcard').length;
+        const visible = Math.max(1, Math.round(track.clientWidth / step)); max = Math.max(0, count - visible); idx = Math.min(idx, max);
+        go(idx, false); update();
+      }
+      function update() { prev.disabled = idx <= 0; next.disabled = idx >= max; }
+      function go(i, smooth = true) { idx = Math.max(0, Math.min(i, max)); track.scrollTo({ left: idx * step, behavior: smooth ? 'smooth' : 'auto' }); update(); }
+      prev.addEventListener('click', () => go(idx - 1)); next.addEventListener('click', () => go(idx + 1));
+      let to; track.addEventListener('scroll', () => { clearTimeout(to); to = setTimeout(() => { const i = Math.round(track.scrollLeft / step); if (i !== idx) go(i); else update(); }, 80); });
+      addEventListener('resize', measure, { passive: true }); measure();
+    })();
+
+    /* Start at top for clean first impression */
+    window.scrollTo(0, 0);
+  </script>
+
+  <noscript><style>.btn:hover { transform: none; box-shadow: none; }</style></noscript>
 </body>
 </html>
