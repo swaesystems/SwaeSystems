@@ -1,434 +1,1223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Swae Systems — Futuristic Luxury AI for Med Spas</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swae Systems — 24/7 AI Concierge for Clinics</title>
+    <meta name="description" content="Your front desk sleeps. Ours doesn't. Swae Systems books patients 24/7, answers pricing questions, and follows up every missed lead — in your clinic’s exact voice." />
 
-<!-- Luxury fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 
-<style>
-/* ===== Palette (true luxury) ===== */
-:root{
-  --black:#050505;              /* obsidian */
-  --black-2:#0B0B0B;            /* depth */
-  --white:#FFFFFF;
-  --muted:#D9D9D9;
-  --gold:#C9A33A;               /* matte gold */
-  --gold-hi:#F0D98C;            /* highlight gold */
-  --stroke:rgba(201,163,58,.28);
-  --glass:rgba(8,8,8,.55);
-  --shadow:0 20px 60px rgba(0,0,0,.55);
-}
+    <style>
+        :root {
+            --bg-deep:#000000;
+            --bg-soft:#0a0a0a;
+            --text-main:#ffffff;
+            --text-dim:#9b9b9b;
+            --gold:#d6b26a; /* champagne, not yellow */
+            --glass-bg:rgba(15,15,15,0.6);
+            --glass-border:rgba(255,255,255,0.08);
+            --radius-xl:20px;
+            --radius-lg:14px;
+            --radius-md:10px;
+            --border-card:rgba(214,178,106,0.22);
+        }
 
-/* ===== Reset / Base ===== */
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--black);color:var(--white);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;scroll-behavior:smooth}
-img{display:block;max-width:100%}
-a{text-decoration:none;color:inherit}
-.container{width:min(1200px,92%);margin:auto}
+        * {
+            box-sizing:border-box;
+            -webkit-font-smoothing:antialiased;
+        }
 
-/* ===== Futuristic background grid lines (subtle) ===== */
-body::before{
-  content:"";position:fixed;inset:0;z-index:-2;
-  background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(240,217,140,.08), transparent 60%),
-    linear-gradient(180deg, rgba(201,163,58,.10), transparent 35%),
-    var(--black);
-}
-body::after{
-  content:"";position:fixed;inset:0;z-index:-3;opacity:.25;
-  background-image:
-    linear-gradient(transparent 97%, rgba(201,163,58,.18) 98%),
-    linear-gradient(90deg, transparent 97%, rgba(201,163,58,.18) 98%);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(60% 60% at 50% 40%, black 40%, transparent 100%);
-  animation: gridshift 18s linear infinite;
-}
-@keyframes gridshift{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
+        body {
+            margin:0;
+            background-color:var(--bg-deep);
+            color:var(--text-main);
+            font-family:"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            line-height:1.4;
+        }
 
-/* ===== NAV (no hamburger; stays minimal & responsive) ===== */
-.nav{
-  position:sticky;top:0;z-index:1000;background:var(--glass);
-  backdrop-filter: blur(14px) saturate(1.4);
-  border-bottom:1px solid var(--stroke);
-}
-.nav .bar{height:78px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{display:flex;align-items:center;gap:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
-.brand img{width:40px;height:40px;border-radius:50%;border:1px solid var(--gold)}
-.brand span{color:var(--gold)}
-.links{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
-.links a{opacity:.95}
-.links a:hover{color:var(--gold)}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
-  padding:12px 22px;border-radius:999px;font-weight:600;
-  border:1px solid var(--gold);color:var(--black);
-  background:linear-gradient(180deg,var(--gold),var(--gold-hi));
-  box-shadow:var(--shadow);transition:transform .2s ease, filter .2s ease;
-}
-.btn:hover{transform:translateY(-1px);filter:saturate(1.02)}
-.btn.ghost{background:transparent;color:var(--gold)}
+        h1,h2,h3,h4,.brand-font{
+            font-family:"Playfair Display", Georgia, "Times New Roman", serif;
+            font-weight:600;
+            letter-spacing:-0.02em;
+            color:var(--text-main);
+        }
 
-/* ===== HERO ===== */
-.hero{position:relative;min-height:94vh;display:grid;align-items:center}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-@media (max-width:980px){.hero .wrap{grid-template-columns:1fr}}
-.kicker{font-family:"Playfair Display",serif;color:var(--gold);letter-spacing:.26em;text-transform:uppercase;font-size:.9rem;margin-bottom:12px}
-.display{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(2.6rem,5vw,4.2rem);line-height:1.04;margin:0 0 8px;
-  background:linear-gradient(180deg,var(--gold-hi),var(--gold));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.subtitle{color:var(--muted);font-size:1.14rem;margin:0 0 22px}
-.panel{border:1px solid var(--stroke);border-radius:18px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(201,163,58,.05))}
-.badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.badge{padding:8px 12px;border:1px solid rgba(201,163,58,.32);border-radius:999px;color:var(--gold);font-size:.92rem}
-.preview{border:1px solid var(--stroke);border-radius:18px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(201,163,58,.05))}
-.preview .bar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--stroke)}
-iframe.demo{width:100%;height:500px;border:0;background:#000}
-@media (max-width:980px){iframe.demo{height:380px}}
+        .page-width{
+            width:100%;
+            max-width:1300px;
+            margin-left:auto;
+            margin-right:auto;
+            padding-left:1.25rem;
+            padding-right:1.25rem;
+        }
 
-/* ===== Section base ===== */
-section{padding:100px 0;border-top:1px solid rgba(201,163,58,.18)}
-.head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:28px}
-.head h2{font-family:"Playfair Display",serif;font-size:clamp(1.8rem,3vw,2.4rem);margin:0}
-.lead{color:var(--muted)}
+        /* fade-up scroll anim */
+        .fade-up{
+            opacity:0;
+            transform:translateY(20px);
+            transition:all .6s ease;
+        }
+        .fade-up.show{
+            opacity:1;
+            transform:translateY(0px);
+        }
 
-/* ===== FEATURES ===== */
-.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
-@media (max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:720px){.cards{grid-template-columns:1fr}}
-.card{padding:22px;border:1px solid var(--stroke);border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(201,163,58,.05));transition:transform .25s ease}
-.card:hover{transform:translateY(-3px)}
-.ic{font-size:26px;color:var(--gold)}
-.card h3{margin:10px 0 6px;font-weight:600}
-.card p{color:var(--muted)}
+        /* ===== NAVBAR ===== */
+        header.nav-wrapper{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            z-index:999;
+            padding-top:1rem;
+            padding-bottom:1rem;
+            display:flex;
+            justify-content:center;
+            pointer-events:none;
+        }
+        .nav-inner{
+            width:100%;
+            max-width:1300px;
+            margin-left:auto;
+            margin-right:auto;
 
-/* ===== TESTIMONIALS (user-controlled) ===== */
-.twrap{position:relative;border:1px solid var(--stroke);border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(201,163,58,.04));padding:14px;overflow:hidden}
-.slider{display:flex;gap:16px;transition:transform .45s ease}
-.tcard{min-width:360px;max-width:420px;border:1px solid var(--stroke);border-radius:14px;padding:18px;background:rgba(6,6,6,.66)}
-.stars{color:var(--gold);letter-spacing:.14em;margin-bottom:6px}
-.quote{font-family:"Playfair Display",serif;font-style:italic;font-size:1.04rem}
-.who{color:var(--muted);margin-top:8px;font-size:.95rem}
-.navbtn{
-  position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;
-  border:1px solid var(--gold);background:rgba(5,5,5,.7);color:var(--gold);display:grid;place-items:center;cursor:pointer;
-}
-.navbtn:hover{background:rgba(5,5,5,.9)}
-.prev{left:8px} .next{right:8px}
-.dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
-.dot{width:8px;height:8px;border-radius:50%;background:rgba(201,163,58,.35);cursor:pointer}
-.dot.active{background:var(--gold)}
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
 
-/* ===== PRICING ===== */
-.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media (max-width:900px){.pricing{grid-template-columns:1fr}}
-.tier{border:1px solid var(--stroke);border-radius:18px;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(201,163,58,.06));box-shadow:var(--shadow);display:flex;flex-direction:column}
-.tier h3{color:var(--gold);margin:0 0 8px;font-family:"Playfair Display",serif}
-.price{font-size:2.1rem;background:linear-gradient(180deg,var(--gold-hi),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px}
-.tier ul{margin:8px 0 16px 18px;color:var(--muted)}
-.ribbon{
-  align-self:flex-start;margin:-8px 0 8px -8px;padding:6px 10px;border:1px solid var(--gold);
-  border-radius:999px;color:var(--gold);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase
-}
+            background:var(--glass-bg);
+            backdrop-filter:blur(16px) saturate(140%);
+            -webkit-backdrop-filter:blur(16px) saturate(140%);
+            border:1px solid var(--glass-border);
+            border-radius:var(--radius-xl);
 
-/* ===== LUX FAQ (concierge tone) ===== */
-.faq{max-width:920px;margin:auto;text-align:left}
-.qa{border-bottom:1px solid rgba(201,163,58,.26);padding:14px 0}
-.qa summary{
-  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;
-  font-weight:600
-}
-.qa summary::-webkit-details-marker{display:none}
-.chev{transition:transform .25s ease;color:var(--gold)}
-details[open] .chev{transform:rotate(180deg)}
-.qa p{color:var(--muted);margin:10px 0 0;line-height:1.6}
+            padding:.75rem 1rem;
+            pointer-events:auto;
+        }
 
-/* ===== CONTACT ===== */
-form{display:grid;gap:12px;max-width:760px;margin:auto}
-input,textarea{padding:12px;border-radius:10px;border:1px solid rgba(201,163,58,.32);background:transparent;color:var(--white)}
-textarea{resize:none}
+        .brand-area{
+            display:flex;
+            align-items:center;
+            gap:.5rem;
+            font-family:"Playfair Display", Georgia, serif;
+            font-size:.95rem;
+            font-weight:600;
+            letter-spacing:-0.03em;
+            color:var(--text-main);
+        }
+        .brand-mark{
+            width:32px;
+            height:32px;
+            border-radius:8px;
+            background:radial-gradient(circle at 20% 20%, rgba(214,178,106,0.6) 0%, rgba(0,0,0,0) 70%);
+            border:1px solid var(--gold);
+            box-shadow:0 10px 40px rgba(214,178,106,0.4);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:.6rem;
+            font-weight:600;
+            color:var(--gold);
+            line-height:1;
+        }
 
-/* ===== FOOTER ===== */
-.footer{padding:56px 0;border-top:1px solid var(--stroke);text-align:center;color:var(--muted)}
-.footer img{width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);margin:auto}
-.line{width:140px;height:2px;margin:14px auto;background:linear-gradient(90deg,transparent,var(--gold-hi),var(--gold),transparent);opacity:.9}
+        nav.nav-links{
+            display:flex;
+            align-items:center;
+            gap:1.5rem;
+        }
+        nav.nav-links a{
+            color:var(--text-main);
+            text-decoration:none;
+            font-size:.8rem;
+            font-weight:500;
+            line-height:1;
+            position:relative;
+            transition:color .25s ease;
+        }
+        nav.nav-links a:hover{
+            color:var(--gold);
+        }
+        nav.nav-links a:after{
+            content:"";
+            position:absolute;
+            left:0;
+            right:0;
+            bottom:-4px;
+            height:1px;
+            background:var(--gold);
+            opacity:0;
+            transform:scaleX(0.4);
+            transition:all .25s ease;
+        }
+        nav.nav-links a:hover:after{
+            opacity:1;
+            transform:scaleX(1);
+        }
 
-/* ===== Reveal animation ===== */
-.reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}
-.reveal.show{opacity:1;transform:none}
-</style>
+        .burger-btn{
+            background:none;
+            border:0;
+            color:var(--text-main);
+            cursor:pointer;
+            display:none;
+            padding:.5rem .75rem;
+            border-radius:var(--radius-md);
+            line-height:0;
+        }
+        .burger-line{
+            width:22px;
+            height:2px;
+            background-color:var(--text-main);
+            border-radius:1px;
+            margin:4px 0;
+            transition:background .25s ease;
+        }
+        .burger-btn:active .burger-line,
+        .burger-btn:focus .burger-line{
+            background-color:var(--gold);
+        }
+
+        /* ===== HERO ===== */
+        .hero-section{
+            position:relative;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(214,178,106,0.09) 0%, rgba(0,0,0,0) 70%),
+                radial-gradient(circle at 80% 40%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 60%),
+                var(--bg-deep);
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            padding-top:8rem; /* room for fixed nav */
+            padding-bottom:4rem;
+            overflow:hidden;
+        }
+
+        /* very soft animated glow layer */
+        .hero-glow{
+            position:absolute;
+            inset:0;
+            background:radial-gradient(circle at 50% 20%, rgba(214,178,106,0.18) 0%, rgba(0,0,0,0) 70%);
+            filter:blur(80px);
+            opacity:.2;
+            animation:floatGlow 6s ease-in-out infinite alternate;
+            pointer-events:none;
+        }
+        @keyframes floatGlow{
+            0%{transform:translateY(0px) scale(1);}
+            100%{transform:translateY(20px) scale(1.05);}
+        }
+
+        .hero-inner{
+            position:relative;
+            z-index:2;
+            display:grid;
+            grid-template-columns:1fr;
+            max-width:800px;
+            margin:0 auto;
+            text-align:center;
+        }
+
+        .hero-headline{
+            font-size:clamp(2rem,1.2rem + 2vw,3rem);
+            line-height:1.1;
+            color:var(--text-main);
+            margin:0 0 1rem 0;
+        }
+        .hero-headline span{
+            color:var(--gold);
+        }
+
+        .hero-sub{
+            font-size:1rem;
+            line-height:1.5;
+            color:var(--text-dim);
+            max-width:520px;
+            margin:0 auto 2rem;
+            font-weight:400;
+        }
+
+        .cta-row{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:1rem;
+        }
+
+        .btn-primary{
+            background:radial-gradient(circle at 20% 20%, rgba(214,178,106,0.4) 0%, rgba(0,0,0,0) 70%), rgba(20,20,20,0.6);
+            color:var(--text-main);
+            border:1px solid var(--gold);
+            border-radius:var(--radius-lg);
+            padding:.9rem 1.1rem;
+            font-size:.9rem;
+            font-weight:600;
+            line-height:1.2;
+            text-decoration:none;
+            box-shadow:0 20px 60px rgba(214,178,106,0.25);
+            min-width:150px;
+            text-align:center;
+            backdrop-filter:blur(8px) saturate(140%);
+            -webkit-backdrop-filter:blur(8px) saturate(140%);
+            transition:all .25s ease;
+        }
+        .btn-primary:hover{
+            box-shadow:0 30px 80px rgba(214,178,106,0.4);
+        }
+
+        .btn-secondary{
+            background:rgba(255,255,255,0.03);
+            color:var(--text-main);
+            border:1px solid rgba(255,255,255,0.12);
+            border-radius:var(--radius-lg);
+            padding:.9rem 1.1rem;
+            font-size:.9rem;
+            font-weight:500;
+            line-height:1.2;
+            text-decoration:none;
+            min-width:150px;
+            text-align:center;
+            transition:all .25s ease;
+        }
+        .btn-secondary:hover{
+            border-color:var(--gold);
+            color:var(--gold);
+        }
+
+        .hero-note{
+            margin-top:1.5rem;
+            font-size:.7rem;
+            color:var(--text-dim);
+            line-height:1.4;
+            max-width:360px;
+            text-align:center;
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        /* ===== INFO CARDS (PAIN/PROOF/FIX), DEMO, COMPARISON, TESTIMONIALS, FORM, FOOTER ===== */
+        .section-dark{
+            background:linear-gradient(180deg,rgba(10,10,10,1)0%,rgba(5,5,5,1)100%);
+            padding:4rem 0;
+        }
+
+        .section-soft{
+            background:
+                radial-gradient(circle at 20% 20%, rgba(214,178,106,0.08) 0%, rgba(0,0,0,0) 70%),
+                #000;
+            padding:4rem 0;
+        }
+
+        .section-header{
+            max-width:700px;
+            margin:0 auto 3rem;
+            text-align:center;
+        }
+        .eyebrow{
+            color:var(--gold);
+            font-size:.7rem;
+            font-weight:600;
+            letter-spacing:-0.03em;
+            margin-bottom:.75rem;
+        }
+        .section-title{
+            font-size:1.6rem;
+            line-height:1.2;
+            color:var(--text-main);
+            margin:0 0 1rem;
+        }
+        .section-title span{
+            color:var(--gold);
+            display:block;
+        }
+        .section-desc{
+            color:var(--text-dim);
+            font-size:.9rem;
+            line-height:1.5;
+            margin:0 auto;
+            max-width:480px;
+        }
+
+        /* cards */
+        .value-cards{
+            display:grid;
+            gap:1.5rem;
+            grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
+        }
+        .value-card{
+            background:rgba(15,15,15,0.6);
+            backdrop-filter:blur(16px) saturate(140%);
+            -webkit-backdrop-filter:blur(16px) saturate(140%);
+            border:1px solid var(--border-card);
+            border-radius:var(--radius-lg);
+            padding:1.25rem;
+            box-shadow:0 30px 80px rgba(214,178,106,0.08);
+        }
+        .value-label{
+            color:var(--gold);
+            font-size:.7rem;
+            font-weight:600;
+            letter-spacing:-0.03em;
+            margin-bottom:.5rem;
+        }
+        .value-headline{
+            color:var(--text-main);
+            font-size:.95rem;
+            line-height:1.4;
+            font-weight:500;
+        }
+        .value-text{
+            color:var(--text-dim);
+            font-size:.8rem;
+            line-height:1.5;
+            margin-top:.5rem;
+        }
+
+        /* demo frame */
+        .demo-wrap{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:2rem;
+            align-items:center;
+        }
+        .demo-frame{
+            width:100%;
+            max-width:480px;
+            background:rgba(15,15,15,0.6);
+            border:1px solid var(--border-card);
+            border-radius:var(--radius-xl);
+            box-shadow:
+                0 30px 120px rgba(214,178,106,0.2),
+                0 4px 20px rgba(0,0,0,0.9),
+                0 0 100px rgba(214,178,106,0.08) inset;
+            padding:1rem 1rem 1.5rem;
+            backdrop-filter:blur(20px) saturate(160%);
+            -webkit-backdrop-filter:blur(20px) saturate(160%);
+            font-size:.8rem;
+            line-height:1.4;
+            color:var(--text-main);
+        }
+        .demo-chip{
+            color:var(--gold);
+            font-weight:600;
+        }
+        .demo-note{
+            color:var(--text-dim);
+            font-size:.7rem;
+            line-height:1.4;
+            margin-top:1rem;
+        }
+        .demo-btn{
+            display:inline-block;
+            margin-top:1.5rem;
+            text-decoration:none;
+        }
+
+        /* comparison */
+        .compare-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));
+            gap:1rem;
+        }
+        .compare-col{
+            background:#0a0a0a;
+            border:1px solid rgba(255,255,255,0.07);
+            border-radius:var(--radius-lg);
+            padding:1rem 1rem 1.25rem;
+            box-shadow:0 20px 60px rgba(0,0,0,0.8);
+            position:relative;
+        }
+        .compare-col.highlight{
+            border-color:var(--gold);
+            box-shadow:
+                0 30px 120px rgba(214,178,106,0.25),
+                0 4px 20px rgba(0,0,0,0.9),
+                0 0 100px rgba(214,178,106,0.08) inset;
+        }
+        .compare-head{
+            font-size:.8rem;
+            font-weight:600;
+            line-height:1.4;
+            color:var(--text-main);
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+            margin-bottom:.75rem;
+        }
+        .compare-tag{
+            font-size:.6rem;
+            line-height:1;
+            font-weight:600;
+            color:var(--gold);
+            border:1px solid var(--gold);
+            border-radius:999px;
+            padding:.3rem .5rem;
+        }
+        .compare-points{
+            color:var(--text-dim);
+            font-size:.75rem;
+            line-height:1.5;
+            display:grid;
+            gap:.5rem;
+        }
+        .compare-points b{
+            color:var(--text-main);
+            font-weight:500;
+        }
+
+        /* testimonials */
+        .testi-shell{
+            position:relative;
+        }
+        .testi-track{
+            display:flex;
+            gap:1rem;
+            overflow:hidden;
+            scroll-behavior:smooth;
+            -webkit-overflow-scrolling:touch;
+        }
+        .testi-card{
+            min-width:280px;
+            max-width:320px;
+            flex:0 0 auto;
+
+            background:rgba(15,15,15,0.6);
+            border:1px solid var(--border-card);
+            border-radius:var(--radius-lg);
+            box-shadow:0 30px 80px rgba(214,178,106,0.08);
+
+            padding:1rem 1rem 1.25rem;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+        }
+        .stars{
+            color:var(--gold);
+            font-size:.7rem;
+            letter-spacing:.15rem;
+            margin-bottom:.75rem;
+        }
+        .quote{
+            color:var(--text-main);
+            font-size:.9rem;
+            line-height:1.4;
+            font-weight:500;
+            margin-bottom:1rem;
+        }
+        .byline{
+            color:var(--text-dim);
+            font-size:.7rem;
+            line-height:1.4;
+        }
+
+        .testi-nav{
+            position:absolute;
+            top:50%;
+            left:0;
+            right:0;
+            display:flex;
+            justify-content:space-between;
+            pointer-events:none;
+        }
+        .testi-arrow{
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            background:rgba(0,0,0,0.6);
+            border:1px solid var(--gold);
+            color:var(--gold);
+            font-size:.7rem;
+            font-weight:600;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            box-shadow:0 20px 60px rgba(214,178,106,0.2);
+            pointer-events:auto;
+            cursor:pointer;
+            user-select:none;
+        }
+
+        /* form / CTA */
+        .cta-grid{
+            max-width:900px;
+            margin:0 auto;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:2rem;
+            align-items:start;
+        }
+        .cta-card{
+            background:rgba(15,15,15,0.6);
+            border:1px solid var(--border-card);
+            border-radius:var(--radius-xl);
+            box-shadow:
+                0 30px 120px rgba(214,178,106,0.2),
+                0 4px 20px rgba(0,0,0,0.9),
+                0 0 100px rgba(214,178,106,0.08) inset;
+            padding:1.5rem;
+            backdrop-filter:blur(20px) saturate(160%);
+            -webkit-backdrop-filter:blur(20px) saturate(160%);
+        }
+        .form-field{
+            display:flex;
+            flex-direction:column;
+            margin-bottom:1rem;
+        }
+        .form-label{
+            font-size:.7rem;
+            font-weight:500;
+            color:var(--text-main);
+            margin-bottom:.4rem;
+        }
+        .form-input,
+        .form-select{
+            width:100%;
+            background:rgba(0,0,0,0.4);
+            border:1px solid rgba(255,255,255,0.12);
+            border-radius:var(--radius-md);
+            color:var(--text-main);
+            font-size:.8rem;
+            line-height:1.4;
+            padding:.8rem .8rem;
+            outline:none;
+        }
+        .form-input:focus,
+        .form-select:focus{
+            border-color:var(--gold);
+        }
+        .cta-footer-note{
+            font-size:.7rem;
+            color:var(--text-dim);
+            line-height:1.4;
+            margin-top:1rem;
+        }
+
+        /* footer */
+        footer.site-footer{
+            background:#000;
+            padding:3rem 0 4rem;
+            border-top:1px solid rgba(255,255,255,0.05);
+        }
+        .footer-grid{
+            display:grid;
+            gap:2rem;
+            grid-template-columns:1fr auto;
+            align-items:start;
+        }
+        .footer-brand{
+            display:flex;
+            align-items:flex-start;
+            gap:.75rem;
+        }
+        .footer-brand .brand-mark{
+            flex-shrink:0;
+        }
+        .footer-copy-head{
+            color:var(--text-main);
+            font-size:.8rem;
+            font-weight:600;
+            line-height:1.4;
+        }
+        .footer-copy-sub{
+            color:var(--text-dim);
+            font-size:.7rem;
+            line-height:1.4;
+            margin-top:.4rem;
+        }
+        .footer-links{
+            display:grid;
+            gap:.5rem;
+            font-size:.7rem;
+            text-align:right;
+        }
+        .footer-links a{
+            color:var(--text-main);
+            text-decoration:none;
+            font-weight:500;
+        }
+        .footer-links a:hover{
+            color:var(--gold);
+        }
+        .footer-legal{
+            color:var(--text-dim);
+            font-size:.6rem;
+            line-height:1.4;
+            margin-top:2rem;
+            max-width:480px;
+        }
+
+        /* mobile responsive tweaks */
+        @media(max-width:900px){
+            nav.nav-links{display:none;}
+            .burger-btn{display:block;}
+
+            .demo-wrap{
+                grid-template-columns:1fr;
+            }
+
+            .cta-grid{
+                grid-template-columns:1fr;
+            }
+
+            .footer-grid{
+                grid-template-columns:1fr;
+                text-align:left;
+            }
+            .footer-links{
+                text-align:left;
+                grid-template-columns:auto auto auto;
+                column-gap:1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- ===== NAV (no hamburger) ===== -->
-<div class="nav">
-  <div class="container bar">
-    <a class="brand" href="#top">
-      <img src="logo.PNG" alt="Swae Systems logo"/><span>Swae&nbsp;Systems</span>
-    </a>
-    <div class="links">
-      <a href="#demo">Demo</a>
-      <a href="#features">Features</a>
-      <a href="#testimonials">Reviews</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">Q&A</a>
-      <a href="#contact">Contact</a>
-      <a class="btn" href="#book">Book Demo ✨</a>
-    </div>
-  </div>
-</div>
+    <!-- NAV -->
+    <header class="nav-wrapper">
+        <div class="nav-inner page-width">
+            <div class="brand-area">
+                <div class="brand-mark">SS</div>
+                <div class="brand-text">
+                    <div style="color:var(--text-main); font-size:.8rem; line-height:1;">
+                        SWAE SYSTEMS
+                    </div>
+                    <div style="color:var(--gold); font-size:.6rem; font-weight:500; line-height:1.2;">
+                        24/7 AI Concierge
+                    </div>
+                </div>
+            </div>
 
-<!-- ===== HERO ===== -->
-<header id="top" class="hero">
-  <div class="container wrap">
-    <div class="reveal">
-      <div class="kicker">Med Spa · AI Concierge</div>
-      <h1 class="display">Your Front Desk Sleeps.<br>Our AI Concierge Doesn’t.</h1>
-      <p class="subtitle">
-        A futuristic concierge for luxury med spas — answering instantly, qualifying elegantly, and
-        <strong>booking 24/7</strong> in English, Spanish, or any language your clients prefer.
-      </p>
+            <nav class="nav-links">
+                <a href="#demo">See It Work</a>
+                <a href="#compare">Swae vs Competitors</a>
+                <a href="#contact">Contact Team</a>
+            </nav>
 
-      <div class="panel">
-        <div class="badges">
-          <span class="badge">💬 Web · SMS · IG DMs</span>
-          <span class="badge">🗓️ Real confirmed bookings</span>
-          <span class="badge">🔒 HIPAA-aware intake</span>
+            <button class="burger-btn" aria-label="Open menu" id="openMenu">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </button>
         </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn" href="#demo">Try Live Demo</a>
-          <a class="btn ghost" href="#book">Book Demo ✨</a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-section">
+        <div class="hero-glow"></div>
+        <div class="hero-inner page-width fade-up">
+            <h1 class="hero-headline brand-font">
+                Your front desk sleeps.<br/>
+                <span>Ours doesn’t.</span>
+            </h1>
+
+            <div class="hero-sub">
+                24/7 AI that books appointments, answers pricing questions, and follows up every missed lead — in your clinic’s exact voice.
+                English + Spanish. HIPAA-aware intake. Zero attitude.
+            </div>
+
+            <div class="cta-row">
+                <a class="btn-primary" href="#demo">See It Work</a>
+                <a class="btn-secondary" href="#contact">Get Early Access</a>
+            </div>
+
+            <div class="hero-note">
+                We’re quietly onboarding 3 new clinics this month.
+                After that, new clinics go to waitlist.
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
+        <!-- PAIN / PROOF / FIX -->
+    <section class="section-dark">
+        <div class="page-width fade-up">
+            <div class="section-header">
+                <div class="eyebrow">WHY OWNERS CALL US</div>
+                <h2 class="section-title brand-font">
+                    You’re losing money when nobody answers
+                    <span>and you don’t even see it.</span>
+                </h2>
+                <p class="section-desc">
+                    Most med spa inquiries come in after hours or while staff is juggling in-person clients.
+                    If nobody replies in 5 minutes, they price shop somewhere else.
+                    We stop that leak for you.
+                </p>
+            </div>
 
-    <div class="reveal">
-      <div class="preview">
-        <div class="bar">
-          <strong style="color:var(--gold)">You can test out our demo right here</strong>
-          <a class="btn ghost" href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener">Open Full Demo ↗</a>
+            <div class="value-cards">
+                <!-- Card 1 -->
+                <div class="value-card">
+                    <div class="value-label">AFTER-HOURS LEADS</div>
+                    <div class="value-headline">
+                        Clients DM you at 11PM asking “how much is lip filler?”
+                    </div>
+                    <div class="value-text">
+                        If they wait overnight, they’re already talking to someone else in the morning.
+                        We answer instantly, in your voice, and aim them at a real opening tomorrow.
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="value-card">
+                    <div class="value-label">STAFF OVERLOAD</div>
+                    <div class="value-headline">
+                        Your team is busy flipping rooms and upselling in person.
+                    </div>
+                    <div class="value-text">
+                        They can’t chase every “how much is Botox?” text in under 30 seconds.
+                        We can. No attitude. No missed conversions.
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="value-card">
+                    <div class="value-label">THE FIX</div>
+                    <div class="value-headline">
+                        We qualify, schedule, and hand you booked consults.
+                    </div>
+                    <div class="value-text">
+                        Name, number, desired service, preferred time — captured, organized, sent to you.
+                        You walk in and your calendar is already fuller.
+                    </div>
+                </div>
+            </div>
         </div>
-        <iframe class="demo" title="Swae Systems Demo" src="https://swaesystems.github.io/system-By-Swae/"></iframe>
-      </div>
-    </div>
-  </div>
-</header>
+    </section>
 
-<!-- ===== FEATURES ===== -->
-<section id="features">
-  <div class="container">
-    <div class="head">
-      <h2>Engineered for Luxury Clinics</h2>
-      <p class="lead">High-touch experiences that turn late-night interest into confirmed appointments.</p>
-    </div>
-    <div class="cards">
-      <div class="card reveal"><div class="ic">⚡</div><h3>Instant Response</h3><p>Every inquiry answered in seconds across web chat, SMS, and Instagram DMs.</p></div>
-      <div class="card reveal"><div class="ic">💎</div><h3>On-Brand Elegance</h3><p>A voice that reads like your best front-desk associate — calm, precise, cinematic.</p></div>
-      <div class="card reveal"><div class="ic">🌍</div><h3>Bilingual & Beyond</h3><p>English and Spanish by default. Add any language your market needs.</p></div>
-      <div class="card reveal"><div class="ic">🗓️</div><h3>Real Booking</h3><p>Secures appointment times on your calendar. Reminds. Confirms. Reduces no-shows.</p></div>
-      <div class="card reveal"><div class="ic">🔒</div><h3>HIPAA-Aware</h3><p>Sensitive intake handled with best-practice flows and secure hand-offs.</p></div>
-    </div>
-  </div>
-</section>
+    <!-- LIVE DEMO -->
+    <section id="demo" class="section-soft">
+        <div class="page-width fade-up">
+            <div class="section-header" style="margin-bottom:2rem;">
+                <div class="eyebrow">SEE IT LIVE</div>
+                <h2 class="section-title brand-font">
+                    Watch our concierge work in real time.
+                    <span>This isn’t a mockup.</span>
+                </h2>
+                <p class="section-desc">
+                    This is the actual intake + booking system we deploy.
+                    It answers pricing questions at 2:15 AM, locks in a preferred time,
+                    and hands you a clean lead with everything you need.
+                </p>
+            </div>
 
-<!-- ===== TESTIMONIALS (USER-CONTROLLED) ===== -->
-<section id="testimonials">
-  <div class="container">
-    <div class="head">
-      <h2>What Owners Say</h2>
-      <p class="lead">Measured results. Concierge-level care.</p>
-    </div>
+            <div class="demo-wrap">
+                <!-- LEFT TEXT -->
+                <div class="fade-up">
+                    <div style="color:var(--text-main); font-size:.9rem; line-height:1.5; font-weight:500; margin-bottom:1rem;">
+                        Your new 24/7 front desk:
+                        <span class="demo-chip">bilingual</span>,
+                        <span class="demo-chip">instant</span>,
+                        <span class="demo-chip">on-brand</span>.
+                    </div>
 
-    <div class="twrap">
-      <button class="navbtn prev" aria-label="Previous review">‹</button>
-      <button class="navbtn next" aria-label="Next review">›</button>
+                    <div style="color:var(--text-dim); font-size:.8rem; line-height:1.5; max-width:420px; margin-bottom:1.5rem;">
+                        A new client asks “How much is Botox and can I come tomorrow?”
+                        Our system replies in <span style="color:var(--gold);">your clinic’s tone</span>,
+                        gives realistic pricing ranges, offers open times,
+                        and collects name / number / service preference for you.
+                    </div>
 
-      <div class="slider" id="slider">
-        <div class="tcard reveal">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“Week one: <strong>11 new Botox consults</strong>. Guests thought it was a human assistant.”</div>
-          <div class="who">— Amanda R., Clinic Director · Beverly Hills</div>
+                    <a class="demo-btn btn-primary" href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener noreferrer">
+                        Open the Live Demo →
+                    </a>
+
+                    <div class="demo-note">
+                        Mobile-friendly. Professional tone. Zero “bot energy.”
+                        You’ll see how natural it feels.
+                    </div>
+                </div>
+
+                <!-- RIGHT FRAME / PREVIEW -->
+                <div class="fade-up" style="display:flex; justify-content:center;">
+                    <div class="demo-frame">
+                        <div style="font-size:.8rem; line-height:1.4; color:var(--text-main); font-weight:500;">
+                            “Hi babe 💕 filler usually lands around $480–$650 total, based on your goal.
+                            I can hold a consult for you tomorrow at 2:15 PM or 4:40 PM — what works better?”
+                        </div>
+
+                        <div style="border-top:1px solid rgba(255,255,255,0.07); margin-top:1rem; padding-top:1rem; color:var(--text-dim); font-size:.7rem; line-height:1.4;">
+                            That tone is 100% customizable.  
+                            We match your brand voice, not generic script.  
+                            English + Spanish. HIPAA-aware intake process. Final PHI handling stays on your side.
+                        </div>
+
+                        <div style="margin-top:1.5rem; font-size:.7rem; line-height:1.4; color:var(--text-dim);">
+                            • Captures name, number, service, preferred time  
+                            • Automatically logs lead info for you  
+                            • No payroll, no stress, no missed DMs
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="tcard reveal">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“Night DMs now become <strong>morning appointments</strong>. No-shows fell about 25%.”</div>
-          <div class="who">— Daniel P., Owner · Miami</div>
+    </section>
+
+    <!-- SWAE VS COMPETITORS -->
+    <section id="compare" class="section-dark">
+        <div class="page-width fade-up">
+            <div class="section-header">
+                <div class="eyebrow">WHY US</div>
+                <h2 class="section-title brand-font">
+                    “We’ll call you back tomorrow”
+                    <span>is how you lose clients.</span>
+                </h2>
+                <p class="section-desc">
+                    Here’s how Swae Systems compares to generic chatbots and old-school call centers /
+                    voicemail / “leave us a message”.
+                </p>
+            </div>
+
+            <div class="compare-grid">
+                <!-- SWAE -->
+                <div class="compare-col highlight">
+                    <div class="compare-head">
+                        <span>Swae Systems</span>
+                        <span class="compare-tag">Concierge</span>
+                    </div>
+                    <div class="compare-points">
+                        <div><b>Speed:</b> Replies in &lt;5 seconds, 24/7.</div>
+                        <div><b>Tone:</b> Speaks exactly like your clinic (not robotic).</div>
+                        <div><b>Booking:</b> Offers real times, collects name / number / service.</div>
+                        <div><b>Follow-up:</b> Chases no-shows so you don’t have to.</div>
+                        <div><b>Bilingual:</b> English + Spanish.</div>
+                        <div><b>Cost:</b> Flat monthly. No hourly payroll, no sick days.</div>
+                        <div><b>Compliance:</b> HIPAA-aware intake. Final PHI stays with you.</div>
+                    </div>
+                </div>
+
+                <!-- OTHER AI -->
+                <div class="compare-col">
+                    <div class="compare-head">
+                        <span>“AI Chatbot” Agencies</span>
+                        <span class="compare-tag" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.5);">
+                            Scripted
+                        </span>
+                    </div>
+                    <div class="compare-points">
+                        <div><b>Slow replies:</b> Often forwards to email anyway.</div>
+                        <div><b>Generic voice:</b> Sounds like a robot copy/paste.</div>
+                        <div><b>Doesn’t book:</b> “We’ll have someone call you.”</div>
+                        <div>Doesn’t handle no-shows.</div>
+                        <div>Usually English only.</div>
+                        <div>Feels like a widget, not a concierge.</div>
+                    </div>
+                </div>
+
+                <!-- CALL SERVICE -->
+                <div class="compare-col">
+                    <div class="compare-head">
+                        <span>After-Hours Call Service</span>
+                        <span class="compare-tag" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.5);">
+                            Human
+                        </span>
+                    </div>
+                    <div class="compare-points">
+                        <div><b>Expensive:</b> You’re paying hourly or per-call forever.</div>
+                        <div><b>Inconsistent:</b> They don’t know your menu, your vibe, or
+                        what you actually charge.</div>
+                        <div><b>Slow handoff:</b> “We’ll leave a message.”</div>
+                        <div>Zero instant SMS follow-up to lock in a time.</div>
+                        <div>Missed texts = missed money. Still your problem.</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="tcard reveal">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“Setup took <strong>5 days</strong>. Tone is on-brand and bilingual execution is flawless.”</div>
-          <div class="who">— Sofia M., Operations · Dallas</div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section-soft">
+        <div class="page-width fade-up">
+            <div class="section-header" style="margin-bottom:2rem;">
+                <div class="eyebrow">RESULTS OWNERS FEEL</div>
+                <h2 class="section-title brand-font">
+                    “We thought it was an actual receptionist.”
+                    <span>That’s the point.</span>
+                </h2>
+                <p class="section-desc">
+                    Real reactions from early partners using our concierge.
+                    Text-only. No stock faces. No nonsense.
+                </p>
+            </div>
+
+            <div class="testi-shell" style="position:relative; max-width:900px; margin:0 auto;">
+                <div class="testi-track" id="testiTrack">
+                    <div class="testi-card">
+                        <div class="stars">★★★★★</div>
+                        <div class="quote">
+                            We used to miss DMs every weekend. Now I open Monday and the
+                            consult calendar’s already full. I literally thought: who booked these?
+                        </div>
+                        <div class="byline">
+                            Owner, Beverly MedSpa
+                        </div>
+                    </div>
+
+                    <div class="testi-card">
+                        <div class="stars">★★★★★</div>
+                        <div class="quote">
+                            Clients said, “She was so sweet on text, is she the new girl?”
+                            They didn’t realize it was AI. That’s how natural it sounds.
+                        </div>
+                        <div class="byline">
+                            Clinic Director, Luxe Aesthetics
+                        </div>
+                    </div>
+
+                    <div class="testi-card">
+                        <div class="stars">★★★★★</div>
+                        <div class="quote">
+                            My staff stopped panicking about answering every call.
+                            Stress dropped instantly. They can just focus on people in the building.
+                        </div>
+                        <div class="byline">
+                            Operations Lead, Sculpt Haus
+                        </div>
+                    </div>
+
+                    <div class="testi-card">
+                        <div class="stars">★★★★★</div>
+                        <div class="quote">
+                            We don’t lose “How much is Botox?” leads anymore.
+                            They get answered, priced, and offered a slot in under 60 seconds.
+                        </div>
+                        <div class="byline">
+                            Co-Owner, Coastal Injectables
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testi-nav">
+                    <div class="testi-arrow" id="testiPrev">‹</div>
+                    <div class="testi-arrow" id="testiNext">›</div>
+                </div>
+
+                <div style="text-align:center; color:var(--text-dim); font-size:.7rem; line-height:1.4; margin-top:2rem;">
+                    Swipe on mobile · Click arrows on desktop
+                </div>
+            </div>
         </div>
-        <div class="tcard reveal">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“Our IG inbox is finally sane. Conversion lifted and the team can focus on in-clinic care.”</div>
-          <div class="who">— Priya K., Owner · NYC</div>
+    </section>
+        <!-- CONTACT / EARLY ACCESS -->
+    <section id="contact" class="section-dark">
+        <div class="page-width fade-up">
+            <div class="section-header" style="margin-bottom:2rem;">
+                <div class="eyebrow">LIMITED ONBOARDING</div>
+                <h2 class="section-title brand-font">
+                    We’re onboarding 3 new clinics this month.
+                    <span>After that, waitlist.</span>
+                </h2>
+                <p class="section-desc">
+                    Reserve a spot below. No setup fee for pilot — we just ask to use results
+                    in our marketing.
+                </p>
+            </div>
+
+            <div class="cta-grid">
+                <!-- LEFT PITCH -->
+                <div style="color:var(--text-main); font-size:.9rem; line-height:1.5; font-weight:500;">
+                    <div style="color:var(--gold); font-size:.8rem; font-weight:600; letter-spacing:-0.03em; margin-bottom:.75rem;">
+                        WHAT YOU GET
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        • 24/7 intake + booking coverage<br/>
+                        • Bilingual (English + Spanish)<br/>
+                        • Pricing answers in your voice<br/>
+                        • Lead data sent straight to you<br/>
+                        • Zero attitude, zero “we’ll call you tomorrow”
+                    </div>
+
+                    <div style="color:var(--text-dim); font-size:.8rem; line-height:1.5;">
+                        We act like the most reliable, never-sleeps front desk you’ve ever had.
+                        No hourly payroll. No missed DMs. No overwhelm.
+                    </div>
+                </div>
+
+                <!-- RIGHT FORM -->
+                <div class="cta-card">
+                    <form style="margin:0;">
+                        <div class="form-field">
+                            <label class="form-label">Clinic / Business Name</label>
+                            <input class="form-input" type="text" placeholder="Luxe Aesthetics, Beverly MedSpa, etc." />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">Your Cell (so we can text you booked requests)</label>
+                            <input class="form-input" type="tel" placeholder="(555) 123-4567" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label">Where are you losing the most leads right now?</label>
+                            <select class="form-select">
+                                <option>Botox / Filler Inquiries</option>
+                                <option>Weight Loss / Semaglutide</option>
+                                <option>IV Drip / Wellness</option>
+                                <option>Laser / Hair Removal</option>
+                                <option>After-hours DMs & Missed Calls</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <button class="btn-primary" type="button" style="width:100%; justify-content:center;">
+                            Reserve My Spot
+                        </button>
+
+                        <div class="cta-footer-note">
+                            Zero setup fee for pilot. We just ask to show results (number of booked consults, response time, etc.) in our marketing.
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="dots" id="dots"></div>
-    </div>
-  </div>
-</section>
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="page-width fade-up">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="brand-mark">SS</div>
+                    <div>
+                        <div class="footer-copy-head">
+                            SWAE SYSTEMS
+                        </div>
+                        <div class="footer-copy-sub">
+                            24/7 AI Concierge for Clinics.<br/>
+                            Bilingual intake. Instant reply. Zero attitude.
+                        </div>
+                    </div>
+                </div>
 
-<!-- ===== PRICING ===== -->
-<section id="pricing">
-  <div class="container">
-    <div class="head">
-      <h2>Simple Monthly Plans</h2>
-      <p class="lead">Premium service. Zero contracts. Pause anytime.</p>
-    </div>
+                <div class="footer-links">
+                    <a href="#demo">See It Work</a>
+                    <a href="#compare">Swae vs Competitors</a>
+                    <a href="#contact">Contact Team</a>
+                </div>
+            </div>
 
-    <div class="pricing">
-      <div class="tier reveal">
-        <h3>✨ Starter</h3>
-        <div class="price">$750/mo</div>
-        <ul>
-          <li>Website concierge + basic intake</li>
-          <li>English & Spanish</li>
-          <li>Leads to your email/CRM</li>
-        </ul>
-        <a class="btn" href="#book">Choose Starter</a>
-      </div>
+            <div class="footer-legal">
+                Swae Systems provides AI-assisted intake and scheduling support.
+                Final medical approval, compliance, and PHI handling remain the responsibility of the clinic.
+            </div>
+        </div>
+    </footer>
 
-      <div class="tier reveal">
-        <span class="ribbon">Most Popular</span>
-        <h3>💎 Growth</h3>
-        <div class="price">$1,500/mo</div>
-        <ul>
-          <li>Full booking to your calendar</li>
-          <li>Web + SMS/WhatsApp/IG DM</li>
-          <li>No-show reduction automations</li>
-        </ul>
-        <a class="btn" href="#book">Choose Growth</a>
-      </div>
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobileMenu"
+         style="position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+                display:none; align-items:flex-start; justify-content:flex-end; z-index:9999;">
+        <div style="background:#0a0a0a; border-left:1px solid var(--gold); box-shadow:0 40px 160px rgba(214,178,106,0.3);
+                    width:80%; max-width:260px; border-radius:0 0 0 var(--radius-xl);
+                    padding:1.25rem 1rem 2rem; color:var(--text-main);">
 
-      <div class="tier reveal">
-        <h3>🏆 Elite</h3>
-        <div class="price">$2,500/mo</div>
-        <ul>
-          <li>Everything in Growth</li>
-          <li>Analytics dashboard</li>
-          <li>Multi-location routing</li>
-        </ul>
-        <a class="btn" href="#book">Choose Elite</a>
-      </div>
-    </div>
-  </div>
-</section>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+                <div style="display:flex; align-items:center; gap:.5rem;">
+                    <div class="brand-mark" style="flex-shrink:0;">SS</div>
+                    <div style="line-height:1;">
+                        <div style="font-size:.8rem; font-weight:600; color:var(--text-main);">
+                            SWAE SYSTEMS
+                        </div>
+                        <div style="font-size:.6rem; color:var(--gold); font-weight:500;">
+                            24/7 AI Concierge
+                        </div>
+                    </div>
+                </div>
 
-<!-- ===== LUXURY Q&A ===== -->
-<section id="faq">
-  <div class="container">
-    <div class="head">
-      <h2>Q&A — The Concierge Standard</h2>
-      <p class="lead">Precise answers for owners who value detail and design.</p>
-    </div>
+                <button id="closeMenu"
+                        style="background:none; border:1px solid var(--gold); color:var(--gold);
+                               border-radius:8px; font-size:.7rem; line-height:1;
+                               padding:.4rem .5rem; cursor:pointer;">
+                    ✕
+                </button>
+            </div>
 
-    <div class="faq">
-      <details class="qa reveal">
-        <summary>Is Swae Systems HIPAA-compliant?<span class="chev">⌄</span></summary>
-        <p>We design HIPAA-aware intake with secure hand-offs and can integrate with your compliant systems. We’ll advise on best practices and keep protected health info out of non-compliant channels.</p>
-      </details>
-      <details class="qa reveal">
-        <summary>Does it actually book appointments?<span class="chev">⌄</span></summary>
-        <p>Yes. The concierge confirms real time slots on your calendar, sends reminders, and manages reschedules — so conversations become commitments, not just “leads.”</p>
-      </details>
-      <details class="qa reveal">
-        <summary>How fast is setup?<span class="chev">⌄</span></summary>
-        <p>Typical onboarding takes 3–7 business days. We match your tone, wire channels (web/SMS/IG), and test end-to-end bookings before go-live.</p>
-      </details>
-      <details class="qa reveal">
-        <summary>What makes Swae different?<span class="chev">⌄</span></summary>
-        <p>A luxury brand layer. We obsess over language, spacing, and conversion — delivering a concierge that feels human, on-brand, and instant across every touchpoint.</p>
-      </details>
-    </div>
-  </div>
-</section>
+            <div style="display:grid; gap:1rem; font-size:.8rem; font-weight:500;">
+                <a href="#demo" style="color:var(--text-main); text-decoration:none;">See It Work</a>
+                <a href="#compare" style="color:var(--text-main); text-decoration:none;">Swae vs Competitors</a>
+                <a href="#contact" style="color:var(--text-main); text-decoration:none;">Contact Team</a>
+            </div>
 
-<!-- ===== CONTACT / BOOK ===== -->
-<section id="contact">
-  <div class="container">
-    <div class="head">
-      <h2>Book Your Demo</h2>
-      <p class="lead">Prefer a conversation? Let’s explore why Swae Systems is the perfect fit for your clinic.</p>
+            <div style="border-top:1px solid rgba(255,255,255,0.07); margin-top:1.5rem; padding-top:1.5rem;
+                        font-size:.7rem; line-height:1.4; color:var(--text-dim);">
+                We answer leads in under 5 seconds, 24/7.
+                You wake up to booked consults instead of missed calls.
+            </div>
+
+            <div style="margin-top:1.5rem;">
+                <a class="btn-primary" href="#contact" style="width:100%; display:block; text-align:center; text-decoration:none;">
+                    Get Early Access
+                </a>
+            </div>
+        </div>
     </div>
 
-    <form id="book" onsubmit="event.preventDefault(); alert('Thank you — we’ll follow up shortly.');">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <input required placeholder="Your Name"/>
-        <input required type="email" placeholder="Email"/>
-        <input required placeholder="Clinic Name"/>
-        <input placeholder="Phone (optional)"/>
-      </div>
-      <textarea rows="4" placeholder="What would you like to automate first? (e.g., Botox consults, IG DMs, no-show reduction)"></textarea>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-        <button class="btn" type="submit">Book Demo ✨</button>
-        <a class="btn ghost" href="mailto:swaesystems.ai@gmail.com">Talk With Us 💬</a>
-      </div>
-    </form>
-    <p class="lead" style="text-align:center;margin-top:10px;color:var(--muted)">You can also try the live concierge above — ask anything and test a booking flow.</p>
-  </div>
-</section>
+    <!-- SCRIPTS -->
+    <script>
+        // fade-up on scroll
+        const observer = new IntersectionObserver((entries)=>{
+            entries.forEach(entry=>{
+                if(entry.isIntersecting){
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {threshold:0.15});
 
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <img src="logo.PNG" alt="Swae Systems Logo"/>
-  <div class="line"></div>
-  © 2025 Swae Systems — Futuristic Luxury AI Concierge for Med Spas.<br/>
-  <a href="mailto:swaesystems.ai@gmail.com" style="color:var(--gold)">swaesystems.ai@gmail.com</a>
-</footer>
+        document.querySelectorAll('.fade-up').forEach(el=>{
+            observer.observe(el);
+        });
 
-<!-- ===== JS: reveals + testimonial slider (arrows, dots, drag) ===== -->
-<script>
-// reveal on scroll
-const ob=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.14});
-document.querySelectorAll('.reveal').forEach(el=>ob.observe(el));
+        // mobile menu
+        const openMenuBtn = document.getElementById('openMenu');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-// testimonial slider
-const slider=document.getElementById('slider');
-const dotsWrap=document.getElementById('dots');
-const cards=[...slider.children];
-let idx=0, W=cards[0].offsetWidth+16; // card width + gap
+        if(openMenuBtn && mobileMenu){
+            openMenuBtn.addEventListener('click', ()=>{
+                mobileMenu.style.display = 'flex';
+            });
+        }
+        if(closeMenuBtn && mobileMenu){
+            closeMenuBtn.addEventListener('click', ()=>{
+                mobileMenu.style.display = 'none';
+            });
+        }
+        // close overlay if background clicked
+        if(mobileMenu){
+            mobileMenu.addEventListener('click', (e)=>{
+                if(e.target === mobileMenu){
+                    mobileMenu.style.display = 'none';
+                }
+            });
+        }
 
-function updateSlider(){
-  W=cards[0].offsetWidth+16;
-  slider.style.transform=`translateX(${-idx*W}px)`;
-  [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active', i===idx));
-}
-function makeDots(){
-  dotsWrap.innerHTML="";
-  for(let i=0;i<cards.length;i++){
-    const d=document.createElement('div');d.className='dot';if(i===0)d.classList.add('active');
-    d.addEventListener('click',()=>{idx=i;updateSlider()});dotsWrap.appendChild(d);
-  }
-}
-makeDots(); window.addEventListener('resize',updateSlider);
+        // testimonial carousel
+        const track = document.getElementById('testiTrack');
+        const prevBtn = document.getElementById('testiPrev');
+        const nextBtn = document.getElementById('testiNext');
 
-document.querySelector('.prev').addEventListener('click',()=>{idx=(idx-1+cards.length)%cards.length;updateSlider()});
-document.querySelector('.next').addEventListener('click',()=>{idx=(idx+1)%cards.length;updateSlider()});
+        function slideBy(amount){
+            if(!track) return;
+            track.scrollBy({left: amount, behavior:'smooth'});
+        }
 
-// drag/swipe
-let startX=0, currX=0, isDown=false;
-slider.addEventListener('pointerdown',e=>{isDown=true;startX=e.clientX;slider.setPointerCapture(e.pointerId)});
-slider.addEventListener('pointermove',e=>{
-  if(!isDown)return; currX=e.clientX;
-  const dx=currX-startX;
-  slider.style.transform=`translateX(${-idx*W + dx}px)`;
-});
-slider.addEventListener('pointerup',e=>{
-  if(!isDown)return; isDown=false;
-  const dx=e.clientX-startX;
-  if(Math.abs(dx)>60){ idx = (dx<0) ? (idx+1)%cards.length : (idx-1+cards.length)%cards.length; }
-  updateSlider();
-});
+        if(prevBtn){
+            prevBtn.addEventListener('click', ()=>slideBy(-320));
+        }
+        if(nextBtn){
+            nextBtn.addEventListener('click', ()=>slideBy(320));
+        }
 
-updateSlider();
-</script>
+        // touch swipe is naturally supported because track is overflow:hidden but scrollable.
+        // We just nudge it: allow horizontal scroll wheel on desktop with shift
+        if(track){
+            track.addEventListener('wheel', (e)=>{
+                if(Math.abs(e.deltaY) > Math.abs(e.deltaX)){
+                    track.scrollLeft += e.deltaY;
+                }
+            }, {passive:true});
+        }
+    </script>
+
 </body>
 </html>
